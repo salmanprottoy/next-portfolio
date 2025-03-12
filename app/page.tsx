@@ -12,7 +12,11 @@ export default function Home() {
   const [prefix, setPrefix] = useState("");
 
   useEffect(() => {
-    setPrefix(process.env.NODE_ENV === "production" ? "/next-portfolio" : "");
+    const isGitHubPages =
+      window.location.hostname.includes("github.io") ||
+      window.location.pathname.startsWith("/next-portfolio");
+
+    setPrefix(isGitHubPages ? "/next-portfolio" : "");
   }, []);
   return (
     <main className="bg-primary md:px-[120px] py-6 w-full h-screen bg-circles">
