@@ -2,20 +2,21 @@
 const nextConfig = {
   output: "export",
   reactStrictMode: true,
+  basePath: process.env.NODE_ENV === "production" ? "/next-portfolio" : "",
+  assetPrefix: process.env.NODE_ENV === "production" ? "/next-portfolio/" : "",
   images: {
-    domains: ["example.com"], // Add your image domains here
+    domains: ["example.com"],
     unoptimized: true,
   },
   webpack: (config, { isServer }) => {
-    // Example of custom webpack configuration
     if (!isServer) {
       config.resolve.fallback.fs = false;
     }
     return config;
   },
   env: {
-    // CUSTOM_VAR: process.env.CUSTOM_VAR,
+    // Your environment variables here if needed
   },
 };
 
-export default nextConfig;
+module.exports = nextConfig;
