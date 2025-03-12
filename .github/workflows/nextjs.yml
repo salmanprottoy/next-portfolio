@@ -1,9 +1,9 @@
 name: Next.js CI/CD Workflow
 
 on:
-  # Run on pull requests
+  # Run on pull requests to main branch
   pull_request:
-    branches: ["*"]
+    branches: ["main"]
   # Run on pushes to main branch
   push:
     branches: ["main"]
