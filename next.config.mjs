@@ -1,8 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: "export",
   reactStrictMode: true,
   images: {
     domains: ["example.com"], // Add your image domains here
+    unoptimized: true,
   },
   webpack: (config, { isServer }) => {
     // Example of custom webpack configuration
@@ -12,7 +14,7 @@ const nextConfig = {
     return config;
   },
   env: {
-    // CUSTOM_VAR: process.env.CUSTOM_VAR, // Example of environment variable
+    // CUSTOM_VAR: process.env.CUSTOM_VAR,
   },
 };
 
