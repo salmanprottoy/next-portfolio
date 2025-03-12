@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/atoms/display/Button";
 import { Text } from "@/components/atoms/typography/Text";
 import { Flex } from "@/components/atoms/layouts/Flex";
@@ -5,7 +6,14 @@ import Header from "@/components/organism/navigation/Header";
 import TypingEffect from "@/components/TypingEffect";
 import Image from "next/image";
 import CirclesSVG from "@/components/CirclesSVG";
+import { useEffect, useState } from "react";
+
 export default function Home() {
+  const [prefix, setPrefix] = useState("");
+
+  useEffect(() => {
+    setPrefix(process.env.NODE_ENV === "production" ? "/next-portfolio" : "");
+  }, []);
   return (
     <main className="bg-primary md:px-[120px] py-6 w-full h-screen bg-circles">
       <Header />
@@ -18,7 +26,7 @@ export default function Home() {
       >
         <Flex direction="row" justifyContent="center" className="w-full pb-6">
           <Image
-            src={"/images/salmanprottoy.jpg"}
+            src={`${prefix}/images/salmanprottoy.jpg`}
             width={120}
             height={120}
             alt="Salman Prottoy"
