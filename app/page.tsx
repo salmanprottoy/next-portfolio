@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/atoms/display/Button";
 import { Text } from "@/components/atoms/typography/Text";
 import { Flex } from "@/components/atoms/layouts/Flex";
