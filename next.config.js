@@ -2,10 +2,10 @@
 const nextConfig = {
   output: "export",
   reactStrictMode: true,
-  basePath: process.env.NEXT_PUBLIC_BASE_PATH || "",
-  assetPrefix: process.env.NEXT_PUBLIC_BASE_PATH
-    ? `${process.env.NEXT_PUBLIC_BASE_PATH}/`
-    : "",
+  ...(process.env.GITHUB_ACTIONS === "true" && {
+    basePath: process.env.NEXT_PUBLIC_BASE_PATH || "/next-portfolio",
+    assetPrefix: (process.env.NEXT_PUBLIC_BASE_PATH || "/next-portfolio") + "/",
+  }),
   images: {
     domains: ["example.com"],
     unoptimized: true,
