@@ -105,12 +105,27 @@ jobs:
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
         
+      # Create next.config.js with output: 'export' if it doesn't exist
+      - name: Setup Next.js config for static export
+        run: |
+          if [ ! -f next.config.js ]; then
+            echo "module.exports = { output: 'export' };" > next.config.js
+          elif ! grep -q "output.*export" next.config.js; then
+            # Check if we need to add export to existing config
+            if grep -q "module.exports" next.config.js; then
+              # Config already uses module.exports
+              sed -i 's/module.exports = {/module.exports = { output: "export",/g' next.config.js
+            else
+              # Config might use newer syntax
+              echo "/** @type {import('next').NextConfig} */" > next.config.js.new
+              echo "const nextConfig = { output: 'export', ...$(cat next.config.js) };" >> next.config.js.new
+              echo "module.exports = nextConfig;" >> next.config.js.new
+              mv next.config.js.new next.config.js
+            fi
+          fi
+        
       - name: Build with Next.js
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
-      
-      # Static export for Next.js 
-      - name: Static HTML export with Next.js
-        run: ${{ steps.detect-package-manager.outputs.runner }} next export
         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
