@@ -75,6 +75,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     env:
+      GITHUB_ACTIONS: 'true'
       NEXT_PUBLIC_BASE_PATH: /next-portfolio
     steps:
       - name: Checkout
