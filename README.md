@@ -23,7 +23,7 @@ NEXT-PORTFOLIO/
 ├── docker-compose.yml  # Docker Compose configuration
 ├── Dockerfile          # Docker configuration
 ├── next-env.d.ts       # Next.js TypeScript declarations
-├── next.config.mjs     # Next.js configuration
+├── next.config.js      # Next.js configuration
 ├── package-lock.json   # npm lock file
 ├── package.json        # Project dependencies
 ├── postcss.config.js   # PostCSS configuration 
