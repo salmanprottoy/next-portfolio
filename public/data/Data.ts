@@ -19,15 +19,6 @@ import {
   Css,
   HTML,
   npm,
-  CRM,
-  cityRidingService,
-  premierLeagueTeamInfo,
-  onlineBookStore,
-  extremeFitness,
-  doctorPatient,
-  fuschiaNep,
-  banglaCar,
-  instaShop,
   linux,
   php,
   heroku,
@@ -42,7 +33,7 @@ import {
   oracle,
   bash,
   bootstrap,
-} from "@/components/Icons";
+} from "@/components/atoms/Icon";
 
 const facebook = {
   name: "facebook",
@@ -212,7 +203,7 @@ export const Projects = [
     },
     link: "",
     repo: "https://github.com/salmanprottoy/CRM-Software-laravel",
-    image: CRM,
+    image: "/images/crm.png",
     imageDetails: {
       alt: "CRM Software",
     },
@@ -226,7 +217,7 @@ export const Projects = [
     },
     link: "https://extreme-fitness-gym-bd.web.app/",
     repo: "https://github.com/salmanprottoy/extreme-fitness-gym-client",
-    image: extremeFitness,
+    image: "/images/fitness.png",
     imageDetails: {
       alt: "Extreme Fitness GYM",
     },
@@ -240,7 +231,7 @@ export const Projects = [
     },
     link: "https://online-book-store-e7a9c.web.app/",
     repo: "https://github.com/salmanprottoy/online-book-store-client",
-    image: onlineBookStore,
+    image: "/images/obs.png",
     imageDetails: {
       alt: "Online Book Store",
     },
@@ -254,7 +245,7 @@ export const Projects = [
     },
     link: "https://fuschia-neptunium.netlify.app/",
     repo: "https://github.com/salmanprottoy/fuschia-neptunium",
-    image: fuschiaNep,
+    image: "/images/fuschia.png",
     imageDetails: {
       alt: "Fuschia Neptunium",
     },
@@ -268,7 +259,7 @@ export const Projects = [
     },
     link: "",
     repo: "https://github.com/salmanprottoy/baglaCarApp",
-    image: banglaCar,
+    image: "/images/banglacar.jpg",
     imageDetails: {
       alt: "Bangla Car",
     },
@@ -282,7 +273,7 @@ export const Projects = [
     },
     link: "https://instashop-bd.web.app/",
     repo: "https://github.com/salmanprottoy/instaShop",
-    image: instaShop,
+    image: "/images/instashop.png",
     imageDetails: {
       alt: "Insta Shop",
     },
@@ -296,7 +287,7 @@ export const Projects = [
     },
     link: "",
     repo: "https://github.com/salmanprottoy/Doctor-Patient-Portal",
-    image: doctorPatient,
+    image: "/images/doctorpatient.png",
     imageDetails: {
       alt: "Doctor Patient Portal",
     },
@@ -310,7 +301,7 @@ export const Projects = [
     },
     link: "https://city-riding-service.web.app/",
     repo: "https://github.com/salmanprottoy/city-riding-service",
-    image: cityRidingService,
+    image: "/images/cityridingservice.png",
     imageDetails: {
       alt: "City Riding Service",
     },
@@ -324,7 +315,7 @@ export const Projects = [
     },
     link: "https://premier-league-team-info.netlify.app/",
     repo: "https://github.com/salmanprottoy/premier-league-football-team-info",
-    image: premierLeagueTeamInfo,
+    image: "/images/premierleagueteaminfo.png",
     imageDetails: {
       alt: "Premier League Team Info",
     },

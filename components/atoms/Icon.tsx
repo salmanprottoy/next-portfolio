@@ -1,13 +1,4 @@
 import React from "react";
-import crm from "../public/images/crm.png";
-import cityridingservice from "../public/images/cityridingservice.png";
-import onlinebookstore from "../public/images/obs.png";
-import premierleagueteaminfo from "../public/images/premierleagueteaminfo.png";
-import extremefitness from "../public/images/fitness.png";
-import doctorpatient from "../public/images/doctorpatient.png";
-import fuschia from "../public/images/fuschia.png";
-import banglacar from "../public/images/banglacar.jpg";
-import instashop from "../public/images/instashop.png";
 
 export const GithubIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <svg
@@ -173,7 +164,7 @@ export const TechIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
     <path
       d="M6.66665 27.3333H73.3333M40 77.3333C60.25 77.3333 76.6666 60.9167 76.6666 40.6667C76.6666 20.4167 60.25 4 40 4C19.75 4 3.33331 20.4167 3.33331 40.6667C3.33331 60.9167 19.75 77.3333 40 77.3333ZM40 77.3333C50 77.3333 53.3333 60.6667 53.3333 40.6667C53.3333 20.6667 50 4 40 4C30 4 26.6666 20.6667 26.6666 40.6667C26.6666 60.6667 30 77.3333 40 77.3333ZM6.66665 54H73.3333H6.66665Z"
       stroke="black"
-      stroke-width="6.66667"
+      strokeWidth="6.66667"
     />
   </svg>
 );
@@ -609,21 +600,3 @@ export const linux: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
     />
   </svg>
 );
-
-export const CRM = crm;
-
-export const cityRidingService = cityridingservice;
-
-export const premierLeagueTeamInfo = premierleagueteaminfo;
-
-export const onlineBookStore = onlinebookstore;
-
-export const extremeFitness = extremefitness;
-
-export const doctorPatient = doctorpatient;
-
-export const fuschiaNep = fuschia;
-
-export const banglaCar = banglacar;
-
-export const instaShop = instashop;
