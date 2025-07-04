@@ -1,5 +1,5 @@
 import { Flex, Text } from "@/components/atoms";
-import { socialMedia } from "../../public/data/Data";
+import { socialMedia } from "../../app/data/Data";
 import { CiMail } from "react-icons/ci";
 
 const Header = () => {
