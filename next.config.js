@@ -17,7 +17,7 @@ const nextConfig = {
   // Performance optimizations
   experimental: {
     optimizeCss: true,
-    optimizePackageImports: ["@/components"],
+    // optimizePackageImports: ["@/components"],
   },
 
   // Webpack optimizations
