@@ -1,0 +1,200 @@
+name: Next.js CI/CD Workflow
+
+on:
+  # Run on pull requests to main branch specifically
+  pull_request:
+    branches: ["main"]
+  # Run on pushes to main branch
+  push:
+    branches: ["main"]
+  # Allows manual running from Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+  actions: write
+  deployments: write
+  statuses: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # Lint and test job
+  lint-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Detect package manager
+        id: detect-package-manager
+        run: |
+          if [ -f "${{ github.workspace }}/yarn.lock" ]; then
+            echo "manager=yarn" >> $GITHUB_OUTPUT
+            echo "command=install" >> $GITHUB_OUTPUT
+            echo "runner=yarn" >> $GITHUB_OUTPUT
+            exit 0
+          elif [ -f "${{ github.workspace }}/package.json" ]; then
+            echo "manager=npm" >> $GITHUB_OUTPUT
+            echo "command=ci" >> $GITHUB_OUTPUT
+            echo "runner=npx --no-install" >> $GITHUB_OUTPUT
+            exit 0
+          else
+            echo "Unable to determine package manager"
+            exit 1
+          fi
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: ${{ steps.detect-package-manager.outputs.manager }}
+
+      - name: Install dependencies
+        run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
+
+      - name: Run lint
+        run: ${{ steps.detect-package-manager.outputs.runner }} ${{ steps.detect-package-manager.outputs.manager == 'yarn' && 'lint' || 'run lint' }}
+
+      - name: Check build
+        run: ${{ steps.detect-package-manager.outputs.runner }} next build
+
+  # Build and deploy job (only on main branch pushes)
+  build-and-deploy:
+    # Only run this job for pushes to the main branch
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    needs: lint-and-test
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    env:
+      GITHUB_ACTIONS: "true"
+      NEXT_PUBLIC_BASE_PATH: /next-portfolio
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Detect package manager
+        id: detect-package-manager
+        run: |
+          if [ -f "${{ github.workspace }}/yarn.lock" ]; then
+            echo "manager=yarn" >> $GITHUB_OUTPUT
+            echo "command=install" >> $GITHUB_OUTPUT
+            echo "runner=yarn" >> $GITHUB_OUTPUT
+            exit 0
+          elif [ -f "${{ github.workspace }}/package.json" ]; then
+            echo "manager=npm" >> $GITHUB_OUTPUT
+            echo "command=ci" >> $GITHUB_OUTPUT
+            echo "runner=npx --no-install" >> $GITHUB_OUTPUT
+            exit 0
+          else
+            echo "Unable to determine package manager"
+            exit 1
+          fi
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: ${{ steps.detect-package-manager.outputs.manager }}
+
+      - name: Install dependencies
+        run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
+
+      # Create a temporary next.config.js for static export
+      - name: Setup Next.js config for static export
+        run: |
+          # Backup original config
+          cp next.config.js next.config.js.backup
+
+          # Create a new config for static export
+          cat > next.config.js << 'EOF'
+          /** @type {import('next').NextConfig} */
+          const nextConfig = {
+            // Enable React Strict Mode for better development experience
+            reactStrictMode: true,
+            
+            // Enable SWC minification for faster builds
+            swcMinify: true,
+            
+            // Static export for GitHub Pages
+            output: "export",
+            trailingSlash: true,
+            
+            // Disable image optimization for static export
+            images: {
+              unoptimized: true,
+            },
+            
+            // Environment-specific configurations
+            basePath: process.env.NEXT_PUBLIC_BASE_PATH || "/next-portfolio",
+            assetPrefix: (process.env.NEXT_PUBLIC_BASE_PATH || "/next-portfolio") + "/",
+            
+            // Security headers
+            async headers() {
+              return [
+                {
+                  source: "/(.*)",
+                  headers: [
+                    {
+                      key: "X-Frame-Options",
+                      value: "DENY",
+                    },
+                    {
+                      key: "X-Content-Type-Options",
+                      value: "nosniff",
+                    },
+                    {
+                      key: "Referrer-Policy",
+                      value: "origin-when-cross-origin",
+                    },
+                  ],
+                },
+              ];
+            },
+            
+            // Compiler optimizations
+            compiler: {
+              removeConsole: process.env.NODE_ENV === "production",
+            },
+          };
+
+          // Sentry configuration for static export
+          const { withSentryConfig } = require("@sentry/nextjs");
+
+          module.exports = withSentryConfig(nextConfig, {
+            org: "american-international-univ-r0",
+            project: "next-portfolio",
+            silent: !process.env.CI,
+            widenClientFileUpload: true,
+            disableLogger: true,
+            automaticVercelMonitors: true,
+          });
+          EOF
+
+      - name: Build with Next.js
+        run: ${{ steps.detect-package-manager.outputs.runner }} next build
+
+      - name: Add .nojekyll file
+        run: touch ./out/.nojekyll
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./out
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      # Restore original config
+      - name: Restore original config
+        if: always()
+        run: mv next.config.js.backup next.config.js
