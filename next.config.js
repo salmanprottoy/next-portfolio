@@ -6,6 +6,9 @@ const nextConfig = {
   // Enable SWC minification for faster builds
   swcMinify: true,
 
+  // Enable standalone output for Docker
+  output: "standalone",
+
   // Optimize images
   images: {
     formats: ["image/webp", "image/avif"],
