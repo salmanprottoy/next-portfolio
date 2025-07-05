@@ -1,198 +1,58 @@
-import {
-  FigmaIcon,
-  Firebase,
-  GithubIcon,
-  InstagramIcon,
-  Javascript,
-  LinkedinIcon,
-  Nodejs,
-  Laravel,
-  Python,
-  cSharp,
-  ReactIcon,
-  TechIcon,
-  ToolsIcon,
-  Arduino,
-  TwitterIcon,
-  FacebookIcon,
-  YoutubeIcon,
-  Css,
-  HTML,
-  npm,
-  linux,
-  php,
-  heroku,
-  c,
-  cpp,
-  redux,
-  mongodb,
-  mysql,
-  typeScript,
-  sqlServer,
-  git,
-  oracle,
-  bash,
-  bootstrap,
-} from "@/components/atoms/Icon";
-
-const facebook = {
-  name: "facebook",
-  logo: FacebookIcon,
-  link: "https://fb.com/salman.prottoy1/",
-};
-const insta = {
-  name: "insta",
-  logo: InstagramIcon,
-  link: "https://instagram.com/salman_prottoy/",
-};
-const github = {
-  name: "github",
-  logo: GithubIcon,
-  link: "https://github.com/salmanprottoy/",
-};
-const youtube = {
-  name: "youtube",
-  logo: YoutubeIcon,
-  link: "https://www.youtube.com/channel/UCFpY-FxvOpyKavh2nr9QSSg",
-};
-const linkedin = {
-  name: "linkedin",
-  logo: LinkedinIcon,
-  link: "https://linkedin.com/in/salman-prottoy/",
-};
-const twitter = {
-  name: "twitter",
-  logo: TwitterIcon,
-  link: "https://twitter.com/salman_prottoy/",
-};
 export const socialMedia = [
-  linkedin,
-  github,
-  facebook,
-  twitter,
-  insta,
-  youtube,
+  {
+    name: "linkedin",
+    link: "https://linkedin.com/in/salman-prottoy/",
+  },
+  {
+    name: "github",
+    link: "https://github.com/salmanprottoy/",
+  },
+  {
+    name: "facebook",
+    link: "https://fb.com/salman.prottoy1/",
+  },
+  {
+    name: "twitter",
+    link: "https://twitter.com/salman_prottoy/",
+  },
+  {
+    name: "insta",
+    link: "https://instagram.com/salman_prottoy/",
+  },
+  {
+    name: "youtube",
+    link: "https://www.youtube.com/channel/UCFpY-FxvOpyKavh2nr9QSSg",
+  },
 ];
 
-export const description = [
-  "Hi, I'm Md. Salman Hossan Prottoy",
-  "I am a final year undergraduate student in Computer Science and Engineering at American International University-Bangladesh. Passionate learner, currently interested in machine learning, natural language processing, AI and quantum computing. I don't confine myself to a certain branch and accept that anything new is never old to understand.",
-  "I have significant experience with classic backend stacks and front-end frameworks including Express, Laravel, and React. Looking to start the journey with a respectable, technology focused organization as a software engineer.",
-  "I constantly enhance my abilities and give society new meaning. In order to take on responsibilities, I am mastering my skills. I'd like to lead my own software engineering team. ",
+export const Skills = [
+  { name: "JavaScript", icon: "JavascriptIcon" },
+  { name: "Python", icon: "PythonIcon" },
+  { name: "TypeScript", icon: "TypescriptIcon" },
+  { name: "Go", icon: "GoIcon" },
+  { name: "HTML5", icon: "Html5Icon" },
+  { name: "CSS3", icon: "CssIcon" },
+  { name: "Sass", icon: "SassIcon" },
+  { name: "Tailwind CSS", icon: "TailwindcssIcon" },
+  { name: "Next.js", icon: "NextdotjsIcon" },
+  { name: "Vue.js", icon: "VuedotjsIcon" },
+  { name: "Django", icon: "DjangoIcon" },
+  { name: "Pandas", icon: "PandasIcon" },
+  { name: "Node.js", icon: "NodedotjsIcon" },
+  { name: "Jest", icon: "JestIcon" },
+  { name: "PostgreSQL", icon: "PostgresqlIcon" },
+  { name: "OpenSearch", icon: "OpensearchIcon" },
+  { name: "MySQL", icon: "MysqlIcon" },
+  { name: "MongoDB", icon: "MongodbIcon" },
+  { name: "Prisma", icon: "PrismaIcon" },
+  { name: "tRPC", icon: "TrpcIcon" },
+  { name: "GraphQL", icon: "GraphqlIcon" },
+  { name: "Git", icon: "GitIcon" },
+  { name: "Docker", icon: "DockerIcon" },
+  { name: "Nginx", icon: "NginxIcon" },
+  { name: "Firebase", icon: "FirebaseIcon" },
+  { name: "Vercel", icon: "VercelIcon" },
 ];
-
-export const Skills = {
-  Icons: { Tools: ToolsIcon, Tech: TechIcon },
-  Tools: [
-    {
-      icon: git,
-      name: "Git",
-    },
-    {
-      icon: bash,
-      name: "Bash",
-    },
-    {
-      icon: linux,
-      name: "Linux",
-    },
-    {
-      icon: npm,
-      name: "npm",
-    },
-    {
-      icon: FigmaIcon,
-      name: "Figma",
-    },
-    {
-      icon: heroku,
-      name: "Heroku",
-    },
-    {
-      icon: Arduino,
-      name: "Arduino",
-    },
-  ],
-  Technologies: [
-    {
-      icon: c,
-      name: "C",
-    },
-    {
-      icon: cpp,
-      name: "C++",
-    },
-    {
-      icon: cSharp,
-      name: "C#",
-    },
-    {
-      icon: Javascript,
-      name: "JavaScript",
-    },
-
-    {
-      icon: php,
-      name: " PHP ",
-    },
-    {
-      icon: Python,
-      name: "Python",
-    },
-    {
-      icon: typeScript,
-      name: "TypeScript",
-    },
-    {
-      icon: HTML,
-      name: " HTML ",
-    },
-    {
-      icon: Css,
-      name: " CSS ",
-    },
-    {
-      icon: bootstrap,
-      name: " Bootstrap ",
-    },
-    {
-      icon: ReactIcon,
-      name: "React.js",
-    },
-    {
-      icon: redux,
-      name: "Redux",
-    },
-    {
-      icon: Nodejs,
-      name: "Node",
-    },
-    {
-      icon: Laravel,
-      name: "Laravel",
-    },
-    {
-      icon: Firebase,
-      name: "Firebase",
-    },
-    {
-      icon: oracle,
-      name: "Oracle",
-    },
-    {
-      icon: mysql,
-      name: "MySQL",
-    },
-    {
-      icon: sqlServer,
-      name: "MsSQL",
-    },
-    {
-      icon: mongodb,
-      name: "MongoDB",
-    },
-  ],
-};
 
 export const Projects = [
   {
@@ -338,4 +198,35 @@ export const Educations = [
     exam: "Secondary School Certificate",
     year: "2015",
   },
+];
+
+export const Experience = [
+  {
+    jobTitle: "Software Engineer (Remote)",
+    company: "Brand Cloud Inc.",
+    date: "September 2023 - Present",
+    bullets: [
+      "Worked extensively on full-stack development, including user-friendly interfaces, robust APIs, and efficient database management for over 3 major projects, leading to a significant increase in user satisfaction scores.",
+      "Applied advanced technical skills in Docker for containerization, PostgreSQL for efficient database management, and designing scalable web application architectures.",
+      "Selected tickets for development in each sprint, assigned tasks to a team of 5 engineers, and scheduled tasks effectively, improving sprint delivery times. Conducted over 100 code reviews and screen reviews, maintaining high code quality and reducing bugs.",
+      "Demonstrated proficiency in database design, ensuring robust, scalable, and efficient data storage solutions, while leading efforts to optimize performance and ensure security, contributing significantly to the overall success of the projects.",
+    ],
+  },
+  {
+    jobTitle: "Junior Software Engineer",
+    company: "W3 Engineers Limited",
+    date: "May 2022 - August 2023",
+    bullets: [
+      "Designed and developed scalable and robust APIs, ensuring easy integration and enhancing system scalability. Implemented features based on requirements, improving app structure and API performance.",
+      "Developed, maintained, and optimized multiple cron jobs for data processing and updates, utilizing parallel processing techniques to boost efficiency.",
+      "Developed migration scripts and integrated Elastic File System for data storage in the API, facilitating seamless database transitions across various databases, and enhancing file access speed.",
+      "Contributed to the user experience of the network monitor and configure for enterprise application by designing reusable and scalable components and seamlessly integrating APIs, ensuring a smooth and intuitive user interface.",
+    ],
+  },
+];
+
+export const AboutMe = [
+  "I&apos;m a passionate Software Engineer with expertise in full-stack development, specializing in building scalable web applications and robust APIs. With over 2 years of experience in the tech industry, I&apos;ve worked on diverse projects ranging from enterprise applications to modern web platforms.",
+  "My technical journey includes proficiency in JavaScript, Python, TypeScript, and Go, along with modern frameworks like React, Next.js, Vue.js, and Django. I have extensive experience with databases including PostgreSQL, MongoDB, and cloud services like Docker, Firebase, and Vercel.",
+  "Currently working as a Software Engineer at Brand Cloud Inc. in Tokyo, Japan, I lead development teams, conduct code reviews, and contribute to the success of major projects. I&apos;m passionate about clean code, performance optimization, and creating user-friendly applications that solve real-world problems.",
 ];
