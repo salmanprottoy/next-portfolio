@@ -1,6 +1,5 @@
 import type { ChangeEventHandler, KeyboardEventHandler } from "react";
-import { Flex } from "../layouts/Flex";
-import { Text } from "../typography/Text";
+import { Flex } from "./Flex";
 
 export type Props = {
   onChange?: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;

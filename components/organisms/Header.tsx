@@ -1,6 +1,5 @@
-import { Flex } from "@/components/atoms/layouts/Flex";
-import { Text } from "@/components/atoms/typography/Text";
-import { socialMedia } from "../../../public/data/Data";
+import { Flex, Text } from "@/components/atoms";
+import { socialMedia } from "../../app/data/Data";
 import { CiMail } from "react-icons/ci";
 
 const Header = () => {
@@ -15,21 +14,11 @@ const Header = () => {
         justifyContent="between"
         className="w-full relative z-50"
       >
-        <Flex
-          direction="col"
-          justifyContent="between"
-          className="cursor-pointer"
-        >
+        <Flex direction="row" className="cursor-pointer">
           {filteredSocialMedia.map((item, index) => {
             const Icon = item.logo;
             return (
-              <Flex
-                key={index}
-                direction="row"
-                gap="10px"
-                justifyContent="center"
-                className="w-full"
-              >
+              <Flex key={index} direction="col" gap="10px">
                 <a href={item.link} target="_blank" rel="noopener noreferrer">
                   <Icon />
                 </a>

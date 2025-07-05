@@ -38,3 +38,10 @@ next-env.d.ts
 
 # Sentry Config File
 .env.sentry-build-plugin
+
+# atoms page
+app/atoms/page.tsx
+
+# nginx logs
+/logs/
+*.log

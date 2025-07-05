@@ -13,6 +13,7 @@
     "@sentry/nextjs": "^9.12.0",
     "@vercel/analytics": "^1.2.2",
     "clsx": "^2.1.1",
+    "critters": "^0.0.25",
     "next": "14.1.4",
     "react": "^18",
     "react-dom": "^18",
