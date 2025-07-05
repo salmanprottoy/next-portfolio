@@ -23,7 +23,7 @@ export const TextField = (props: Props) => {
   } = props;
 
   return (
-    <Flex direction="col" gap="0px" className={`w-[250px] ${className}`}>
+    <Flex direction="column" gap="none" className={`w-[250px] ${className}`}>
       <input
         onKeyDown={onKeyDown}
         onChange={onChange}
