@@ -1,60 +1,112 @@
-import { type ReactNode } from "react";
+import { type ReactNode, forwardRef } from "react";
+import cn from "@/app/utils/cn";
 
-type Props = {
-  id?: string;
+export interface FlexProps {
   children: ReactNode;
-  direction: "row" | "col";
-  justifyContent?: "start" | "center" | "end" | "between" | "around";
-  alignItems?: "start" | "center" | "end" | "flex-end";
+  direction?: "row" | "column" | "row-reverse" | "column-reverse";
+  justify?: "start" | "center" | "end" | "between" | "around" | "evenly";
+  align?: "start" | "center" | "end" | "baseline" | "stretch";
+  wrap?: "nowrap" | "wrap" | "wrap-reverse";
+  gap?: "none" | "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl";
   className?: string;
-  wrap?: boolean;
-  gap?: string;
-  onClick?: React.MouseEventHandler<HTMLDivElement>;
-};
+  id?: string;
+  onClick?: () => void;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
+  "aria-label"?: string;
+  "aria-describedby"?: string;
+  role?: string;
+}
 
-const justifyContentMap = {
+const directionStyles = {
+  row: "flex-row",
+  column: "flex-col",
+  "row-reverse": "flex-row-reverse",
+  "column-reverse": "flex-col-reverse",
+} as const;
+
+const justifyStyles = {
   start: "justify-start",
   center: "justify-center",
   end: "justify-end",
   between: "justify-between",
   around: "justify-around",
-};
+  evenly: "justify-evenly",
+} as const;
 
-const alignItemsMap = {
+const alignStyles = {
   start: "items-start",
   center: "items-center",
   end: "items-end",
-  "flex-end": "items-flex-end",
-};
+  baseline: "items-baseline",
+  stretch: "items-stretch",
+} as const;
 
-export function Flex(props: Props) {
-  const {
-    id,
-    children,
-    className,
-    direction,
-    justifyContent = direction === "row" ? "start" : "center",
-    alignItems = direction === "row" ? "center" : "start",
-    wrap = true,
-    gap,
-    onClick,
-  } = props;
+const wrapStyles = {
+  nowrap: "flex-nowrap",
+  wrap: "flex-wrap",
+  "wrap-reverse": "flex-wrap-reverse",
+} as const;
 
-  return (
-    <div
-      id={id}
-      className={`flex ${
-        wrap && direction === "row" ? "flex-wrap" : "whitespace-nowrap"
-      } 
-        flex-${direction} 
-        ${justifyContentMap[justifyContent] || ""} 
-        ${alignItemsMap[alignItems] || ""} 
-        ${direction === "row" ? "gap-[16px]" : "gap-[24px]"} 
-        ${className}`}
-      style={{ gap }}
-      onClick={onClick}
-    >
-      {children}
-    </div>
-  );
-}
+const gapStyles = {
+  none: "gap-0",
+  xs: "gap-1",
+  sm: "gap-2",
+  md: "gap-4",
+  lg: "gap-6",
+  xl: "gap-8",
+  "2xl": "gap-12",
+  "3xl": "gap-16",
+} as const;
+
+export const Flex = forwardRef<HTMLDivElement, FlexProps>(
+  (
+    {
+      children,
+      direction = "row",
+      justify = "start",
+      align = "start",
+      wrap = "nowrap",
+      gap = "none",
+      className,
+      id,
+      onClick,
+      onMouseEnter,
+      onMouseLeave,
+      "aria-label": ariaLabel,
+      "aria-describedby": ariaDescribedby,
+      role,
+      ...props
+    },
+    ref
+  ) => {
+    const classes = cn(
+      "flex",
+      directionStyles[direction],
+      justifyStyles[justify],
+      alignStyles[align],
+      wrapStyles[wrap],
+      gapStyles[gap],
+      className
+    );
+
+    return (
+      <div
+        ref={ref}
+        id={id}
+        className={classes}
+        onClick={onClick}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+        aria-label={ariaLabel}
+        aria-describedby={ariaDescribedby}
+        role={role}
+        {...props}
+      >
+        {children}
+      </div>
+    );
+  }
+);
+
+Flex.displayName = "Flex";
