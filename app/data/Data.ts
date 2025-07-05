@@ -17,13 +17,23 @@ export const socialMedia = [
   },
   {
     name: "insta",
-    link: "https://instagram.com/salman_prottoy/",
+    link: "https://instagram.com/salman.prottoy/",
   },
   {
     name: "youtube",
     link: "https://www.youtube.com/channel/UCFpY-FxvOpyKavh2nr9QSSg",
   },
 ];
+
+export const resume = {
+  link: "https://drive.google.com/file/d/19Xjj5BK8paFgnI-HIOxWN8R1QvAg9L5f/view",
+  text: "Resume",
+};
+
+export const contact = {
+  email: "salman.prottoy@gmail.com",
+  text: "Get in touch",
+};
 
 export const Skills = [
   { name: "JavaScript", icon: "JavascriptIcon" },
