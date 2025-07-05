@@ -9,16 +9,12 @@ const Header = () => {
 
   return (
     <header>
-      <Flex
-        direction="row"
-        justifyContent="between"
-        className="w-full relative z-50"
-      >
-        <Flex direction="row" className="cursor-pointer">
+      <Flex direction="row" justify="between" className="w-full relative z-50">
+        <Flex direction="row" gap="md" className="cursor-pointer">
           {filteredSocialMedia.map((item, index) => {
             const Icon = item.logo;
             return (
-              <Flex key={index} direction="col" gap="10px">
+              <Flex key={index} direction="column" gap="sm">
                 <a href={item.link} target="_blank" rel="noopener noreferrer">
                   <Icon />
                 </a>
@@ -26,9 +22,16 @@ const Header = () => {
             );
           })}
         </Flex>
-        <Flex direction="row">
+        <Flex direction="row" align="center" gap="md">
           <CiMail size={24} />
-          <Text text="Get in touch" className="!uppercase text-[18px]" />
+          <Text
+            variant="body-lg"
+            weight="normal"
+            color="light"
+            className="uppercase"
+          >
+            Get in touch
+          </Text>
         </Flex>
       </Flex>
     </header>
