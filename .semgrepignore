@@ -1,0 +1,25 @@
+# Semgrep ignore file
+# Exclude build artifacts and dependencies
+node_modules/
+.next/
+out/
+dist/
+build/
+
+# Exclude lock files
+package-lock.json
+yarn.lock
+
+# Exclude generated files
+*.min.js
+*.min.css
+
+# Exclude test files (optional - remove if you want to scan tests)
+**/*.test.js
+**/*.test.ts
+**/*.spec.js
+**/*.spec.ts
+
+# Exclude documentation
+README.md
+docs/ 
