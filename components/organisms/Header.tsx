@@ -22,17 +22,19 @@ const Header = () => {
             );
           })}
         </Flex>
-        <Flex direction="row" align="center" gap="md">
-          <CiMail size={24} />
-          <Text
-            variant="body-lg"
-            weight="normal"
-            color="light"
-            className="uppercase"
-          >
-            Get in touch
-          </Text>
-        </Flex>
+        <a href="mailto:salman.prottoy@gmail.com" className="cursor-pointer">
+          <Flex direction="row" align="center" gap="md">
+            <CiMail size={24} />
+            <Text
+              variant="body-lg"
+              weight="normal"
+              color="light"
+              className="uppercase"
+            >
+              Get in touch
+            </Text>
+          </Flex>
+        </a>
       </Flex>
     </header>
   );
