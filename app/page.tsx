@@ -358,12 +358,12 @@ export default function Home() {
               />
             </div>
             {/* About Text */}
-            <div className="flex-1 text-center md:text-left">
+            <div className="flex-1 md:text-left">
               <Text
                 variant="heading-lg"
                 weight="bold"
                 color="light"
-                className="mb-6"
+                className="text-center mb-6"
               >
                 About Me
               </Text>

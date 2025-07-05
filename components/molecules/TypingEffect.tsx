@@ -13,7 +13,7 @@ const TypingEffect = ({
   cursor = true,
 }: TypingEffectProps) => {
   return (
-    <div className="flex justify-center items-center text-4xl font-bold">
+    <div className="flex justify-center items-center text-xl md:text-4xl font-bold">
       <TypeAnimation
         sequence={[...text.flatMap((t) => [t, 1000])]}
         speed={speed as any}
