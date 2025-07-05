@@ -18,9 +18,20 @@ fs.readdirSync(iconsDir).forEach((file: string) => {
     // Ensure fill='currentColor' on <svg> and <path>
     svg = svg
       .replace(/<svg([^>]*)>/, '<svg$1 fill="currentColor">')
-      .replace(/<path([^>]*)>/g, (m: string, attrs: string) =>
-        /fill=/.test(attrs) ? m : `<path${attrs} fill=\"currentColor\">`
-      );
+      .replace(/<path([^>]*)\/>/g, (m: string, attrs: string) => {
+        if (/fill=/.test(attrs)) {
+          return m;
+        } else {
+          return `<path${attrs} fill="currentColor" />`;
+        }
+      })
+      .replace(/<path([^>]*)>/g, (m: string, attrs: string) => {
+        if (/fill=/.test(attrs)) {
+          return m;
+        } else {
+          return `<path${attrs} fill="currentColor">`;
+        }
+      });
 
     const component = `import React from "react";
 import { SVGProps } from "react";
