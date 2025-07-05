@@ -137,7 +137,7 @@ export default function Home() {
                 className="rounded-full"
               />
             </Flex>
-            <Flex direction="row" justify="center" className="w-full">
+            <Flex direction="row" justify="center" className="w-full pb-2">
               <Text
                 variant="body-lg"
                 weight="medium"
