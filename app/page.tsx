@@ -1,11 +1,9 @@
 "use client";
-import { Button } from "@/components/atoms/display/Button";
-import { Text } from "@/components/atoms/typography/Text";
-import { Flex } from "@/components/atoms/layouts/Flex";
-import Header from "@/components/organism/navigation/Header";
-import TypingEffect from "@/components/TypingEffect";
+import { Button, Text, Flex } from "@/components/atoms";
+import CirclesSVG from "@/components/atoms/CircleSVG";
+import TypingEffect from "@/components/molecules/TypingEffect";
+import Header from "@/components/organisms/Header";
 import Image from "next/image";
-import CirclesSVG from "@/components/CirclesSVG";
 import { useEffect, useState } from "react";
 
 export default function Home() {

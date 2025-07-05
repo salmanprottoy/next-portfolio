@@ -1,32 +1,48 @@
-# Use the official Node.js 18 image as the base image for building
-FROM node:18 AS builder
+# Use the official Node.js 20 image as the base image for building
+FROM node:20-alpine AS builder
 
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy package.json and yarn.lock files to the working directory
+# Copy package files
 COPY package.json yarn.lock ./
 
-# Install dependencies
-RUN yarn install
+# Install dependencies with frozen lockfile for consistency
+RUN yarn install --frozen-lockfile
 
-# Copy the rest of the application code to the working directory
+# Copy the rest of the application code
 COPY . .
 
 # Build the Next.js application
 RUN yarn build
 
-# Use a smaller Node.js image for the runtime
-FROM node:18-slim AS runner
+# Production stage
+FROM node:20-alpine AS runner
 
-# Set the working directory inside the container
+# Create a non-root user for security
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+# Set the working directory
 WORKDIR /app
 
-# Copy only the necessary files from the builder stage
-COPY --from=builder /app .
+# Copy necessary files from builder
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
 
-# Expose the port the app runs on
+# Change ownership to the nextjs user
+RUN chown -R nextjs:nodejs /app
+
+# Switch to non-root user
+USER nextjs
+
+# Expose the port
 EXPOSE 3000
 
-# Start the Next.js application
+# Set environment variable
+ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
+
+# Start the application
 CMD ["yarn", "start"]
