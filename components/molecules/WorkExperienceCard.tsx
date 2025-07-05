@@ -27,28 +27,34 @@ export function WorkExperienceCard({
           : " text-tertiary opacity-60"
       )}
     >
-      <Flex direction="col" gap="5px" className="w-full">
+      <Flex direction="column" gap="xs" className="w-full">
         <Text
-          text={jobTitle}
-          className={cn(
-            "text-3xl font-bold",
-            active ? "text-light" : "text-tertiary"
-          )}
-        />
+          variant="heading-lg"
+          weight="bold"
+          color={active ? "default" : "tertiary"}
+          className={active ? "text-light" : "text-tertiary"}
+        >
+          {jobTitle}
+        </Text>
         <Text
-          text={company}
-          className={cn(
-            "text-2xl font-medium pb-2.5",
-            active ? "text-light" : "text-tertiary"
-          )}
-        />
+          variant="heading-sm"
+          weight="medium"
+          color={active ? "default" : "tertiary"}
+          className={cn("pb-2.5", active ? "text-light" : "text-tertiary")}
+        >
+          {company}
+        </Text>
         <Text
-          text={date}
+          variant="caption"
+          weight="medium"
+          color={active ? "tertiary" : "muted"}
           className={cn(
-            "text-base tracking-widest pb-2.5 uppercase",
+            "tracking-widest pb-2.5 uppercase",
             active ? "text-tertiary" : "text-tertiary/70"
           )}
-        />
+        >
+          {date}
+        </Text>
       </Flex>
       <ul className="space-y-3">
         {bullets.map((b, i) => (

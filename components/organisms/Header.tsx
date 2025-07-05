@@ -1,6 +1,7 @@
 import { Flex, Text } from "@/components/atoms";
-import { socialMedia } from "../../app/data/Data";
-import { CiMail } from "react-icons/ci";
+import { socialMedia, resume } from "../../app/data/Data";
+import { FiDownload } from "react-icons/fi";
+import { GithubIcon, LinkedinIcon } from "@/components/atoms/Icon";
 
 const Header = () => {
   const filteredSocialMedia = socialMedia.filter(
@@ -9,27 +10,34 @@ const Header = () => {
 
   return (
     <header>
-      <Flex
-        direction="row"
-        justifyContent="between"
-        className="w-full relative z-50"
-      >
-        <Flex direction="row" className="cursor-pointer">
+      <Flex direction="row" justify="between" className="w-full relative z-50">
+        <Flex direction="row" gap="md" className="cursor-pointer">
           {filteredSocialMedia.map((item, index) => {
-            const Icon = item.logo;
+            let Icon = null;
+            if (item.name === "github") Icon = GithubIcon;
+            if (item.name === "linkedin") Icon = LinkedinIcon;
             return (
-              <Flex key={index} direction="col" gap="10px">
+              <Flex key={index} direction="column" gap="sm">
                 <a href={item.link} target="_blank" rel="noopener noreferrer">
-                  <Icon />
+                  {Icon && <Icon />}
                 </a>
               </Flex>
             );
           })}
         </Flex>
-        <Flex direction="row">
-          <CiMail size={24} />
-          <Text text="Get in touch" className="!uppercase text-[18px]" />
-        </Flex>
+        <a
+          href={resume.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="cursor-pointer"
+        >
+          <Flex direction="row" align="center" gap="md">
+            <FiDownload size={24} />
+            <Text variant="body-lg" weight="normal" color="light">
+              {resume.text}
+            </Text>
+          </Flex>
+        </a>
       </Flex>
     </header>
   );
