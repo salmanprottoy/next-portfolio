@@ -21,12 +21,12 @@ export default function Home() {
       <Header />
       <CirclesSVG className="absolute z-0 top-0 left-0 w-full h-full" />
       <Flex
-        direction="row"
-        alignItems="center"
-        gap="0px"
+        direction="column"
+        align="center"
+        gap="none"
         className="w-full relative top-[160px] z-10"
       >
-        <Flex direction="row" justifyContent="center" className="w-full pb-6">
+        <Flex direction="row" justify="center" className="w-full pb-6">
           <Image
             src={`${prefix}/images/salmanprottoy.jpg`}
             width={120}
@@ -35,13 +35,17 @@ export default function Home() {
             className="rounded-full"
           />
         </Flex>
-        <Flex direction="row" justifyContent="center" className="w-full">
+        <Flex direction="row" justify="center" className="w-full">
           <Text
-            text="Software Engineer"
-            className="font-karla text-[26px] uppercase text-tertiary tracking-widest"
-          />
+            variant="body-lg"
+            weight="medium"
+            color="tertiary"
+            className="font-karla uppercase tracking-widest"
+          >
+            Software Engineer
+          </Text>
         </Flex>
-        <Flex direction="row" justifyContent="center" className="w-full pb-8">
+        <Flex direction="row" justify="center" className="w-full pb-8">
           <TypingEffect
             text={[
               "",
@@ -53,7 +57,7 @@ export default function Home() {
             speed={50}
           />
         </Flex>
-        <Flex direction="row" justifyContent="center" className="w-full">
+        <Flex direction="row" justify="center" className="w-full">
           <Button>Experience</Button>
           <Button>Skills</Button>
           <Button>Projects</Button>
