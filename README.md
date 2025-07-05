@@ -250,6 +250,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🔗 Links
 
-- **Live Demo**: [Your GitHub Pages URL]
-- **Documentation**: [Your documentation URL]
+- **Live Demo**: [Github Page](https://salmanprottoy.github.io/next-portfolio/)
 - **Security Policy**: [SECURITY.md](SECURITY.md)
