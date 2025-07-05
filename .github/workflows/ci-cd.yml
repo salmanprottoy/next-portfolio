@@ -69,14 +69,35 @@ jobs:
             yarn audit --level moderate
           fi
 
+      # Check if Snyk token is available
+      - name: Check Snyk token
+        id: check-snyk
+        run: |
+          if [ -n "${{ secrets.SNYK_TOKEN }}" ]; then
+            echo "snyk-available=true" >> $GITHUB_OUTPUT
+          else
+            echo "snyk-available=false" >> $GITHUB_OUTPUT
+          fi
+
       # Run Snyk for comprehensive security scanning
       - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/node@master
+        if: steps.check-snyk.outputs.snyk-available == 'true'
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
           args: --severity-threshold=high
         continue-on-error: true
+
+      # Inform when Snyk is skipped
+      - name: Snyk skipped - no token
+        if: steps.check-snyk.outputs.snyk-available == 'false'
+        run: |
+          echo "⚠️ Snyk security scanning skipped - SNYK_TOKEN not configured"
+          echo "To enable Snyk scanning:"
+          echo "1. Get a free token from https://snyk.io"
+          echo "2. Add it as a GitHub secret named 'SNYK_TOKEN'"
+          echo "3. Re-run this workflow"
 
       # Run OWASP ZAP security scan
       - name: OWASP ZAP Scan
