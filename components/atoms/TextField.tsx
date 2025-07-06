@@ -10,6 +10,7 @@ export type Props = {
   defaultValue?: string | number;
   placeholder?: string;
   value?: string | number;
+  readOnly?: boolean;
 };
 export const TextField = (props: Props) => {
   const {
@@ -20,6 +21,7 @@ export const TextField = (props: Props) => {
     value,
     placeholder,
     onKeyDown,
+    readOnly,
   } = props;
 
   return (
@@ -30,6 +32,7 @@ export const TextField = (props: Props) => {
         defaultValue={defaultValue}
         placeholder={placeholder}
         value={value}
+        readOnly={readOnly}
         className={`block rounded-full px-6 py-2.5 text-[14px] bg-secondary font-karla text-tertiary focus:text-white ${
           isBold ? "font-bold" : "font-medium"
         } `}
