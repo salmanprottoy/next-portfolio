@@ -24,6 +24,13 @@ export const metadata: Metadata = {
   },
   description:
     "Software Engineer, Web Developer, and Open Source Contributor based in Bangladesh. Specialized in React, Node.js, Python, and full-stack development.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    apple: "/favicon.ico",
+  },
   keywords: [
     "Md. Salman Hossan Prottoy",
     "Salman Prottoy",
