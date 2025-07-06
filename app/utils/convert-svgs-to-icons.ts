@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 const iconsDir = path.join(__dirname, "../../public/icons");
-const outFile = path.join(__dirname, "../../components/icons/Icon.tsx");
+const outFile = path.join(__dirname, "../../components/atoms/Icon.tsx");
 
 const iconFiles = fs
   .readdirSync(iconsDir)
