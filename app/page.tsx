@@ -14,7 +14,7 @@ import TypingEffect from "@/components/molecules/TypingEffect";
 import { ProjectCard } from "@/components/molecules/ProjectCard";
 import Header from "@/components/organisms/Header";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import Footer from "@/components/organisms/Footer";
@@ -31,6 +31,10 @@ export default function Home() {
   const [prefix, setPrefix] = useState("");
   const [activeSlide, setActiveSlide] = useState(0);
   const [activeSection, setActiveSection] = useState("hero");
+  const [activeExperienceSlide, setActiveExperienceSlide] = useState(0);
+  const [activeProjectsSlide, setActiveProjectsSlide] = useState(0);
+  const experienceSwiperRef = useRef<any>(null);
+  const projectsSwiperRef = useRef<any>(null);
 
   const sections = [
     { id: "hero", label: "Home" },
@@ -218,11 +222,14 @@ export default function Home() {
             {/* Mobile: Swiper with 1 card at a time */}
             <div className="block md:hidden w-full overflow-hidden">
               <Swiper
+                onSwiper={(swiper) => (experienceSwiperRef.current = swiper)}
                 spaceBetween={24}
                 slidesPerView={1}
                 centeredSlides={true}
                 style={{ paddingBottom: 24 }}
-                onSlideChange={(swiper) => setActiveSlide(swiper.activeIndex)}
+                onSlideChange={(swiper) =>
+                  setActiveExperienceSlide(swiper.activeIndex)
+                }
               >
                 {Experience.map((exp, index) => (
                   <SwiperSlide key={index}>
@@ -231,19 +238,55 @@ export default function Home() {
                       company={exp.company}
                       date={exp.date}
                       bullets={exp.bullets}
-                      active={activeSlide === index}
+                      active={activeExperienceSlide === index}
                     />
                   </SwiperSlide>
                 ))}
               </Swiper>
+              {Experience.length >= 2 && (
+                <div className="flex justify-center mt-5">
+                  {Experience.map((_, idx) => {
+                    let show = false;
+                    if (Experience.length <= 3) show = true;
+                    else if (
+                      idx === activeExperienceSlide ||
+                      (activeExperienceSlide === 0 && idx < 3) ||
+                      (activeExperienceSlide === Experience.length - 1 &&
+                        idx >= Experience.length - 3) ||
+                      (idx >= activeExperienceSlide - 1 &&
+                        idx <= activeExperienceSlide + 1)
+                    )
+                      show = true;
+                    if (!show) return null;
+                    return (
+                      <button
+                        key={idx}
+                        onClick={() => {
+                          experienceSwiperRef.current?.slideTo(idx);
+                          setActiveExperienceSlide(idx);
+                        }}
+                        className={`w-3 h-3 rounded-full mx-1 transition-all duration-300 ${
+                          activeExperienceSlide === idx
+                            ? "bg-white scale-125"
+                            : "bg-white/30 hover:bg-white/60"
+                        }`}
+                        aria-label={`Go to slide ${idx + 1}`}
+                      />
+                    );
+                  })}
+                </div>
+              )}
             </div>
             {/* Desktop: Swiper with 2 cards at a time, left card active */}
             <div className="hidden md:block w-full overflow-hidden">
               <Swiper
+                onSwiper={(swiper) => (experienceSwiperRef.current = swiper)}
                 spaceBetween={24}
                 slidesPerView={2}
                 style={{ paddingBottom: 24 }}
-                onSlideChange={(swiper) => setActiveSlide(swiper.activeIndex)}
+                onSlideChange={(swiper) =>
+                  setActiveExperienceSlide(swiper.activeIndex)
+                }
               >
                 {Experience.map((exp, index) => (
                   <SwiperSlide key={index}>
@@ -252,11 +295,44 @@ export default function Home() {
                       company={exp.company}
                       date={exp.date}
                       bullets={exp.bullets}
-                      active={activeSlide === index}
+                      active={activeExperienceSlide === index}
                     />
                   </SwiperSlide>
                 ))}
               </Swiper>
+              {Experience.length > 2 && (
+                <div className="flex justify-center mt-5 pb-2">
+                  {Experience.map((_, idx) => {
+                    let show = false;
+                    if (Experience.length <= 3) show = true;
+                    else if (
+                      idx === activeExperienceSlide ||
+                      (activeExperienceSlide === 0 && idx < 3) ||
+                      (activeExperienceSlide === Experience.length - 1 &&
+                        idx >= Experience.length - 3) ||
+                      (idx >= activeExperienceSlide - 1 &&
+                        idx <= activeExperienceSlide + 1)
+                    )
+                      show = true;
+                    if (!show) return null;
+                    return (
+                      <button
+                        key={idx}
+                        onClick={() => {
+                          experienceSwiperRef.current?.slideTo(idx);
+                          setActiveExperienceSlide(idx);
+                        }}
+                        className={`w-3 h-3 rounded-full mx-1 transition-all duration-300 ${
+                          activeExperienceSlide === idx
+                            ? "bg-white scale-125"
+                            : "bg-white/30 hover:bg-white/60"
+                        }`}
+                        aria-label={`Go to slide ${idx + 1}`}
+                      />
+                    );
+                  })}
+                </div>
+              )}
             </div>
           </Flex>
         </section>
@@ -314,12 +390,14 @@ export default function Home() {
             </Text>
             <div className="w-full overflow-hidden">
               <Swiper
+                onSwiper={(swiper) => (projectsSwiperRef.current = swiper)}
                 spaceBetween={24}
                 slidesPerView={1}
-                breakpoints={{
-                  768: { slidesPerView: 3 },
-                }}
+                breakpoints={{ 768: { slidesPerView: 3 } }}
                 style={{ paddingBottom: 24 }}
+                onSlideChange={(swiper) =>
+                  setActiveProjectsSlide(swiper.activeIndex)
+                }
               >
                 {Projects.map((project, idx) => (
                   <SwiperSlide key={idx}>
@@ -332,6 +410,39 @@ export default function Home() {
                   </SwiperSlide>
                 ))}
               </Swiper>
+              {Projects.length >= 4 && (
+                <div className="flex justify-center mt-6 pb-2">
+                  {Projects.map((_, idx) => {
+                    let show = false;
+                    if (Projects.length <= 3) show = true;
+                    else if (
+                      idx === activeProjectsSlide ||
+                      (activeProjectsSlide === 0 && idx < 3) ||
+                      (activeProjectsSlide === Projects.length - 1 &&
+                        idx >= Projects.length - 3) ||
+                      (idx >= activeProjectsSlide - 1 &&
+                        idx <= activeProjectsSlide + 1)
+                    )
+                      show = true;
+                    if (!show) return null;
+                    return (
+                      <button
+                        key={idx}
+                        onClick={() => {
+                          projectsSwiperRef.current?.slideTo(idx);
+                          setActiveProjectsSlide(idx);
+                        }}
+                        className={`w-3 h-3 rounded-full mx-1 transition-all duration-300 ${
+                          activeProjectsSlide === idx
+                            ? "bg-white scale-125"
+                            : "bg-white/30 hover:bg-white/60"
+                        }`}
+                        aria-label={`Go to slide ${idx + 1}`}
+                      />
+                    );
+                  })}
+                </div>
+              )}
             </div>
           </Flex>
         </section>
