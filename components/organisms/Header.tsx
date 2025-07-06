@@ -1,7 +1,7 @@
 import { Flex, Text } from "@/components/atoms";
 import { socialMedia, resume } from "../../app/data/Data";
 import { FiDownload } from "react-icons/fi";
-import { GithubIcon, LinkedinIcon } from "@/components/atoms/Icon";
+import Icon from "@/components/atoms/Icon";
 
 const Header = () => {
   const filteredSocialMedia = socialMedia.filter(
@@ -12,18 +12,13 @@ const Header = () => {
     <header>
       <Flex direction="row" justify="between" className="w-full relative z-50">
         <Flex direction="row" gap="md" className="cursor-pointer">
-          {filteredSocialMedia.map((item, index) => {
-            let Icon = null;
-            if (item.name === "github") Icon = GithubIcon;
-            if (item.name === "linkedin") Icon = LinkedinIcon;
-            return (
-              <Flex key={index} direction="column" gap="sm">
-                <a href={item.link} target="_blank" rel="noopener noreferrer">
-                  {Icon && <Icon />}
-                </a>
-              </Flex>
-            );
-          })}
+          {filteredSocialMedia.map((item, index) => (
+            <Flex key={index} direction="column" gap="sm">
+              <a href={item.link} target="_blank" rel="noopener noreferrer">
+                <Icon name={item.name as "github" | "linkedin"} />
+              </a>
+            </Flex>
+          ))}
         </Flex>
         <a
           href={resume.link}
