@@ -110,6 +110,8 @@ const config: Config = {
         sans: ["var(--font-karla)", ...fontFamily.sans],
         prompt: ["var(--font-prompt)", ...fontFamily.sans],
         karla: ["var(--font-karla)", ...fontFamily.sans],
+        body: ["var(--font-karla)", ...fontFamily.sans],
+        heading: ["var(--font-prompt)", ...fontFamily.sans],
       },
       fontSize: {
         xs: ["0.75rem", { lineHeight: "1rem" }],
