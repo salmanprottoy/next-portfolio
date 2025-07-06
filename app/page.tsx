@@ -1,7 +1,6 @@
 "use client";
 import { WorkExperienceCard } from "@/components/molecules/WorkExperienceCard";
-import { Button, Text, Flex, SkillBadge, Grid } from "@/components/atoms";
-import CirclesSVG from "@/components/atoms/CircleSVG";
+import { Button, Text, Flex, SkillBadge } from "@/components/atoms";
 import TypingEffect from "@/components/molecules/TypingEffect";
 import { ProjectCard } from "@/components/molecules/ProjectCard";
 import Header from "@/components/organisms/Header";
@@ -21,7 +20,6 @@ import Icon from "@/components/atoms/Icon";
 
 export default function Home() {
   const [prefix, setPrefix] = useState("");
-  const [activeSlide, setActiveSlide] = useState(0);
   const [activeSection, setActiveSection] = useState("hero");
   const [activeExperienceSlide, setActiveExperienceSlide] = useState(0);
   const [activeProjectsSlide, setActiveProjectsSlide] = useState(0);

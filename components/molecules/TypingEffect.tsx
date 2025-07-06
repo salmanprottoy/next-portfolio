@@ -1,5 +1,6 @@
 "use client";
 import { TypeAnimation } from "react-type-animation";
+import { useEffect, useState } from "react";
 
 interface TypingEffectProps {
   text: string[];
@@ -12,14 +13,25 @@ const TypingEffect = ({
   speed = 70,
   cursor = true,
 }: TypingEffectProps) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // Always render the same initial content on server and client
   return (
-    <div className="flex justify-center items-center text-xl md:text-4xl font-bold">
-      <TypeAnimation
-        sequence={[...text.flatMap((t) => [t, 1000])]}
-        speed={speed as any}
-        repeat={Infinity}
-        cursor={cursor}
-      />
+    <div className="flex justify-center items-center text-light text-xl md:text-4xl font-bold">
+      {isMounted ? (
+        <TypeAnimation
+          sequence={[...text.flatMap((t) => [t, 1000])]}
+          speed={speed as any}
+          repeat={Infinity}
+          cursor={cursor}
+        />
+      ) : (
+        <span className="text-light">MD. SALMAN HOSSAN PROTTOY</span>
+      )}
     </div>
   );
 };
