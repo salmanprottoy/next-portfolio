@@ -452,44 +452,46 @@ export default function Home() {
           id="about"
           className="min-h-screen px-5 md:px-[120px] py-6 flex items-center justify-center bg-primary"
         >
-          <Flex
-            direction="column"
-            align="center"
-            justify="center"
-            className="w-full max-w-5xl gap-10 md:gap-20 md:flex-row"
-          >
-            {/* Photo */}
-            <div className="flex-shrink-0 mb-8 md:mb-0">
-              <Image
-                src="/images/salmanprottoy.jpg"
-                alt="Md. Salman Hossan Prottoy"
-                width={288}
-                height={288}
-                className="w-72 h-72 object-cover rounded-2xl shadow-lg"
-              />
-            </div>
-            {/* About Text */}
-            <div className="flex-1 md:text-left">
-              <Text
-                variant="heading-lg"
-                weight="bold"
-                color="light"
-                className="text-center mb-6"
-              >
-                About Me
-              </Text>
-              {AboutMe.map((para, idx) => (
-                <div
-                  key={idx}
-                  className={
-                    idx === 0
-                      ? "text-light text-lg mb-4 leading-relaxed"
-                      : "text-light leading-relaxed"
-                  }
-                  dangerouslySetInnerHTML={{ __html: para }}
+          <Flex direction="column" align="center" className="w-full">
+            <Text
+              variant="heading-lg"
+              weight="bold"
+              color="light"
+              className="text-center mb-8"
+            >
+              About Me
+            </Text>
+            <Flex
+              direction="column"
+              align="center"
+              justify="center"
+              className="w-full max-w-5xl gap-10 md:gap-20 md:flex-row"
+            >
+              {/* Photo */}
+              <div className="flex-shrink-0 mb-8 md:mb-0">
+                <Image
+                  src="/images/salmanprottoy.jpg"
+                  alt="Md. Salman Hossan Prottoy"
+                  width={288}
+                  height={288}
+                  className="w-72 h-72 object-cover rounded-2xl shadow-lg"
                 />
-              ))}
-            </div>
+              </div>
+              {/* About Text */}
+              <div className="flex-1 md:text-left">
+                {AboutMe.map((para, idx) => (
+                  <div
+                    key={idx}
+                    className={
+                      idx === 0
+                        ? "text-light text-lg mb-4 leading-relaxed"
+                        : "text-light leading-relaxed"
+                    }
+                    dangerouslySetInnerHTML={{ __html: para }}
+                  />
+                ))}
+              </div>
+            </Flex>
           </Flex>
         </section>
       </main>

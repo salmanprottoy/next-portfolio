@@ -6,6 +6,23 @@
   --foreground-rgb: 0, 0, 0;
 }
 
+/* Set default font families */
+@layer base {
+  html {
+    font-family: var(--font-karla), system-ui, sans-serif;
+  }
+
+  /* Use Prompt for headings by default */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-prompt), system-ui, sans-serif;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
