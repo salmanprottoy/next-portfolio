@@ -23,19 +23,28 @@ iconFiles.forEach((file: string) => {
   // Convert fill="#fff" to fill="currentColor" for better theming
   svg = svg.replace(/fill="#fff"/g, 'fill="currentColor"');
 
-  // Ensure fill='currentColor' on <svg> and <path>
+  // Ensure fill='currentColor' on <svg> and <path>, avoiding duplicates
   svg = svg
-    .replace(/<svg([^>]*)>/, '<svg$1 fill="currentColor">')
+    .replace(/<svg([^>]*)>/g, (m: string, attrs: string) => {
+      if (/fill=/.test(attrs)) {
+        // If fill already exists, replace it with currentColor
+        return m.replace(/fill="[^"]*"/g, 'fill="currentColor"');
+      } else {
+        return `<svg${attrs} fill="currentColor">`;
+      }
+    })
     .replace(/<path([^>]*)\/>/g, (m: string, attrs: string) => {
       if (/fill=/.test(attrs)) {
-        return m;
+        // If fill already exists, replace it with currentColor
+        return m.replace(/fill="[^"]*"/g, 'fill="currentColor"');
       } else {
         return `<path${attrs} fill="currentColor" />`;
       }
     })
     .replace(/<path([^>]*)>/g, (m: string, attrs: string) => {
       if (/fill=/.test(attrs)) {
-        return m;
+        // If fill already exists, replace it with currentColor
+        return m.replace(/fill="[^"]*"/g, 'fill="currentColor"');
       } else {
         return `<path${attrs} fill="currentColor">`;
       }
