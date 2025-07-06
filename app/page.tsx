@@ -82,13 +82,16 @@ export default function Home() {
 
   return (
     <>
-      <main className="bg-primary w-full overflow-x-hidden">
+      <main className="bg-primary w-full overflow-x-hidden" role="main">
         <div className=" px-8 md:px-[120px] py-6">
           <Header />
         </div>
 
         {/* Dot Navigation */}
-        <div className="fixed right-8 top-1/2 transform -translate-y-1/2 z-50">
+        <nav
+          className="fixed right-8 top-1/2 transform -translate-y-1/2 z-50"
+          aria-label="Page navigation"
+        >
           <Flex direction="column" gap="md" align="center">
             {sections.map((section) => (
               <button
@@ -100,21 +103,25 @@ export default function Home() {
                     : "bg-tertiary/30 hover:bg-tertiary/60"
                 }`}
                 title={section.label}
+                aria-label={`Navigate to ${section.label} section`}
+                aria-current={activeSection === section.id ? "page" : undefined}
               />
             ))}
           </Flex>
-        </div>
+        </nav>
 
         {/* Section 1: Hero */}
         <section
           id="hero"
           className="h-screen flex items-center justify-center bg-primary relative"
+          aria-labelledby="hero-heading"
         >
           {/* Mail Icon in top right */}
           <a
             href={`mailto:${contact.email}`}
             className="absolute bottom-[7.5rem] right-8 md:right-[5rem] z-20 p-2 rounded-lg bg-dark/40 hover:bg-dark/70 transition"
             title={contact.text}
+            aria-label="Send email to Salman Prottoy"
           >
             <svg
               width="28"
@@ -126,6 +133,7 @@ export default function Home() {
               strokeLinecap="round"
               strokeLinejoin="round"
               className="text-tertiary"
+              aria-hidden="true"
             >
               <rect x="3" y="5" width="18" height="14" rx="2" />
               <polyline points="3 7 12 13 21 7" />
@@ -137,8 +145,9 @@ export default function Home() {
                 src={`${prefix}/images/salmanprottoy.jpg`}
                 width={120}
                 height={120}
-                alt="Salman Prottoy"
+                alt="Salman Prottoy - Software Engineer and Web Developer"
                 className="rounded-full"
+                priority
               />
             </Flex>
             <Flex direction="row" justify="center" className="w-full pb-2">
@@ -147,6 +156,7 @@ export default function Home() {
                 weight="medium"
                 color="tertiary"
                 className="font-karla uppercase tracking-widest"
+                id="hero-heading"
               >
                 Software Engineer
               </Text>
@@ -168,12 +178,15 @@ export default function Home() {
               justify="center"
               align="center"
               className="w-full gap-4 md:flex-row flex-wrap"
+              role="group"
+              aria-label="Navigation buttons"
             >
               <Button
                 size="xl"
                 shape="pill"
                 variant={activeSection === "experience" ? "outline" : "primary"}
                 onClick={() => scrollToSection("experience")}
+                aria-label="View work experience"
               >
                 Experience
               </Button>
@@ -182,6 +195,7 @@ export default function Home() {
                 shape="pill"
                 variant={activeSection === "skills" ? "outline" : "primary"}
                 onClick={() => scrollToSection("skills")}
+                aria-label="View technical skills"
               >
                 Skills
               </Button>
@@ -190,6 +204,7 @@ export default function Home() {
                 shape="pill"
                 variant={activeSection === "projects" ? "outline" : "primary"}
                 onClick={() => scrollToSection("projects")}
+                aria-label="View projects"
               >
                 Projects
               </Button>
@@ -198,6 +213,7 @@ export default function Home() {
                 shape="pill"
                 variant={activeSection === "about" ? "outline" : "primary"}
                 onClick={() => scrollToSection("about")}
+                aria-label="Learn more about Salman"
               >
                 About
               </Button>

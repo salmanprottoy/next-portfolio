@@ -1,6 +1,6 @@
 # Next.js Portfolio
 
-A modern, secure portfolio website built with Next.js 14, React 18, and Tailwind CSS. Features comprehensive security scanning, automated CI/CD, and static export for GitHub Pages deployment.
+A modern, secure portfolio website built with Next.js 14, React 18, and Tailwind CSS. Features comprehensive security scanning, automated CI/CD, static export for GitHub Pages deployment, and advanced SEO optimization.
 
 ## 🚀 Features
 
@@ -9,12 +9,13 @@ A modern, secure portfolio website built with Next.js 14, React 18, and Tailwind
 - **Automated CI/CD**: GitHub Actions with security checks and deployment
 - **Static Export**: Optimized for GitHub Pages deployment
 - **Performance**: Optimized images, code splitting, and modern web standards
+- **SEO Optimized**: Advanced search engine optimization with structured data
 - **Monitoring**: Sentry integration for error tracking and performance monitoring
 - **Responsive Design**: Mobile-first approach with modern UI/UX
 
 ## 📋 Overview
 
-This project is a personal portfolio website built with the latest web technologies. It leverages Next.js for server-side rendering and routing, React for UI components, and Tailwind CSS for styling. The project includes comprehensive security measures and automated deployment pipelines.
+This project is a personal portfolio website built with the latest web technologies. It leverages Next.js for server-side rendering and routing, React for UI components, and Tailwind CSS for styling. The project includes comprehensive security measures, automated deployment pipelines, and advanced SEO optimization for better search engine visibility.
 
 ## 🏗️ Project Structure
 
@@ -27,11 +28,16 @@ NEXT-PORTFOLIO/
 │   ├── atoms/         # Atomic design components
 │   ├── data/          # Static data and content
 │   ├── globals.css    # Global styles
-│   ├── layout.tsx     # Root layout
+│   ├── layout.tsx     # Root layout with SEO metadata
 │   ├── page.tsx       # Home page
+│   ├── not-found.tsx  # Custom 404 page
+│   ├── sitemap.ts     # Dynamic sitemap generation
+│   ├── robots.ts      # Robots.txt generation
+│   ├── manifest.ts    # PWA manifest
 │   └── utils/         # Utility functions
 ├── components/         # Reusable React components
 │   ├── atoms/         # Basic UI components (Button, Text, etc.)
+│   │   └── StructuredData.tsx # JSON-LD structured data
 │   ├── molecules/     # Composite components (Cards, etc.)
 │   └── organisms/     # Complex components (Header, etc.)
 ├── public/            # Static assets (images, icons)
@@ -46,7 +52,7 @@ NEXT-PORTFOLIO/
 ├── docker-compose.yml # Docker Compose configuration
 ├── Dockerfile         # Docker configuration
 ├── next-env.d.ts      # Next.js TypeScript declarations
-├── next.config.js     # Next.js configuration
+├── next.config.js     # Next.js configuration with SEO optimizations
 ├── package-lock.json  # npm lock file
 ├── package.json       # Project dependencies
 ├── postcss.config.js  # PostCSS configuration 
@@ -56,6 +62,122 @@ NEXT-PORTFOLIO/
 ├── tsconfig.json      # TypeScript configuration
 └── yarn.lock          # Yarn lock file
 ```
+
+## 🔍 SEO Features
+
+### Advanced Search Engine Optimization
+
+This portfolio includes comprehensive SEO optimization to improve search engine visibility and ranking:
+
+#### **Metadata & Meta Tags**
+- **Dynamic Title Tags**: Template-based titles with fallbacks
+- **Comprehensive Meta Descriptions**: Detailed descriptions for better click-through rates
+- **Open Graph Tags**: Optimized social media sharing
+- **Twitter Card Tags**: Enhanced Twitter sharing experience
+- **Keywords**: Strategic keyword targeting for software engineering terms
+- **Canonical URLs**: Prevents duplicate content issues
+
+#### **Structured Data (JSON-LD)**
+- **Person Schema**: Complete professional profile markup
+- **WebSite Schema**: Site information for search engines
+- **Article Schema**: Content type identification
+- **Skills & Expertise**: Technical skills markup
+- **Social Media Profiles**: Professional network connections
+- **Geographic Information**: Location-based optimization
+
+#### **Technical SEO**
+- **Sitemap Generation**: Dynamic XML sitemap (`/sitemap.xml`)
+- **Robots.txt**: Search engine crawling instructions (`/robots.txt`)
+- **PWA Manifest**: Progressive Web App capabilities (`/manifest.json`)
+- **Custom 404 Page**: User-friendly error page with SEO considerations
+- **Image Optimization**: WebP/AVIF formats with proper alt tags
+- **Performance Headers**: Security and performance optimizations
+
+#### **Accessibility & UX**
+- **Semantic HTML**: Proper heading hierarchy and landmarks
+- **ARIA Labels**: Screen reader accessibility
+- **Keyboard Navigation**: Full keyboard accessibility
+- **Focus Management**: Proper focus indicators
+- **Alt Text**: Descriptive image alt attributes
+
+#### **Performance Optimization**
+- **Image Compression**: Next.js Image optimization
+- **Code Splitting**: Automatic bundle optimization
+- **Compression**: Gzip/Brotli compression enabled
+- **Security Headers**: HSTS, CSP, and other security headers
+- **Cache Optimization**: Strategic caching policies
+
+### SEO Implementation Details
+
+#### **Metadata Configuration** (`app/layout.tsx`)
+```typescript
+export const metadata: Metadata = {
+  title: {
+    default: "Salman Prottoy - Software Engineer & Web Developer",
+    template: "%s | Salman Prottoy"
+  },
+  description: "Software Engineer, Web Developer, and Open Source Contributor based in Bangladesh...",
+  keywords: ["Salman Prottoy", "Software Engineer", "Web Developer", ...],
+  openGraph: { /* Social media optimization */ },
+  twitter: { /* Twitter Card optimization */ },
+  robots: { /* Search engine crawling instructions */ }
+};
+```
+
+#### **Structured Data** (`components/atoms/StructuredData.tsx`)
+```typescript
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Salman Prottoy",
+  "jobTitle": "Software Engineer",
+  "knowsAbout": ["JavaScript", "TypeScript", "React", ...],
+  "sameAs": ["LinkedIn", "GitHub", "Twitter", ...]
+}
+```
+
+#### **Dynamic Sitemap** (`app/sitemap.ts`)
+```typescript
+export default function sitemap(): MetadataRoute.Sitemap {
+  return [
+    { url: baseUrl, priority: 1, changeFrequency: 'monthly' },
+    { url: `${baseUrl}/#experience`, priority: 0.8 },
+    // ... more sections
+  ];
+}
+```
+
+### SEO Best Practices Implemented
+
+1. **Content Optimization**
+   - Descriptive page titles and meta descriptions
+   - Strategic keyword placement
+   - Professional bio and skill descriptions
+
+2. **Technical SEO**
+   - Fast loading times with optimized images
+   - Mobile-responsive design
+   - Clean URL structure
+   - Proper HTTP status codes
+
+3. **User Experience**
+   - Intuitive navigation
+   - Clear call-to-action buttons
+   - Professional presentation
+   - Accessible design
+
+4. **Local SEO**
+   - Geographic targeting (Bangladesh)
+   - Professional service area
+   - Local business information
+
+### SEO Monitoring & Analytics
+
+The portfolio is configured for:
+- **Google Search Console**: Submit sitemap and monitor performance
+- **Google Analytics**: Track user behavior and conversions
+- **PageSpeed Insights**: Monitor Core Web Vitals
+- **Lighthouse Audits**: Regular performance and SEO audits
 
 ## 🛡️ Security Features
 
@@ -187,6 +309,7 @@ The project is configured for automatic deployment to GitHub Pages:
 1. **Automatic Deployment**: Pushes to main branch trigger deployment
 2. **Static Export**: Optimized for static hosting
 3. **Security Headers**: Configured for production security
+4. **SEO Optimization**: All SEO features work in production
 
 ### Manual Deployment
 
@@ -199,6 +322,27 @@ npm run export
 
 # Deploy to your preferred hosting service
 ```
+
+## 📊 SEO Performance
+
+### Key SEO Metrics
+- **Page Speed**: Optimized for Core Web Vitals
+- **Mobile Responsiveness**: Mobile-first design
+- **Accessibility**: WCAG 2.1 AA compliance
+- **Security**: HTTPS and security headers
+- **Technical SEO**: Clean code and proper markup
+
+### SEO Checklist
+- ✅ Meta tags and descriptions
+- ✅ Open Graph and Twitter Cards
+- ✅ Structured data (JSON-LD)
+- ✅ Sitemap and robots.txt
+- ✅ Image optimization
+- ✅ Semantic HTML
+- ✅ Accessibility features
+- ✅ Performance optimization
+- ✅ Security headers
+- ✅ Mobile responsiveness
 
 ## 🔧 Configuration
 
@@ -250,5 +394,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🔗 Links
 
-- **Live Demo**: [Github Page](https://salmanprottoy.github.io/next-portfolio/)
+- **Live Demo**: [Vercel](https://salmanprottoy.vercel.app/)
 - **Security Policy**: [SECURITY.md](SECURITY.md)
