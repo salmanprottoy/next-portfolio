@@ -13,7 +13,12 @@ const Header = () => {
       <Flex direction="row" justify="between" className="w-full relative z-50">
         <Flex direction="row" gap="md" className="cursor-pointer">
           {filteredSocialMedia.map((item, index) => (
-            <Flex key={index} direction="column" gap="sm">
+            <Flex
+              key={index}
+              direction="column"
+              gap="sm"
+              className="text-light"
+            >
               <a href={item.link} target="_blank" rel="noopener noreferrer">
                 <Icon name={item.name as "github" | "linkedin"} />
               </a>
@@ -26,7 +31,7 @@ const Header = () => {
           rel="noopener noreferrer"
           className="cursor-pointer"
         >
-          <Flex direction="row" align="center" gap="md">
+          <Flex direction="row" align="center" gap="md" className="text-light">
             <Icon name="download" />
             <Text variant="body-lg" weight="bold" color="light">
               {resume.text}
