@@ -1,14 +1,6 @@
 "use client";
 import { WorkExperienceCard } from "@/components/molecules/WorkExperienceCard";
 import { Button, Text, Flex, SkillBadge, Grid } from "@/components/atoms";
-import {
-  TechIcon,
-  ReactIcon,
-  Javascript,
-  Python,
-  Nodejs,
-  Firebase,
-} from "@/components/atoms/Icon";
 import CirclesSVG from "@/components/atoms/CircleSVG";
 import TypingEffect from "@/components/molecules/TypingEffect";
 import { ProjectCard } from "@/components/molecules/ProjectCard";
@@ -25,7 +17,7 @@ import {
   Skills,
   contact,
 } from "@/app/data/Data";
-import * as Icons from "@/components/icons";
+import Icon from "@/components/atoms/Icon";
 
 export default function Home() {
   const [prefix, setPrefix] = useState("");
@@ -370,16 +362,16 @@ export default function Home() {
             <div className="w-full">
               <Flex direction="row" justify="center" gap="md" wrap="wrap">
                 {Skills.map((skill, idx) => {
-                  const IconComponent = Icons[skill.icon as keyof typeof Icons];
                   return (
                     <SkillBadge
                       key={idx}
                       icon={
-                        IconComponent ? (
-                          <IconComponent className="w-6 h-6 text-black group-hover:text-white transition-colors" />
-                        ) : (
-                          <div className="w-6 h-6 bg-gray-300 rounded" />
-                        )
+                        <Icon
+                          name={
+                            skill.icon as import("@/components/atoms/Icon").IconName
+                          }
+                          className="w-6 h-6 text-black group-hover:text-white transition-colors"
+                        />
                       }
                       label={skill.name}
                     />
