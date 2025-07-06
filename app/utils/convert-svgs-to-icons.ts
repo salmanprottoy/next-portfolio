@@ -17,6 +17,12 @@ iconFiles.forEach((file: string) => {
   iconNames.push(`"${svgName}"`);
   let svg = fs.readFileSync(path.join(iconsDir, file), "utf8");
 
+  // Remove XML namespace attributes that cause JSX errors
+  svg = svg.replace(/xml:space="[^"]*"/g, "");
+
+  // Convert fill="#fff" to fill="currentColor" for better theming
+  svg = svg.replace(/fill="#fff"/g, 'fill="currentColor"');
+
   // Ensure fill='currentColor' on <svg> and <path>
   svg = svg
     .replace(/<svg([^>]*)>/, '<svg$1 fill="currentColor">')

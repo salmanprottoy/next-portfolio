@@ -27,8 +27,8 @@ const Header = () => {
           className="cursor-pointer"
         >
           <Flex direction="row" align="center" gap="md">
-            <FiDownload size={24} />
-            <Text variant="body-lg" weight="normal" color="light">
+            <Icon name="download" />
+            <Text variant="body-lg" weight="bold" color="light">
               {resume.text}
             </Text>
           </Flex>
