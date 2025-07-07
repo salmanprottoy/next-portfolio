@@ -1,4 +1,4 @@
-import { Projects, Experience, Skills, contact } from "@/app/data/Data";
+import { Skills, contact } from "@/app/data/Data";
 
 interface StructuredDataProps {
   type: "person" | "website" | "article";

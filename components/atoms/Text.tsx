@@ -83,7 +83,7 @@ const alignStyles = {
   justify: "text-justify",
 } as const;
 
-export const Text = forwardRef<HTMLElement, TextProps>(
+const Text = forwardRef<HTMLElement, TextProps>(
   (
     {
       children,
@@ -126,3 +126,5 @@ export const Text = forwardRef<HTMLElement, TextProps>(
 );
 
 Text.displayName = "Text";
+
+export default Text;

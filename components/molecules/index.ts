@@ -1,3 +1,3 @@
 export { default as TypingEffect } from "./TypingEffect";
-export { ProjectCard } from "./ProjectCard";
+export { default as ProjectCard } from "./ProjectCard";
 export * from "./WorkExperienceCard";

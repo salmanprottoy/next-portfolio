@@ -1,14 +1,26 @@
 "use client";
-import { WorkExperienceCard } from "@/components/molecules/WorkExperienceCard";
-import { Button, Text, Flex, SkillBadge } from "@/components/atoms";
-import TypingEffect from "@/components/molecules/TypingEffect";
-import { ProjectCard } from "@/components/molecules/ProjectCard";
-import Header from "@/components/organisms/Header";
+import dynamic from "next/dynamic";
+
+const WorkExperienceCard = dynamic(
+  () => import("../components/molecules/WorkExperienceCard")
+);
+const Button = dynamic(() => import("@/components/atoms/Button"));
+const Text = dynamic(() => import("@/components/atoms/Text"));
+const Flex = dynamic(() => import("@/components/atoms/Flex"));
+const SkillBadge = dynamic(() => import("@/components/atoms/SkillBadge"));
+const TypingEffect = dynamic(
+  () => import("@/components/molecules/TypingEffect")
+);
+const ProjectCard = dynamic(
+  () => import("../components/molecules/ProjectCard")
+);
+const Header = dynamic(() => import("@/components/organisms/Header"));
 import Image from "next/image";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useMemo } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper as SwiperInstance } from "swiper/types";
 import "swiper/css";
-import Footer from "@/components/organisms/Footer";
+const Footer = dynamic(() => import("@/components/organisms/Footer"));
 import {
   Projects,
   Experience,
@@ -18,21 +30,29 @@ import {
 } from "@/app/data/Data";
 import Icon from "@/components/atoms/Icon";
 
-export default function Home() {
-  const [prefix, setPrefix] = useState("");
-  const [activeSection, setActiveSection] = useState("hero");
-  const [activeExperienceSlide, setActiveExperienceSlide] = useState(0);
-  const [activeProjectsSlide, setActiveProjectsSlide] = useState(0);
-  const experienceSwiperRef = useRef<any>(null);
-  const projectsSwiperRef = useRef<any>(null);
+interface Section {
+  id: string;
+  label: string;
+}
 
-  const sections = [
-    { id: "hero", label: "Home" },
-    { id: "experience", label: "Experience" },
-    { id: "skills", label: "Skills" },
-    { id: "projects", label: "Projects" },
-    { id: "about", label: "About" },
-  ];
+export default function Home() {
+  const [prefix, setPrefix] = useState<string>("");
+  const [activeSection, setActiveSection] = useState<string>("hero");
+  const [activeExperienceSlide, setActiveExperienceSlide] = useState<number>(0);
+  const [activeProjectsSlide, setActiveProjectsSlide] = useState<number>(0);
+  const experienceSwiperRef = useRef<SwiperInstance | null>(null);
+  const projectsSwiperRef = useRef<SwiperInstance | null>(null);
+
+  const sections: Section[] = useMemo(
+    () => [
+      { id: "hero", label: "Home" },
+      { id: "experience", label: "Experience" },
+      { id: "skills", label: "Skills" },
+      { id: "projects", label: "Projects" },
+      { id: "about", label: "About" },
+    ],
+    []
+  );
 
   useEffect(() => {
     const isGitHubPages =
@@ -61,7 +81,7 @@ export default function Home() {
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [sections]);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -69,6 +89,30 @@ export default function Home() {
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  const NavigationButtons = () => (
+    <Flex
+      direction="column"
+      justify="center"
+      align="center"
+      className="w-full gap-4 md:flex-row flex-wrap"
+      role="group"
+      aria-label="Navigation buttons"
+    >
+      {sections.map((section) => (
+        <Button
+          key={section.id}
+          size="xl"
+          shape="pill"
+          variant={activeSection === section.id ? "outline" : "primary"}
+          onClick={() => scrollToSection(section.id)}
+          aria-label={`View ${section.label.toLowerCase()}`}
+        >
+          {section.label}
+        </Button>
+      ))}
+    </Flex>
+  );
 
   return (
     <>
@@ -137,7 +181,7 @@ export default function Home() {
                 height={120}
                 alt="Salman Prottoy - Software Engineer and Web Developer"
                 className="rounded-full"
-                priority
+                loading="lazy"
               />
             </Flex>
             <Flex direction="row" justify="center" className="w-full pb-2">
@@ -163,51 +207,7 @@ export default function Home() {
                 speed={50}
               />
             </Flex>
-            <Flex
-              direction="column"
-              justify="center"
-              align="center"
-              className="w-full gap-4 md:flex-row flex-wrap"
-              role="group"
-              aria-label="Navigation buttons"
-            >
-              <Button
-                size="xl"
-                shape="pill"
-                variant={activeSection === "experience" ? "outline" : "primary"}
-                onClick={() => scrollToSection("experience")}
-                aria-label="View work experience"
-              >
-                Experience
-              </Button>
-              <Button
-                size="xl"
-                shape="pill"
-                variant={activeSection === "skills" ? "outline" : "primary"}
-                onClick={() => scrollToSection("skills")}
-                aria-label="View technical skills"
-              >
-                Skills
-              </Button>
-              <Button
-                size="xl"
-                shape="pill"
-                variant={activeSection === "projects" ? "outline" : "primary"}
-                onClick={() => scrollToSection("projects")}
-                aria-label="View projects"
-              >
-                Projects
-              </Button>
-              <Button
-                size="xl"
-                shape="pill"
-                variant={activeSection === "about" ? "outline" : "primary"}
-                onClick={() => scrollToSection("about")}
-                aria-label="Learn more about Salman"
-              >
-                About
-              </Button>
-            </Flex>
+            <NavigationButtons />
           </Flex>
         </section>
 
@@ -478,6 +478,7 @@ export default function Home() {
                 <Image
                   src="/images/salmanprottoy.jpg"
                   alt="Md. Salman Hossan Prottoy"
+                  loading="lazy"
                   width={288}
                   height={288}
                   className="w-72 h-72 object-cover rounded-2xl shadow-lg"

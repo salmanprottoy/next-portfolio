@@ -10,7 +10,7 @@ export interface ProjectCardProps {
   links?: { label: string; url: string }[];
 }
 
-export function ProjectCard({
+export default function ProjectCard({
   image,
   title,
   description,
