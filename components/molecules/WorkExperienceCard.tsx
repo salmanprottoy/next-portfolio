@@ -1,7 +1,7 @@
 import React from "react";
 import cn from "@/app/utils/cn";
-import { Text } from "../atoms/Text";
-import { Flex } from "../atoms/Flex";
+import Text from "../atoms/Text";
+import Flex from "../atoms/Flex";
 
 export interface WorkExperienceCardProps {
   jobTitle: string;
@@ -11,7 +11,7 @@ export interface WorkExperienceCardProps {
   active?: boolean;
 }
 
-export function WorkExperienceCard({
+export default function WorkExperienceCard({
   jobTitle,
   company,
   date,

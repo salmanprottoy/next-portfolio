@@ -1,3 +1,4 @@
 export { default as TypingEffect } from "./TypingEffect";
-export { ProjectCard } from "./ProjectCard";
-export * from "./WorkExperienceCard";
+export { default as ProjectCard } from "./ProjectCard";
+export { default as WorkExperienceCard } from "./WorkExperienceCard";
+export type { WorkExperienceCardProps } from "./WorkExperienceCard";

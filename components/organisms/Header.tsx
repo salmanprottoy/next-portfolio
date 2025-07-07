@@ -1,9 +1,10 @@
 import { Flex, Text } from "@/components/atoms";
 import { socialMedia, resume } from "../../app/data/Data";
-import { FiDownload } from "react-icons/fi";
 import Icon from "@/components/atoms/Icon";
 
-const Header = () => {
+import React from "react";
+
+const Header = React.memo(() => {
   const filteredSocialMedia = socialMedia.filter(
     (item) => item.name === "github" || item.name === "linkedin"
   );
@@ -41,6 +42,8 @@ const Header = () => {
       </Flex>
     </header>
   );
-};
+});
+
+Header.displayName = "Header";
 
 export default Header;

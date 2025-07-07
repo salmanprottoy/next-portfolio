@@ -59,7 +59,7 @@ const gapStyles = {
   "3xl": "gap-16",
 } as const;
 
-export const Flex = forwardRef<HTMLDivElement, FlexProps>(
+const Flex = forwardRef<HTMLDivElement, FlexProps>(
   (
     {
       children,
@@ -110,3 +110,5 @@ export const Flex = forwardRef<HTMLDivElement, FlexProps>(
 );
 
 Flex.displayName = "Flex";
+
+export default Flex;
