@@ -178,7 +178,8 @@ export default function Home() {
                 height={120}
                 alt="Salman Prottoy - Software Engineer and Web Developer"
                 className="rounded-full"
-                loading="lazy"
+-                loading="lazy"
++                priority
               />
             </Flex>
             <Flex direction="row" justify="center" className="w-full pb-2">
