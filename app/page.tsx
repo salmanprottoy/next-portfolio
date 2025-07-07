@@ -43,13 +43,16 @@ export default function Home() {
   const experienceSwiperRef = useRef<SwiperInstance | null>(null);
   const projectsSwiperRef = useRef<SwiperInstance | null>(null);
 
-  const sections: Section[] = [
-    { id: "hero", label: "Home" },
-    { id: "experience", label: "Experience" },
-    { id: "skills", label: "Skills" },
-    { id: "projects", label: "Projects" },
-    { id: "about", label: "About" },
-  ];
+  const sections = useMemo<Section[]>(
+    () => [
+      { id: "hero", label: "Home" },
+      { id: "experience", label: "Experience" },
+      { id: "skills", label: "Skills" },
+      { id: "projects", label: "Projects" },
+      { id: "about", label: "About" },
+    ],
+    []
+  );
 
   useEffect(() => {
     const isGitHubPages =
