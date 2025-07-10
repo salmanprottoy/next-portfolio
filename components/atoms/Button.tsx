@@ -45,10 +45,10 @@ const variantStyles: Record<ButtonVariant, string> = {
 
 // Size styles mapping
 const sizeStyles: Record<ButtonSize, string> = {
-  sm: "text-sm font-medium sm:px-[30px] sm:py-[5px]",
-  md: "text-base font-medium sm:px-[30px] sm:py-[5px] md:px-[35px] md:py-[6px]",
-  lg: "text-lg font-medium sm:px-[30px] sm:py-[5px] md:px-[35px] md:py-[6px] lg:px-[40px] lg:py-[6px]",
-  xl: "text-xl font-medium sm:px-[30px] sm:py-[5px] md:px-[35px] md:py-[6px] lg:px-[40px] lg:py-[6px] xl:px-[50px] xl:py-[8px]",
+  sm: "text-sm font-medium px-[30px] py-[5px] sm:px-[30px] sm:py-[5px]",
+  md: "text-base font-medium px-[35px] py-[6px] sm:px-[30px] sm:py-[5px] md:px-[35px] md:py-[6px]",
+  lg: "text-lg font-medium px-[40px] py-[6px]sm:px-[30px] sm:py-[5px] md:px-[35px] md:py-[6px] lg:px-[40px] lg:py-[6px]",
+  xl: "text-xl font-medium px-[40px] py-[6px] sm:px-[30px] sm:py-[5px] md:px-[35px] md:py-[6px] lg:px-[40px] lg:py-[6px] xl:px-[50px] xl:py-[8px]",
 };
 
 // Shape styles mapping
