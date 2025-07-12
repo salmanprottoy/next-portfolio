@@ -17,6 +17,7 @@ const nextConfig = {
     minimumCacheTTL: 60,
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    domains: ["salmanprottoy-portfolio.s3.ap-south-1.amazonaws.com"],
   },
 
   // Performance optimizations
