@@ -12,12 +12,12 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: "#64ffda",
     icons: [
       {
-        src: "/images/salmanprottoy.jpg",
+        src: `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/salmanprottoy.jpg`,
         sizes: "192x192",
         type: "image/jpeg",
       },
       {
-        src: "/images/salmanprottoy.jpg",
+        src: `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/salmanprottoy.jpg`,
         sizes: "512x512",
         type: "image/jpeg",
       },

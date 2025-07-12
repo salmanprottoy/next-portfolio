@@ -17,7 +17,7 @@ export const StructuredData: React.FC<StructuredDataProps> = ({
     description:
       "Software Engineer, Web Developer, and Open Source Contributor based in Bangladesh",
     url: "https://salmanprottoy.vercel.app",
-    image: "https://salmanprottoy.vercel.app/images/salmanprottoy.jpg",
+    image: `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/salmanprottoy.jpg`,
     sameAs: [
       "https://linkedin.com/in/salman-prottoy/",
       "https://github.com/salmanprottoy/",
@@ -77,7 +77,7 @@ export const StructuredData: React.FC<StructuredDataProps> = ({
       "Software Engineer, Web Developer, and Open Source Contributor",
     image:
       data?.image ||
-      "https://salmanprottoy.vercel.app/images/salmanprottoy.jpg",
+      `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/salmanprottoy.jpg`,
     author: {
       "@type": "Person",
       name: "Md. Salman Hossan Prottoy",

@@ -176,7 +176,7 @@ export default function Home() {
           <Flex direction="column" align="center" gap="none" className="w-full">
             <Flex direction="row" justify="center" className="w-full pb-6">
               <Image
-                src={`${prefix}/images/salmanprottoy.jpg`}
+                src={`${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/salmanprottoy.jpg`}
                 width={120}
                 height={120}
                 alt="Salman Prottoy - Software Engineer and Web Developer"
@@ -476,7 +476,7 @@ export default function Home() {
               {/* Photo */}
               <div className="flex-shrink-0 mb-8 md:mb-0">
                 <Image
-                  src="/images/salmanprottoy.jpg"
+                  src={`${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/salmanprottoy.jpg`}
                   alt="Md. Salman Hossan Prottoy"
                   loading="lazy"
                   width={288}

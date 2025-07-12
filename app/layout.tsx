@@ -69,7 +69,7 @@ export const metadata: Metadata = {
     siteName: "Md. Salman Hossan Prottoy Portfolio",
     images: [
       {
-        url: "/images/salmanprottoy.jpg",
+        url: `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/salmanprottoy.jpg`,
         width: 1200,
         height: 630,
         alt: "Md. Salman Hossan Prottoy - Software Engineer",
@@ -81,7 +81,7 @@ export const metadata: Metadata = {
     title: "Md. Salman Hossan Prottoy - Software Engineer & Web Developer",
     description:
       "Software Engineer, Web Developer, and Open Source Contributor based in Bangladesh. Specialized in React, Node.js, Python, and full-stack development.",
-    images: ["/images/salmanprottoy.jpg"],
+    images: [`${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/salmanprottoy.jpg`],
     creator: "@salman_prottoy",
   },
   robots: {
@@ -121,8 +121,7 @@ export default function RootLayout({
               description:
                 "Software Engineer, Web Developer, and Open Source Contributor",
               url: "https://salmanprottoy.vercel.app",
-              image:
-                "https://salmanprottoy.vercel.app/images/salmanprottoy.jpg",
+              image: `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/salmanprottoy.jpg`,
               sameAs: [
                 "https://linkedin.com/in/salman-prottoy/",
                 "https://github.com/salmanprottoy/",

@@ -73,7 +73,7 @@ export const Projects = [
     },
     link: "",
     repo: "https://github.com/salmanprottoy/CRM-Software-laravel",
-    image: "/images/crm.png",
+    image: `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/crm.png`,
     imageDetails: {
       alt: "CRM Software",
     },
@@ -87,7 +87,7 @@ export const Projects = [
     },
     link: "https://extreme-fitness-gym-bd.web.app/",
     repo: "https://github.com/salmanprottoy/extreme-fitness-gym-client",
-    image: "/images/fitness.png",
+    image: `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/fitness.png`,
     imageDetails: {
       alt: "Extreme Fitness GYM",
     },
@@ -101,7 +101,7 @@ export const Projects = [
     },
     link: "https://online-book-store-e7a9c.web.app/",
     repo: "https://github.com/salmanprottoy/online-book-store-client",
-    image: "/images/obs.png",
+    image: `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/obs.png`,
     imageDetails: {
       alt: "Online Book Store",
     },
@@ -115,7 +115,7 @@ export const Projects = [
     },
     link: "https://fuschia-neptunium.netlify.app/",
     repo: "https://github.com/salmanprottoy/fuschia-neptunium",
-    image: "/images/fuschia.png",
+    image: `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/fuschia.png`,
     imageDetails: {
       alt: "Fuschia Neptunium",
     },
@@ -129,7 +129,7 @@ export const Projects = [
     },
     link: "",
     repo: "https://github.com/salmanprottoy/baglaCarApp",
-    image: "/images/banglacar.jpg",
+    image: `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/banglacar.jpg`,
     imageDetails: {
       alt: "Bangla Car",
     },
@@ -143,7 +143,7 @@ export const Projects = [
     },
     link: "https://instashop-bd.web.app/",
     repo: "https://github.com/salmanprottoy/instaShop",
-    image: "/images/instashop.png",
+    image: `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/instashop.png`,
     imageDetails: {
       alt: "Insta Shop",
     },
@@ -157,7 +157,7 @@ export const Projects = [
     },
     link: "",
     repo: "https://github.com/salmanprottoy/Doctor-Patient-Portal",
-    image: "/images/doctorpatient.png",
+    image: `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/doctorpatient.png`,
     imageDetails: {
       alt: "Doctor Patient Portal",
     },
@@ -171,7 +171,7 @@ export const Projects = [
     },
     link: "https://city-riding-service.web.app/",
     repo: "https://github.com/salmanprottoy/city-riding-service",
-    image: "/images/cityridingservice.png",
+    image: `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/cityridingservice.png`,
     imageDetails: {
       alt: "City Riding Service",
     },
@@ -185,7 +185,7 @@ export const Projects = [
     },
     link: "https://premier-league-team-info.netlify.app/",
     repo: "https://github.com/salmanprottoy/premier-league-football-team-info",
-    image: "/images/premierleagueteaminfo.png",
+    image: `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/premierleagueteaminfo.png`,
     imageDetails: {
       alt: "Premier League Team Info",
     },
