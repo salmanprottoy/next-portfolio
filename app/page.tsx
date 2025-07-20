@@ -56,7 +56,7 @@ export default function Home() {
 
   useEffect(() => {
     const isGitHubPages =
-      window.location.hostname.includes("github.io") ||
+      ["github.io"].includes(window.location.hostname) ||
       window.location.pathname.startsWith("/next-portfolio");
 
     setPrefix(isGitHubPages ? "/next-portfolio" : "");
