@@ -21,7 +21,7 @@ const TypingEffect = ({
 
   // Always render the same initial content on server and client
   return (
-    <div className="flex justify-center items-center text-light text-xl md:text-4xl font-bold">
+    <div className="flex justify-center items-center text-light text-xl md:text-4xl font-bold text-center">
       {isMounted ? (
         <TypeAnimation
           sequence={[...text.flatMap((t) => [t, 1000])]}
@@ -30,7 +30,7 @@ const TypingEffect = ({
           cursor={cursor}
         />
       ) : (
-        <span className="text-light">MD. SALMAN HOSSAN PROTTOY</span>
+        <span className="text-light">{text[0] ?? "Software Engineer"}</span>
       )}
     </div>
   );
