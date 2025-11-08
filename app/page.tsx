@@ -14,6 +14,9 @@ const TypingEffect = dynamic(
 const ProjectCard = dynamic(
   () => import("../components/molecules/ProjectCard")
 );
+const Grid = dynamic(() =>
+  import("@/components/atoms/Grid").then((mod) => mod.Grid)
+);
 const Header = dynamic(() => import("@/components/organisms/Header"));
 import Image from "next/image";
 import { useEffect, useState, useRef, useMemo } from "react";
@@ -27,6 +30,10 @@ import {
   AboutMe,
   Skills,
   contact,
+  HonorsAndAwards,
+  ResearchExperience,
+  Publications,
+  ExtraCurricular,
 } from "@/app/data/Data";
 import Icon from "@/components/atoms/Icon";
 
@@ -173,7 +180,12 @@ export default function Home() {
               <polyline points="3 7 12 13 21 7" />
             </svg>
           </a>
-          <Flex direction="column" align="center" gap="none" className="w-full">
+          <Flex
+            direction="column"
+            align="center"
+            gap="none"
+            className="w-full px-4 md:px-0"
+          >
             <Flex direction="row" justify="center" className="w-full pb-6">
               <Image
                 src={`${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/salmanprottoy.jpg`}
@@ -192,20 +204,34 @@ export default function Home() {
                 className="font-karla uppercase tracking-widest"
                 id="hero-heading"
               >
-                Software Engineer
+                Software Engineer &amp; Sub-Lead
               </Text>
             </Flex>
-            <Flex direction="row" justify="center" className="w-full pb-8">
+            <Flex
+              direction="row"
+              justify="center"
+              className="w-full pb-6 px-2 md:px-0"
+            >
               <TypingEffect
                 text={[
-                  "",
-                  "MD.",
-                  "MD. SALMAN",
-                  "MD. SALMAN HOSSAN",
-                  "MD. SALMAN HOSSAN PROTTOY",
+                  "Leading distributed teams across Tokyo & Dhaka",
+                  "Designing resilient cloud-native SaaS platforms",
+                  "Transforming research into production-ready AI features",
                 ]}
-                speed={50}
+                speed={45}
               />
+            </Flex>
+            <Flex
+              direction="column"
+              align="center"
+              className="max-w-3xl w-full pb-6 text-center"
+            >
+              <Text variant="body-lg" color="light" className="text-light/80">
+                From Dhaka to Tokyo, I guide cross-functional teams at Brand
+                Cloud Inc. to ship cloud-native SaaS experiences that delight
+                users, scale with confidence, and translate research-backed
+                experimentation into production-ready impact.
+              </Text>
             </Flex>
             <NavigationButtons />
           </Flex>
@@ -485,7 +511,7 @@ export default function Home() {
                 />
               </div>
               {/* About Text */}
-              <div className="flex-1 md:text-left">
+              <div className="flex-1 md:text-left space-y-4">
                 {AboutMe.map((para, idx) => (
                   <div
                     key={idx}
@@ -499,6 +525,147 @@ export default function Home() {
                 ))}
               </div>
             </Flex>
+            <div className="mt-16 w-full">
+              <Grid cols={1} gap="lg" className="md:grid-cols-2 gap-y-8">
+                <div className="rounded-2xl border border-light/10 bg-dark/30 p-8 backdrop-blur-sm">
+                  <Text
+                    variant="heading-sm"
+                    weight="bold"
+                    color="light"
+                    className="uppercase tracking-widest"
+                  >
+                    Recognition &amp; Awards
+                  </Text>
+                  <ul className="mt-4 space-y-4">
+                    {HonorsAndAwards.map((award, idx) => (
+                      <li key={`${award.title}-${idx}`}>
+                        <Text variant="body-lg" weight="bold" color="light">
+                          {award.title}
+                        </Text>
+                        <Text
+                          variant="body-sm"
+                          color="light"
+                          className="text-light/70"
+                        >
+                          {award.institution} · {award.date}
+                        </Text>
+                        <Text
+                          variant="body"
+                          color="light"
+                          className="text-light/80"
+                        >
+                          {award.description}
+                        </Text>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="rounded-2xl border border-light/10 bg-dark/30 p-8 backdrop-blur-sm">
+                  <Text
+                    variant="heading-sm"
+                    weight="bold"
+                    color="light"
+                    className="uppercase tracking-widest"
+                  >
+                    Research Experience
+                  </Text>
+                  {ResearchExperience.map((research, idx) => (
+                    <div key={`${research.title}-${idx}`} className="mt-4">
+                      <Text variant="body-lg" weight="bold" color="light">
+                        {research.title}
+                      </Text>
+                      <Text
+                        variant="body-sm"
+                        color="light"
+                        className="text-light/70"
+                      >
+                        {research.institution} · {research.date}
+                      </Text>
+                      <ul className="mt-3 space-y-2 list-disc list-inside text-left text-light/80">
+                        {research.bullets.map((bullet, bulletIdx) => (
+                          <li key={`${research.title}-${bulletIdx}`} className="text-sm md:text-base">
+                            {bullet}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+                <div className="rounded-2xl border border-light/10 bg-dark/30 p-8 backdrop-blur-sm">
+                  <Text
+                    variant="heading-sm"
+                    weight="bold"
+                    color="light"
+                    className="uppercase tracking-widest"
+                  >
+                    Publications
+                  </Text>
+                  <ul className="mt-4 space-y-5">
+                    {Publications.map((publication, idx) => (
+                      <li key={`${publication.title}-${idx}`}>
+                        <Text variant="body-lg" weight="bold" color="light">
+                          {publication.title}
+                        </Text>
+                        <Text
+                          variant="body-sm"
+                          color="light"
+                          className="text-light/70"
+                        >
+                          {publication.authors} · {publication.year}
+                        </Text>
+                        <Text
+                          variant="body"
+                          color="light"
+                          className="text-light/80"
+                        >
+                          {publication.conference}
+                        </Text>
+                        <a
+                          href={publication.doi}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mt-2 inline-flex items-center gap-2 text-tertiary hover:text-tertiary/80"
+                        >
+                          <Icon name="external-link" className="h-4 w-4" />
+                          Read publication
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="rounded-2xl border border-light/10 bg-dark/30 p-8 backdrop-blur-sm">
+                  <Text
+                    variant="heading-sm"
+                    weight="bold"
+                    color="light"
+                    className="uppercase tracking-widest"
+                  >
+                    Leadership &amp; Service
+                  </Text>
+                  {ExtraCurricular.map((activity, idx) => (
+                    <div key={`${activity.title}-${idx}`} className="mt-4">
+                      <Text variant="body-lg" weight="bold" color="light">
+                        {activity.title}
+                      </Text>
+                      <Text
+                        variant="body-sm"
+                        color="light"
+                        className="text-light/70"
+                      >
+                        {activity.organization} · {activity.date}
+                      </Text>
+                      <ul className="mt-3 space-y-2 list-disc list-inside text-left text-light/80">
+                        {activity.bullets.map((bullet, bulletIdx) => (
+                          <li key={`${activity.title}-${bulletIdx}`} className="text-sm md:text-base">
+                            {bullet}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </Grid>
+            </div>
           </Flex>
         </section>
       </main>

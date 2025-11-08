@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: "Salman Prottoy - Software Engineer & Web Developer",
     short_name: "Salman Prottoy",
     description:
-      "Software Engineer, Web Developer, and Open Source Contributor based in Bangladesh",
+      "Software Engineer & Sub-Lead crafting cloud-native SaaS platforms and research-driven experiences from Bangladesh",
     start_url: "/",
     display: "standalone",
     background_color: "#0f0f23",

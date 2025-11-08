@@ -13,9 +13,9 @@ export const StructuredData: React.FC<StructuredDataProps> = ({
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Md. Salman Hossan Prottoy",
-    jobTitle: "Software Engineer",
+    jobTitle: "Software Engineer & Sub-Lead",
     description:
-      "Software Engineer, Web Developer, and Open Source Contributor based in Bangladesh",
+      "Software Engineer & Technical Lead building cloud-native SaaS platforms and research-driven experiences from Bangladesh",
     url: "https://salmanprottoy.vercel.app",
     image: `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/salmanprottoy.jpg`,
     sameAs: [
@@ -36,7 +36,7 @@ export const StructuredData: React.FC<StructuredDataProps> = ({
     email: contact.email,
     hasOccupation: {
       "@type": "Occupation",
-      name: "Software Engineer",
+      name: "Software Engineer & Technical Lead",
       occupationLocation: {
         "@type": "Place",
         name: "Bangladesh",
@@ -50,7 +50,7 @@ export const StructuredData: React.FC<StructuredDataProps> = ({
     name: "Md. Salman Hossan Prottoy Portfolio",
     url: "https://salmanprottoy.vercel.app",
     description:
-      "Software Engineer, Web Developer, and Open Source Contributor based in Bangladesh",
+      "Software Engineer & Sub-Lead crafting cloud-native SaaS platforms, distributed systems, and research-backed user experiences",
     author: {
       "@type": "Person",
       name: "Md. Salman Hossan Prottoy",
@@ -74,7 +74,7 @@ export const StructuredData: React.FC<StructuredDataProps> = ({
       "Md. Salman Hossan Prottoy - Software Engineer & Web Developer",
     description:
       data?.description ||
-      "Software Engineer, Web Developer, and Open Source Contributor",
+      "Software Engineer & Sub-Lead building cloud-native SaaS platforms and research-driven experiences",
     image:
       data?.image ||
       `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/salmanprottoy.jpg`,

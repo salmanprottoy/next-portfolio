@@ -246,9 +246,10 @@ export const Experience = [
 ];
 
 export const AboutMe = [
-  "I am a results-driven Software Engineer with 2+ years of experience specializing in full-stack development, cloud architecture, and scalable web applications. My expertise spans modern JavaScript ecosystems, Python development, and cloud-native technologies, with a proven track record of delivering high-impact solutions for enterprise clients.",
-  "My technical proficiency encompasses TypeScript, Python, Go, and modern frameworks including React, Next.js, Vue.js, and Django. I have extensive experience with cloud infrastructure, containerization using Docker, database optimization (PostgreSQL, MongoDB), and deployment platforms like AWS, Firebase, and Vercel.",
-  "Currently serving as a Software Engineer & Sub-Lead at Brand Cloud Inc. (Tokyo, Japan), working remotely from Bangladesh, I lead development teams, establish coding standards, and drive technical excellence through comprehensive code reviews and architectural decisions. I am passionate about clean code practices, performance optimization, and building intuitive applications that deliver measurable business value.",
+  "I'm Md. Salman Hossan Prottoy, a results-driven Software Engineer and Sub-Lead with 3+ years of experience architecting scalable SaaS platforms for global teams across Tokyo and Dhaka.",
+  "I thrive in modern TypeScript, Python, and Go ecosystems, pairing frameworks like React, Next.js, Vue.js, and Django with cloud-native tooling including Docker, AWS, Firebase, and Vercel to deliver dependable user experiences.",
+  "At Brand Cloud Inc. I orchestrate cross-functional squads, evolve engineering roadmaps, and champion rigorous code review practices that keep mission-critical products performant, secure, and delightful to use.",
+  "Beyond shipping software, I actively contribute to Bangla NLP research, speak at academic conferences, and mentor emerging technologists through teaching, community events, and leadership programs.",
 ];
 
 export const HonorsAndAwards = [
