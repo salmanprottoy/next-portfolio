@@ -19,11 +19,11 @@ const karla = Karla({
 
 export const metadata: Metadata = {
   title: {
-    default: "Md. Salman Hossan Prottoy - Software Engineer & Web Developer",
+    default: "Md. Salman Hossan Prottoy - Software Engineer & Technical Lead",
     template: "%s | Md. Salman Hossan Prottoy",
   },
   description:
-    "Software Engineer, Web Developer, and Open Source Contributor based in Bangladesh. Specialized in React, Node.js, Python, and full-stack development.",
+    "Software Engineer & Sub-Lead crafting cloud-native SaaS platforms, distributed systems, and research-backed user experiences for global teams across Tokyo and Dhaka.",
   icons: {
     icon: "/favicon.svg",
     apple: "/favicon.svg",
@@ -34,9 +34,12 @@ export const metadata: Metadata = {
     "Software Engineer",
     "Web Developer",
     "Full Stack Developer",
+    "Technical Lead",
+    "Team Lead",
     "React Developer",
     "Node.js Developer",
     "Python Developer",
+    "Go Developer",
     "TypeScript",
     "JavaScript",
     "Next.js",
@@ -44,6 +47,8 @@ export const metadata: Metadata = {
     "MongoDB",
     "PostgreSQL",
     "Open Source",
+    "Cloud Architecture",
+    "SaaS Engineering",
     "Bangladesh",
     "Remote Developer",
   ],
@@ -63,9 +68,9 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://salmanprottoy.vercel.app",
-    title: "Md. Salman Hossan Prottoy - Software Engineer & Web Developer",
+    title: "Md. Salman Hossan Prottoy - Software Engineer & Technical Lead",
     description:
-      "Software Engineer, Web Developer, and Open Source Contributor based in Bangladesh. Specialized in React, Node.js, Python, and full-stack development.",
+      "Software Engineer & Sub-Lead crafting cloud-native SaaS platforms, distributed systems, and research-backed user experiences for global teams across Tokyo and Dhaka.",
     siteName: "Md. Salman Hossan Prottoy Portfolio",
     images: [
       {
@@ -78,9 +83,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Md. Salman Hossan Prottoy - Software Engineer & Web Developer",
+    title: "Md. Salman Hossan Prottoy - Software Engineer & Technical Lead",
     description:
-      "Software Engineer, Web Developer, and Open Source Contributor based in Bangladesh. Specialized in React, Node.js, Python, and full-stack development.",
+      "Software Engineer & Sub-Lead crafting cloud-native SaaS platforms, distributed systems, and research-backed user experiences for global teams across Tokyo and Dhaka.",
     images: [`${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/salmanprottoy.jpg`],
     creator: "@salman_prottoy",
   },
@@ -117,9 +122,9 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Person",
               name: "Md. Salman Hossan Prottoy",
-              jobTitle: "Software Engineer",
+              jobTitle: "Software Engineer & Sub-Lead",
               description:
-                "Software Engineer, Web Developer, and Open Source Contributor",
+                "Software Engineer & Technical Lead building cloud-native SaaS platforms and research-driven experiences",
               url: "https://salmanprottoy.vercel.app",
               image: `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/salmanprottoy.jpg`,
               sameAs: [
@@ -134,12 +139,16 @@ export default function RootLayout({
                 "React",
                 "Node.js",
                 "Python",
+                "Go",
                 "Django",
                 "Next.js",
+                "Vue.js",
                 "MongoDB",
                 "PostgreSQL",
                 "Docker",
+                "AWS",
                 "Git",
+                "Cloud Architecture",
               ],
               worksFor: {
                 "@type": "Organization",
