@@ -1,15 +1,10 @@
 import React from "react";
-import { Text } from "@/components/atoms";
 
 const Footer = () => (
-  <footer className="w-full bg-dark py-3 flex items-center justify-center">
-    <Text
-      variant="body-sm"
-      color="light"
-      className="tracking-widest text-center"
-    >
+  <footer className="w-full py-8 flex items-center justify-center border-t border-border bg-background">
+    <p className="text-sm text-muted-foreground tracking-wider">
       Copyright © {new Date().getFullYear()} Md. Salman Hossan Prottoy
-    </Text>
+    </p>
   </footer>
 );
 

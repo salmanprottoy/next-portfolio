@@ -102,6 +102,10 @@ export const metadata: Metadata = {
   },
 };
 
+import { jsonLdSchema } from "@/app/data/schema";
+
+// ... (keep imports)
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -113,43 +117,7 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              name: "Md. Salman Hossan Prottoy",
-              jobTitle: "Software Engineer",
-              description:
-                "Software Engineer, Web Developer, and Open Source Contributor",
-              url: "https://salmanprottoy.vercel.app",
-              image: `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/salmanprottoy.jpg`,
-              sameAs: [
-                "https://linkedin.com/in/salman-prottoy/",
-                "https://github.com/salmanprottoy/",
-                "https://twitter.com/salman_prottoy/",
-                "https://fb.com/salman.prottoy1/",
-              ],
-              knowsAbout: [
-                "JavaScript",
-                "TypeScript",
-                "React",
-                "Node.js",
-                "Python",
-                "Django",
-                "Next.js",
-                "MongoDB",
-                "PostgreSQL",
-                "Docker",
-                "Git",
-              ],
-              worksFor: {
-                "@type": "Organization",
-                name: "Brand Cloud Inc.",
-              },
-              address: {
-                "@type": "PostalAddress",
-                addressCountry: "BD",
-              },
-            }),
+            __html: JSON.stringify(jsonLdSchema),
           }}
         />
         {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (

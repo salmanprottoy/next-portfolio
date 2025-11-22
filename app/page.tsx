@@ -1,508 +1,321 @@
 "use client";
-import dynamic from "next/dynamic";
 
-const WorkExperienceCard = dynamic(
-  () => import("../components/molecules/WorkExperienceCard")
-);
-const Button = dynamic(() => import("@/components/atoms/Button"));
-const Text = dynamic(() => import("@/components/atoms/Text"));
-const Flex = dynamic(() => import("@/components/atoms/Flex"));
-const SkillBadge = dynamic(() => import("@/components/atoms/SkillBadge"));
-const TypingEffect = dynamic(
-  () => import("@/components/molecules/TypingEffect")
-);
-const ProjectCard = dynamic(
-  () => import("../components/molecules/ProjectCard")
-);
-const Header = dynamic(() => import("@/components/organisms/Header"));
+import { motion } from "framer-motion";
 import Image from "next/image";
-import { useEffect, useState, useRef, useMemo } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Swiper as SwiperInstance } from "swiper/types";
-import "swiper/css";
-const Footer = dynamic(() => import("@/components/organisms/Footer"));
+import Link from "next/link";
+import { ArrowRight, Mail, Github, Linkedin, ExternalLink } from "lucide-react";
+import Header from "@/components/organisms/Header";
+import Footer from "@/components/organisms/Footer";
+import Section from "@/components/ui/Section";
+import Timeline from "@/components/ui/Timeline";
 import {
-  Projects,
   Experience,
-  AboutMe,
+  Educations,
+  Projects,
   Skills,
+  AboutMe,
   contact,
+  ResearchExperience,
+  Publications,
+  HonorsAndAwards,
 } from "@/app/data/Data";
-import Icon from "@/components/atoms/Icon";
 
-interface Section {
-  id: string;
-  label: string;
-}
 
 export default function Home() {
-  const [prefix, setPrefix] = useState<string>("");
-  const [activeSection, setActiveSection] = useState<string>("hero");
-  const [activeExperienceSlide, setActiveExperienceSlide] = useState<number>(0);
-  const [activeProjectsSlide, setActiveProjectsSlide] = useState<number>(0);
-  const experienceSwiperRef = useRef<SwiperInstance | null>(null);
-  const projectsSwiperRef = useRef<SwiperInstance | null>(null);
-
-  const sections = useMemo<Section[]>(
-    () => [
-      { id: "hero", label: "Home" },
-      { id: "experience", label: "Experience" },
-      { id: "skills", label: "Skills" },
-      { id: "projects", label: "Projects" },
-      { id: "about", label: "About" },
-    ],
-    []
-  );
-
-  useEffect(() => {
-    const isGitHubPages =
-      window.location.hostname.includes("github.io") ||
-      window.location.pathname.startsWith("/next-portfolio");
-
-    setPrefix(isGitHubPages ? "/next-portfolio" : "");
-
-    // Intersection Observer to track active section
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
-
-    sections.forEach((section) => {
-      const element = document.getElementById(section.id);
-      if (element) {
-        observer.observe(element);
-      }
-    });
-
-    return () => observer.disconnect();
-  }, [sections]);
-
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  const NavigationButtons = () => (
-    <Flex
-      direction="column"
-      justify="center"
-      align="center"
-      className="w-full gap-4 md:flex-row flex-wrap"
-      role="group"
-      aria-label="Navigation buttons"
-    >
-      {sections.map((section) => (
-        <Button
-          key={section.id}
-          size="xl"
-          shape="pill"
-          variant={activeSection === section.id ? "outline" : "primary"}
-          onClick={() => scrollToSection(section.id)}
-          aria-label={`View ${section.label.toLowerCase()}`}
-        >
-          {section.label}
-        </Button>
-      ))}
-    </Flex>
-  );
-
   return (
-    <>
-      <main className="bg-primary w-full overflow-x-hidden" role="main">
-        <div className=" px-8 md:px-[120px] py-6">
-          <Header />
-        </div>
+    <main className="bg-background text-foreground overflow-x-hidden font-sans selection:bg-primary/30">
+      <Header />
 
-        {/* Dot Navigation */}
-        <nav
-          className="fixed right-8 top-1/2 transform -translate-y-1/2 z-50"
-          aria-label="Page navigation"
-        >
-          <Flex direction="column" gap="md" align="center">
-            {sections.map((section) => (
-              <button
-                key={section.id}
-                onClick={() => scrollToSection(section.id)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  activeSection === section.id
-                    ? "bg-tertiary scale-125"
-                    : "bg-tertiary/30 hover:bg-tertiary/60"
-                }`}
-                title={section.label}
-                aria-label={`Navigate to ${section.label} section`}
-                aria-current={activeSection === section.id ? "page" : undefined}
-              />
-            ))}
-          </Flex>
-        </nav>
-
-        {/* Section 1: Hero */}
-        <section
-          id="hero"
-          className="h-screen flex items-center justify-center bg-primary relative"
-          aria-labelledby="hero-heading"
-        >
-          {/* Mail Icon in top right */}
-          <a
-            href={`mailto:${contact.email}`}
-            className="absolute bottom-[7.5rem] right-8 md:right-[5rem] z-20 p-2 rounded-lg bg-dark/40 hover:bg-dark/70 transition"
-            title={contact.text}
-            aria-label="Send email to Salman Prottoy"
+      {/* Hero Section */}
+      <Section id="hero" className="pt-32 pb-20 md:pt-48 md:pb-32">
+        <div className="flex flex-col items-center text-center gap-8">
+          <motion.div
+            initial={{ scale: 0.5, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="relative w-32 h-32 md:w-48 md:h-48 rounded-full overflow-hidden border-4 border-primary/20 shadow-2xl shadow-primary/10"
           >
-            <svg
-              width="28"
-              height="28"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="text-tertiary"
-              aria-hidden="true"
-            >
-              <rect x="3" y="5" width="18" height="14" rx="2" />
-              <polyline points="3 7 12 13 21 7" />
-            </svg>
-          </a>
-          <Flex direction="column" align="center" gap="none" className="w-full">
-            <Flex direction="row" justify="center" className="w-full pb-6">
-              <Image
-                src={`${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/salmanprottoy.jpg`}
-                width={120}
-                height={120}
-                alt="Salman Prottoy - Software Engineer and Web Developer"
-                className="rounded-full"
-                loading="lazy"
-              />
-            </Flex>
-            <Flex direction="row" justify="center" className="w-full pb-2">
-              <Text
-                variant="body-lg"
-                weight="medium"
-                color="tertiary"
-                className="font-karla uppercase tracking-widest"
-                id="hero-heading"
-              >
-                Software Engineer
-              </Text>
-            </Flex>
-            <Flex direction="row" justify="center" className="w-full pb-8">
-              <TypingEffect
-                text={[
-                  "",
-                  "MD.",
-                  "MD. SALMAN",
-                  "MD. SALMAN HOSSAN",
-                  "MD. SALMAN HOSSAN PROTTOY",
-                ]}
-                speed={50}
-              />
-            </Flex>
-            <NavigationButtons />
-          </Flex>
-        </section>
+            <Image
+              src={`${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/salmanprottoy.jpg`}
+              alt="Md. Salman Hossan Prottoy"
+              fill
+              className="object-cover"
+              priority
+            />
+          </motion.div>
 
-        {/* Section 2: Experience */}
-        <section
-          id="experience"
-          className="min-h-screen px-5 md:px-[120px] py-6 flex items-center justify-center bg-dark"
-        >
-          <Flex direction="column" align="center" className="w-full">
-            <Text
-              variant="heading-lg"
-              weight="bold"
-              color="light"
-              className="text-center mb-8"
+          <div className="space-y-4 max-w-4xl">
+            <motion.h1
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight font-heading bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70"
             >
-              Work Experience
-            </Text>
-            {/* Mobile: Swiper with 1 card at a time */}
-            <div className="block md:hidden w-full overflow-hidden">
-              <Swiper
-                onSwiper={(swiper) => (experienceSwiperRef.current = swiper)}
-                spaceBetween={24}
-                slidesPerView={1}
-                centeredSlides={true}
-                style={{ paddingBottom: 24 }}
-                onSlideChange={(swiper) =>
-                  setActiveExperienceSlide(swiper.activeIndex)
-                }
-              >
-                {Experience.map((exp, index) => (
-                  <SwiperSlide key={index}>
-                    <WorkExperienceCard
-                      jobTitle={exp.jobTitle}
-                      company={exp.company}
-                      date={exp.date}
-                      bullets={exp.bullets}
-                      active={activeExperienceSlide === index}
-                    />
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-              {Experience.length >= 2 && (
-                <div className="flex justify-center mt-5">
-                  {Experience.map((_, idx) => {
-                    let show = false;
-                    if (Experience.length <= 3) show = true;
-                    else if (
-                      idx === activeExperienceSlide ||
-                      (activeExperienceSlide === 0 && idx < 3) ||
-                      (activeExperienceSlide === Experience.length - 1 &&
-                        idx >= Experience.length - 3) ||
-                      (idx >= activeExperienceSlide - 1 &&
-                        idx <= activeExperienceSlide + 1)
-                    )
-                      show = true;
-                    if (!show) return null;
-                    return (
-                      <button
-                        key={idx}
-                        onClick={() => {
-                          experienceSwiperRef.current?.slideTo(idx);
-                          setActiveExperienceSlide(idx);
-                        }}
-                        className={`w-3 h-3 rounded-full mx-1 transition-all duration-300 ${
-                          activeExperienceSlide === idx
-                            ? "bg-white scale-125"
-                            : "bg-white/30 hover:bg-white/60"
-                        }`}
-                        aria-label={`Go to slide ${idx + 1}`}
-                      />
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-            {/* Desktop: Swiper with 2 cards at a time, left card active */}
-            <div className="hidden md:block w-full overflow-hidden">
-              <Swiper
-                onSwiper={(swiper) => (experienceSwiperRef.current = swiper)}
-                spaceBetween={24}
-                slidesPerView={2}
-                style={{ paddingBottom: 24 }}
-                onSlideChange={(swiper) =>
-                  setActiveExperienceSlide(swiper.activeIndex)
-                }
-              >
-                {Experience.map((exp, index) => (
-                  <SwiperSlide key={index}>
-                    <WorkExperienceCard
-                      jobTitle={exp.jobTitle}
-                      company={exp.company}
-                      date={exp.date}
-                      bullets={exp.bullets}
-                      active={activeExperienceSlide === index}
-                    />
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-              {Experience.length > 2 && (
-                <div className="flex justify-center mt-5 pb-2">
-                  {Experience.map((_, idx) => {
-                    let show = false;
-                    if (Experience.length <= 3) show = true;
-                    else if (
-                      idx === activeExperienceSlide ||
-                      (activeExperienceSlide === 0 && idx < 3) ||
-                      (activeExperienceSlide === Experience.length - 1 &&
-                        idx >= Experience.length - 3) ||
-                      (idx >= activeExperienceSlide - 1 &&
-                        idx <= activeExperienceSlide + 1)
-                    )
-                      show = true;
-                    if (!show) return null;
-                    return (
-                      <button
-                        key={idx}
-                        onClick={() => {
-                          experienceSwiperRef.current?.slideTo(idx);
-                          setActiveExperienceSlide(idx);
-                        }}
-                        className={`w-3 h-3 rounded-full mx-1 transition-all duration-300 ${
-                          activeExperienceSlide === idx
-                            ? "bg-white scale-125"
-                            : "bg-white/30 hover:bg-white/60"
-                        }`}
-                        aria-label={`Go to slide ${idx + 1}`}
-                      />
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-          </Flex>
-        </section>
+              Md. Salman Hossan Prottoy
+            </motion.h1>
+            
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className="flex flex-col md:flex-row items-center justify-center gap-3 text-xl md:text-2xl text-muted-foreground font-light"
+            >
+              <span>Software Engineer</span>
+              <span className="hidden md:inline text-primary">•</span>
+              <span>AI Researcher</span>
+            </motion.div>
+          </div>
 
-        {/* Section 3: Skills */}
-        <section
-          id="skills"
-          className="min-h-screen px-5 md:px-[120px] py-6 flex items-center justify-center bg-primary"
-        >
-          <Flex direction="column" align="center" className="w-full">
-            <Text
-              variant="heading-lg"
-              weight="bold"
-              color="light"
-              className="text-center mb-8"
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.4 }}
+            className="flex gap-4 mt-4"
+          >
+            <Link
+              href={`mailto:${contact.email}`}
+              className="px-8 py-3 rounded-full bg-primary text-primary-foreground font-medium hover:bg-primary/90 transition-colors flex items-center gap-2"
             >
-              Skills
-            </Text>
-            <div className="w-full">
-              <Flex direction="row" justify="center" gap="md" wrap="wrap">
-                {Skills.map((skill, idx) => {
-                  return (
-                    <SkillBadge
-                      key={idx}
-                      icon={
-                        <Icon
-                          name={
-                            skill.icon as import("@/components/atoms/Icon").IconName
-                          }
-                          className="w-6 h-6 text-black group-hover:text-white transition-colors"
-                        />
-                      }
-                      label={skill.name}
-                    />
-                  );
-                })}
-              </Flex>
-            </div>
-          </Flex>
-        </section>
+              <Mail className="w-4 h-4" />
+              Contact Me
+            </Link>
+            <Link
+              href="#projects"
+              className="px-8 py-3 rounded-full border border-border hover:bg-secondary/50 transition-colors font-medium"
+            >
+              View Work
+            </Link>
+          </motion.div>
+        </div>
+      </Section>
 
-        {/* Section 4: Projects */}
-        <section
-          id="projects"
-          className="min-h-screen px-5 md:px-[120px] py-6 flex items-center justify-center bg-dark"
-        >
-          <Flex direction="column" align="center" className="w-full">
-            <Text
-              variant="heading-lg"
-              weight="bold"
-              color="light"
-              className="text-center mb-8"
-            >
-              Projects
-            </Text>
-            <div className="w-full overflow-hidden">
-              <Swiper
-                onSwiper={(swiper) => (projectsSwiperRef.current = swiper)}
-                spaceBetween={24}
-                slidesPerView={1}
-                breakpoints={{ 768: { slidesPerView: 3 } }}
-                style={{ paddingBottom: 24 }}
-                onSlideChange={(swiper) =>
-                  setActiveProjectsSlide(swiper.activeIndex)
-                }
-              >
-                {Projects.map((project, idx) => (
-                  <SwiperSlide key={idx}>
-                    <ProjectCard
-                      image={project.image}
-                      title={project.content.title}
-                      description={project.content.desc}
-                      link={project.repo}
-                    />
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-              {Projects.length >= 4 && (
-                <div className="flex justify-center mt-6 pb-2">
-                  {Projects.map((_, idx) => {
-                    let show = false;
-                    if (Projects.length <= 3) show = true;
-                    else if (
-                      idx === activeProjectsSlide ||
-                      (activeProjectsSlide === 0 && idx < 3) ||
-                      (activeProjectsSlide === Projects.length - 1 &&
-                        idx >= Projects.length - 3) ||
-                      (idx >= activeProjectsSlide - 1 &&
-                        idx <= activeProjectsSlide + 1)
-                    )
-                      show = true;
-                    if (!show) return null;
-                    return (
-                      <button
-                        key={idx}
-                        onClick={() => {
-                          projectsSwiperRef.current?.slideTo(idx);
-                          setActiveProjectsSlide(idx);
-                        }}
-                        className={`w-3 h-3 rounded-full mx-1 transition-all duration-300 ${
-                          activeProjectsSlide === idx
-                            ? "bg-white scale-125"
-                            : "bg-white/30 hover:bg-white/60"
-                        }`}
-                        aria-label={`Go to slide ${idx + 1}`}
-                      />
-                    );
-                  })}
-                </div>
-              )}
+      {/* About Section */}
+      <Section id="about" className="bg-secondary/30">
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="space-y-6">
+            <h2 className="text-3xl md:text-4xl font-bold font-heading">About Me</h2>
+            <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
+              {AboutMe.map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
             </div>
-          </Flex>
-        </section>
-
-        {/* Section 5: About */}
-        <section
-          id="about"
-          className="min-h-screen px-5 md:px-[120px] py-6 flex items-center justify-center bg-primary"
-        >
-          <Flex direction="column" align="center" className="w-full">
-            <Text
-              variant="heading-lg"
-              weight="bold"
-              color="light"
-              className="text-center mb-8"
-            >
-              About Me
-            </Text>
-            <Flex
-              direction="column"
-              align="center"
-              justify="center"
-              className="w-full max-w-5xl gap-10 md:gap-20 md:flex-row"
-            >
-              {/* Photo */}
-              <div className="flex-shrink-0 mb-8 md:mb-0">
-                <Image
+          </div>
+          <div className="relative group">
+            <div className="absolute -inset-4 bg-gradient-to-r from-primary to-purple-600 rounded-2xl opacity-20 group-hover:opacity-30 blur-xl transition-opacity duration-500" />
+            <div className="relative aspect-square rounded-2xl overflow-hidden border border-border/50 bg-card">
+               {/* Placeholder for a more abstract or different image if desired, using profile for now */}
+               <Image
                   src={`${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/salmanprottoy.jpg`}
-                  alt="Md. Salman Hossan Prottoy"
-                  loading="lazy"
-                  width={288}
-                  height={288}
-                  className="w-72 h-72 object-cover rounded-2xl shadow-lg"
+                  alt="About Me"
+                  fill
+                  className="object-cover opacity-90 group-hover:scale-105 transition-transform duration-500"
                 />
-              </div>
-              {/* About Text */}
-              <div className="flex-1 md:text-left">
-                {AboutMe.map((para, idx) => (
-                  <div
-                    key={idx}
-                    className={
-                      idx === 0
-                        ? "text-light text-lg mb-4 leading-relaxed"
-                        : "text-light leading-relaxed"
-                    }
-                    dangerouslySetInnerHTML={{ __html: para }}
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      {/* Experience Section */}
+      <Section id="experience">
+        <div className="space-y-16">
+          <div className="text-center space-y-4">
+            <h2 className="text-3xl md:text-4xl font-bold font-heading">Experience</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              My professional journey in software engineering and research.
+            </p>
+          </div>
+          
+          <Timeline
+            items={Experience.map((exp) => ({
+              title: exp.jobTitle,
+              subtitle: exp.company,
+              date: exp.date,
+              description: exp.bullets,
+            }))}
+          />
+        </div>
+      </Section>
+
+      {/* Education Section */}
+      <Section id="education" className="bg-secondary/30">
+        <div className="space-y-16">
+          <div className="text-center space-y-4">
+            <h2 className="text-3xl md:text-4xl font-bold font-heading">Education</h2>
+          </div>
+          
+          <Timeline
+            items={Educations.map((edu) => ({
+              title: edu.exam,
+              subtitle: edu.institution,
+              date: edu.year,
+            }))}
+          />
+        </div>
+      </Section>
+
+       {/* Research Section */}
+       <Section id="research">
+        <div className="space-y-16">
+          <div className="text-center space-y-4">
+            <h2 className="text-3xl md:text-4xl font-bold font-heading">Research</h2>
+          </div>
+          
+          <Timeline
+            items={ResearchExperience.map((res) => ({
+              title: res.title,
+              subtitle: res.institution,
+              date: res.date,
+              description: res.bullets,
+            }))}
+          />
+        </div>
+      </Section>
+
+      {/* Publications Section */}
+      <Section id="publications" className="bg-secondary/30">
+        <div className="space-y-16">
+          <div className="text-center space-y-4">
+            <h2 className="text-3xl md:text-4xl font-bold font-heading">Publications</h2>
+          </div>
+
+          <Timeline
+            items={Publications.map((pub) => ({
+              title: pub.title,
+              subtitle: pub.conference,
+              date: pub.year,
+              description: [
+                `Authors: ${pub.authors}`,
+                pub.publisher,
+                pub.doi ? (
+                  <Link
+                    key="doi"
+                    href={pub.doi}
+                    target="_blank"
+                    className="inline-flex items-center gap-2 text-primary hover:underline"
+                  >
+                    View Publication <ExternalLink className="w-3 h-3" />
+                  </Link>
+                ) : null,
+              ].filter(Boolean) as (string | React.ReactNode)[],
+            }))}
+          />
+        </div>
+      </Section>
+
+      {/* Honors & Awards Section */}
+      <Section id="honors">
+        <div className="space-y-16">
+          <div className="text-center space-y-4">
+            <h2 className="text-3xl md:text-4xl font-bold font-heading">Honors & Awards</h2>
+          </div>
+          
+          <Timeline
+            items={HonorsAndAwards.map((award) => ({
+              title: award.title,
+              subtitle: award.institution,
+              date: award.date,
+              description: [award.description],
+            }))}
+          />
+        </div>
+      </Section>
+
+
+      {/* Skills Section */}
+      <Section id="skills" className="bg-secondary/30">
+        <div className="space-y-12">
+          <h2 className="text-3xl md:text-4xl font-bold font-heading text-center">Technical Skills</h2>
+          <div className="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
+            {Skills.map((skill, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05 }}
+                className="px-6 py-3 rounded-xl bg-card border border-border hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 transition-all cursor-default"
+              >
+                <span className="font-medium">{skill.name}</span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </Section>
+
+      {/* Projects Section */}
+      <Section id="projects">
+        <div className="space-y-16">
+          <div className="text-center space-y-4">
+            <h2 className="text-3xl md:text-4xl font-bold font-heading">Featured Projects</h2>
+            <p className="text-muted-foreground">A selection of my work.</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {Projects.map((project, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="group relative bg-card rounded-2xl overflow-hidden border border-border hover:border-primary/50 transition-colors flex flex-col"
+              >
+                <div className="relative aspect-video overflow-hidden bg-secondary">
+                  <Image
+                    src={project.image}
+                    alt={project.imageDetails.alt}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                ))}
-              </div>
-            </Flex>
-          </Flex>
-        </section>
-      </main>
+                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
+                    {project.repo && (
+                      <Link
+                        href={project.repo}
+                        target="_blank"
+                        className="p-2 rounded-full bg-background text-foreground hover:text-primary transition-colors"
+                        title="View Code"
+                      >
+                        <Github className="w-5 h-5" />
+                      </Link>
+                    )}
+                    {project.link && (
+                      <Link
+                        href={project.link}
+                        target="_blank"
+                        className="p-2 rounded-full bg-background text-foreground hover:text-primary transition-colors"
+                        title="View Live"
+                      >
+                        <ExternalLink className="w-5 h-5" />
+                      </Link>
+                    )}
+                  </div>
+                </div>
+                
+                <div className="p-6 flex flex-col flex-grow">
+                  <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
+                    {project.content.title}
+                  </h3>
+                  <p className="text-muted-foreground text-sm mb-4 flex-grow line-clamp-3">
+                    {project.content.desc}
+                  </p>
+                  <div className="flex flex-wrap gap-2 mt-auto">
+                    {project.content.techStack.map((tech, i) => (
+                      <span
+                        key={i}
+                        className="text-xs px-2 py-1 rounded-md bg-secondary text-secondary-foreground font-mono"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </Section>
+
       <Footer />
-    </>
+    </main>
   );
 }

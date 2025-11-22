@@ -37,31 +37,23 @@ export const contact = {
 
 export const Skills = [
   { name: "JavaScript", icon: "javascript" },
-  { name: "Python", icon: "python" },
   { name: "TypeScript", icon: "typescript" },
+  { name: "Python", icon: "python" },
   { name: "Go", icon: "go" },
-  { name: "HTML5", icon: "html5" },
-  { name: "CSS3", icon: "css" },
-  { name: "Sass", icon: "sass" },
-  { name: "Tailwind CSS", icon: "tailwindcss" },
+  { name: "React", icon: "react" },
   { name: "Next.js", icon: "nextdotjs" },
   { name: "Vue.js", icon: "vuedotjs" },
-  { name: "Django", icon: "django" },
-  { name: "Pandas", icon: "pandas" },
   { name: "Node.js", icon: "nodedotjs" },
-  { name: "Jest", icon: "jest" },
+  { name: "Django", icon: "django" },
   { name: "PostgreSQL", icon: "postgresql" },
-  { name: "OpenSearch", icon: "opensearch" },
-  { name: "MySQL", icon: "mysql" },
   { name: "MongoDB", icon: "mongodb" },
-  { name: "Prisma", icon: "prisma" },
-  { name: "tRPC", icon: "trpc" },
-  { name: "GraphQL", icon: "graphql" },
-  { name: "Git", icon: "git" },
   { name: "Docker", icon: "docker" },
-  { name: "Nginx", icon: "nginx" },
-  { name: "Firebase", icon: "firebase" },
-  { name: "Vercel", icon: "vercel" },
+  { name: "AWS", icon: "aws" },
+  { name: "Git", icon: "git" },
+  { name: "Tailwind CSS", icon: "tailwindcss" },
+  { name: "Prisma", icon: "prisma" },
+  { name: "OpenSearch", icon: "opensearch" },
+  { name: "Pandas", icon: "pandas" },
 ];
 
 export const Projects = [
@@ -194,38 +186,36 @@ export const Projects = [
 
 export const Educations = [
   {
+    institution: "University of Jyväskylä, Finland",
+    exam: "Master of Science — Artificial Intelligence",
+    year: "September 2025 — Present",
+  },
+  {
     institution: "American International University-Bangladesh",
-    exam: "Bachelor of Science in Computer Science and Engineering",
-    year: "2018-Present",
-  },
-  {
-    institution: "Chattogram Cantonment Public College",
-    exam: "Higher Secondary Certificate",
-    year: "2015-2017",
-  },
-  {
-    institution: "Chattogram Cantonment Public College",
-    exam: "Secondary School Certificate",
-    year: "2015",
+    exam: "Bachelor of Science — Computer Science & Engineering",
+    year: "January 2018 — September 2021",
   },
 ];
 
 export const Experience = [
   {
     jobTitle: "Software Engineer (Remote)",
-    company: "Brand Cloud Inc.",
-    date: "September 2023 - Present",
+    company: "Brand Cloud Inc., Tokyo, Japan",
+    date: "September 2023 — Present",
     bullets: [
-      "Led full-stack development initiatives across 3+ major projects, delivering user-centric interfaces, robust RESTful APIs, and optimized database architectures, resulting in 40% improvement in user satisfaction metrics.",
-      "Architected and implemented containerized solutions using Docker, managed PostgreSQL databases for high-performance applications, and designed scalable microservices architecture.",
-      "Served as Sub-Lead for a cross-functional team of 5 engineers, orchestrating agile development processes by selecting and prioritizing development tickets, managing team deliverables, and conducting 100+ code reviews, achieving 95% sprint completion rates and 60% reduction in production bugs.",
-      "Spearheaded database optimization initiatives, implementing advanced indexing strategies and query optimization techniques, resulting in 50% faster response times and enhanced system reliability across all production environments.",
+      "Architected and delivered scalable, end-to-end full-stack solutions for multiple major projects, including payment integration and automated communication services.",
+      "Engineered core components for a Retrieval-Augmented Generation (RAG) application, integrating LLMs into a containerized, cloud-native architecture.",
+      "Designed and implemented CI/CD pipelines to automate end-to-end deployment.",
+      "Mentored teammates and established engineering best practices.",
+      "Designed and developed scalable APIs and backend features.",
+      "Maintained and optimized cron jobs and migration scripts.",
+      "Integrated Elastic File System and improved platform UX where needed.",
     ],
   },
   {
     jobTitle: "Junior Software Engineer",
-    company: "W3 Engineers Limited",
-    date: "May 2022 - August 2023",
+    company: "W3 Engineers Limited, Dhaka, Bangladesh",
+    date: "November 2021 — August 2023",
     bullets: [
       "Developed and maintained scalable RESTful APIs using Django, then migrated and optimized them to Go, implementing best practices for authentication, authorization, and data validation, supporting 5,000+ daily active users.",
       "Engineered and optimized critical data processing pipelines using cron jobs with parallel processing capabilities, reducing processing time by 70% and improving system reliability for enterprise-level applications.",
@@ -235,20 +225,19 @@ export const Experience = [
   },
   {
     jobTitle: "Undergraduate Teaching Assistant",
-    company: "American International University-Bangladesh",
-    date: "May 2021 - August 2021",
+    company: "American International University — Bangladesh",
+    date: "May 2021 — August 2021",
     bullets: [
-      "Delivered comprehensive academic support for the Web Technologies course, mentoring and facilitating learning for a cohort of 80+ undergraduate students, resulting in improved student comprehension and performance outcomes.",
-      "Collaborated closely with course instructors in curriculum development, lesson planning, and creation of instructional materials, ensuring alignment with academic standards and learning objectives.",
-      "Established effective communication channels with faculty to report student progress, identify learning gaps, and implement targeted interventions, contributing to enhanced educational delivery and student success rates.",
+      "Provided academic support for the Web Technologies course (≈80 students).",
+      "Assisted in lesson planning and preparation of instructional materials.",
+      "Collaborated with faculty to identify learning gaps and implement targeted interventions.",
     ],
   },
 ];
 
 export const AboutMe = [
-  "I am a results-driven Software Engineer with 2+ years of experience specializing in full-stack development, cloud architecture, and scalable web applications. My expertise spans modern JavaScript ecosystems, Python development, and cloud-native technologies, with a proven track record of delivering high-impact solutions for enterprise clients.",
-  "My technical proficiency encompasses TypeScript, Python, Go, and modern frameworks including React, Next.js, Vue.js, and Django. I have extensive experience with cloud infrastructure, containerization using Docker, database optimization (PostgreSQL, MongoDB), and deployment platforms like AWS, Firebase, and Vercel.",
-  "Currently serving as a Software Engineer & Sub-Lead at Brand Cloud Inc. (Tokyo, Japan), working remotely from Bangladesh, I lead development teams, establish coding standards, and drive technical excellence through comprehensive code reviews and architectural decisions. I am passionate about clean code practices, performance optimization, and building intuitive applications that deliver measurable business value.",
+  "I am a Master's student in Artificial Intelligence at the University of Jyväskylä, Finland, and a software engineer focused on building scalable, production-ready systems. My interests span language models, retrieval-augmented generation, full-stack development, and cloud-native architectures.",
+  "Alongside industry work, I enjoy working on applied research problems at the intersection of natural language processing and trustworthy AI, with prior experience on fake news detection for Bangla.",
 ];
 
 export const HonorsAndAwards = [
@@ -263,13 +252,12 @@ export const HonorsAndAwards = [
 
 export const ResearchExperience = [
   {
-    title: "Undergraduate Research Work",
-    institution: "American International University-Bangladesh",
-    date: "May 2021 - August 2021",
+    title: "Undergraduate Research Assistant",
+    institution: "American International University — Bangladesh",
+    date: "2021",
     bullets: [
-      "Conducted extensive background studies on existing methodologies for fake news detection and state-of-the-art techniques for handling dataset imbalances.",
-      "Collaborated in the collection and analysis of datasets from various sources using statistical and machine learning models, contributing to the interpretation of the results obtained.",
-      "Co-authored a paper that was presented at the International Conference on 4th Industrial Revolution and Beyond (IC4IR) 2021.",
+      "Conducted background studies on fake news detection and imbalance handling.",
+      "Collected and analyzed datasets; co-authored a paper presented at IC4IR 2021.",
     ],
   },
 ];
@@ -285,20 +273,18 @@ export const Publications = [
     publisher:
       "Lecture Notes in Networks and Systems, vol 437. Springer, Singapore",
     year: "2022",
-    doi: "https://doi.org/10.1007/978-981-19-2445-3_51",
+    doi: "https://link.springer.com/chapter/10.1007/978-981-19-2445-3_51",
   },
 ];
 
 export const ExtraCurricular = [
   {
-    title: "Bangladesh National Cadet Corps (BNCC) – Cadet Corporal",
-    organization: "Bangladesh National Cadet Corps",
-    date: "2015 - 2017",
+    title: "Cadet Corporal",
+    organization: "Bangladesh National Cadet Corps (BNCC)",
+    date: "2015 — 2017",
     bullets: [
-      "Successfully completed BTE-01/2016-17 training program, demonstrating commitment to leadership development and military discipline.",
-      "Led and mentored junior cadets, imparting essential leadership skills, discipline, and teamwork principles through structured training programs.",
-      "Participated in voluntary work for social development, contributing to community projects and initiatives that benefited local communities.",
-      "Organized numerous college programs and events, demonstrating strong leadership capabilities and event management skills while coordinating diverse teams.",
+      "Completed BTE-01/2016-17 training.",
+      "Trained junior cadets and assisted with event organization.",
     ],
   },
 ];
