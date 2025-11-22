@@ -4,7 +4,9 @@ A modern, secure portfolio website built with Next.js 14, React 18, and Tailwind
 
 ## 🚀 Features
 
-- **Modern Tech Stack**: Next.js 14, React 18, TypeScript, Tailwind CSS
+- **Modern Tech Stack**: Next.js 14, React 18, TypeScript, Tailwind CSS, Framer Motion
+- **UI/UX**: Modern Dark Mode design, smooth scroll animations, and glassmorphism effects
+- **Icons**: Consistent and clean iconography with Lucide React
 - **Security First**: Comprehensive security scanning and vulnerability detection
 - **Automated CI/CD**: GitHub Actions with security checks and deployment
 - **Static Export**: Optimized for GitHub Pages deployment
@@ -25,8 +27,7 @@ NEXT-PORTFOLIO/
 ├── .idea/              # IDE configuration
 ├── app/                # Next.js app directory
 │   ├── api/           # API routes (for development)
-│   ├── atoms/         # Atomic design components
-│   ├── data/          # Static data and content
+│   ├── data/          # Static data, content, and schema
 │   ├── globals.css    # Global styles
 │   ├── layout.tsx     # Root layout with SEO metadata
 │   ├── page.tsx       # Home page
@@ -36,10 +37,8 @@ NEXT-PORTFOLIO/
 │   ├── manifest.ts    # PWA manifest
 │   └── utils/         # Utility functions
 ├── components/         # Reusable React components
-│   ├── atoms/         # Basic UI components (Button, Text, etc.)
-│   │   └── StructuredData.tsx # JSON-LD structured data
-│   ├── molecules/     # Composite components (Cards, etc.)
-│   └── organisms/     # Complex components (Header, etc.)
+│   ├── organisms/     # Complex components (Header, Footer)
+│   └── ui/            # UI components (Section, Timeline, etc.)
 ├── public/            # Static assets (images, icons)
 ├── style/             # Custom styling
 ├── .dockerignore      # Docker ignore file
