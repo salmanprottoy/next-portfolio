@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Github, Linkedin, FileText } from "lucide-react";
-import { socialMedia, resume } from "@/app/data/Data";
+import { socialMedia, resume } from "@/app/data/header";
 import Link from "next/link";
 
 const Header = () => {
@@ -19,9 +19,9 @@ const Header = () => {
       className="fixed top-0 left-0 right-0 z-50 px-6 py-6 md:px-12 flex justify-between items-center bg-background/80 backdrop-blur-md border-b border-border/40"
     >
       <div className="flex gap-4">
-        {socialLinks.map((item, index) => (
+        {socialLinks.map((item) => (
           <Link
-            key={index}
+            key={item.name}
             href={item.link}
             target="_blank"
             rel="noopener noreferrer"

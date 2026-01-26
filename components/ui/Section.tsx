@@ -1,8 +1,6 @@
-"use client";
-
-import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { ReactNode } from "react";
+import SectionMotion from "./SectionMotion";
 
 interface SectionProps {
   id: string;
@@ -19,15 +17,7 @@ export default function Section({ id, children, className }: SectionProps) {
         className
       )}
     >
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="w-full max-w-7xl mx-auto z-10"
-      >
-        {children}
-      </motion.div>
+      <SectionMotion>{children}</SectionMotion>
     </section>
   );
 }

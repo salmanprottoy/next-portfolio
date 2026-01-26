@@ -1,6 +1,16 @@
 import { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
+  const profileImageUrl = process.env.NEXT_PUBLIC_S3_BASE_URL
+    ? `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/salmanprottoy.jpg`
+    : "/favicon.svg";
+  const profileImageType = process.env.NEXT_PUBLIC_S3_BASE_URL
+    ? "image/jpeg"
+    : "image/svg+xml";
+  const profileImageSizes = process.env.NEXT_PUBLIC_S3_BASE_URL
+    ? ["192x192", "512x512"]
+    : ["any", "any"];
+
   return {
     name: "Salman Prottoy - Software Engineer & Web Developer",
     short_name: "Salman Prottoy",
@@ -12,14 +22,14 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: "#64ffda",
     icons: [
       {
-        src: `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/salmanprottoy.jpg`,
-        sizes: "192x192",
-        type: "image/jpeg",
+        src: profileImageUrl,
+        sizes: profileImageSizes[0],
+        type: profileImageType,
       },
       {
-        src: `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/salmanprottoy.jpg`,
-        sizes: "512x512",
-        type: "image/jpeg",
+        src: profileImageUrl,
+        sizes: profileImageSizes[1],
+        type: profileImageType,
       },
     ],
     categories: ["business", "productivity"],

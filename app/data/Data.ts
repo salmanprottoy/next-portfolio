@@ -1,34 +1,4 @@
-export const socialMedia = [
-  {
-    name: "linkedin",
-    link: "https://linkedin.com/in/salman-prottoy/",
-  },
-  {
-    name: "github",
-    link: "https://github.com/salmanprottoy/",
-  },
-  {
-    name: "facebook",
-    link: "https://fb.com/salman.prottoy1/",
-  },
-  {
-    name: "twitter",
-    link: "https://twitter.com/salman_prottoy/",
-  },
-  {
-    name: "insta",
-    link: "https://instagram.com/salman.prottoy/",
-  },
-  {
-    name: "youtube",
-    link: "https://www.youtube.com/channel/UCFpY-FxvOpyKavh2nr9QSSg",
-  },
-];
-
-export const resume = {
-  link: "https://drive.google.com/file/d/19Xjj5BK8paFgnI-HIOxWN8R1QvAg9L5f/view",
-  text: "Resume",
-};
+export { socialMedia, resume } from "./header";
 
 export const contact = {
   email: "salman.prottoy@gmail.com",
@@ -56,134 +26,6 @@ export const Skills = [
   { name: "Pandas", icon: "pandas" },
 ];
 
-export const Projects = [
-  {
-    content: {
-      title: "CRM Software",
-      desc: "CRM(Customer Relation Management System) is a SaaS (software as a service) application that manages customer relationship for small business organizations built using two different technologies, Node.JS and Laravel",
-      techStack: ["Bootstrap", "Laravel", "Express.js", "MySQL", "MVC"],
-    },
-    link: "",
-    repo: "https://github.com/salmanprottoy/CRM-Software-laravel",
-    image: `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/crm.png`,
-    imageDetails: {
-      alt: "CRM Software",
-    },
-  },
-
-  {
-    content: {
-      title: "Extreme Fitness GYM",
-      desc: "Extreme Fitness GYM is a SaaS (software as a service) application that manages customer subscriptions for a gym built using Node.JS.",
-      techStack: ["React", "Material UI", "Express.js", "MongoDB"],
-    },
-    link: "https://extreme-fitness-gym-bd.web.app/",
-    repo: "https://github.com/salmanprottoy/extreme-fitness-gym-client",
-    image: `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/fitness.png`,
-    imageDetails: {
-      alt: "Extreme Fitness GYM",
-    },
-  },
-
-  {
-    content: {
-      title: "Online Book Store",
-      desc: "Online Book Store is a SaaS (software as a service) application built with Node.js that can be used as a book selling platform.",
-      techStack: ["React", "Material UI", "Express.js", "MongoDB"],
-    },
-    link: "https://online-book-store-e7a9c.web.app/",
-    repo: "https://github.com/salmanprottoy/online-book-store-client",
-    image: `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/obs.png`,
-    imageDetails: {
-      alt: "Online Book Store",
-    },
-  },
-
-  {
-    content: {
-      title: "Fuschia Neptunium",
-      desc: "A React application build using tailwindcss library that can be use as portfolio website.",
-      techStack: ["Tailwind CSS", "React", "JavaScript"],
-    },
-    link: "https://fuschia-neptunium.netlify.app/",
-    repo: "https://github.com/salmanprottoy/fuschia-neptunium",
-    image: `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/fuschia.png`,
-    imageDetails: {
-      alt: "Fuschia Neptunium",
-    },
-  },
-
-  {
-    content: {
-      title: "Bangla Car",
-      desc: "A React-native application build using react-native library that can be use as bangla cars website.",
-      techStack: ["React", "React-native", "JavaScript"],
-    },
-    link: "",
-    repo: "https://github.com/salmanprottoy/baglaCarApp",
-    image: `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/banglacar.jpg`,
-    imageDetails: {
-      alt: "Bangla Car",
-    },
-  },
-
-  {
-    content: {
-      title: "Insta Shop",
-      desc: "A React application build using react library that can be use as online shopping.",
-      techStack: ["React", "Redux", "JavaScript"],
-    },
-    link: "https://instashop-bd.web.app/",
-    repo: "https://github.com/salmanprottoy/instaShop",
-    image: `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/instashop.png`,
-    imageDetails: {
-      alt: "Insta Shop",
-    },
-  },
-
-  {
-    content: {
-      title: "Doctor Patient Portal",
-      desc: "Doctor Patient Portal is a SaaS (software as a service) application that makes the relationship between the doctor and the patient simpler.",
-      techStack: ["Bootstrap", "JavaScript", "jQuery", "PHP", "MySQL"],
-    },
-    link: "",
-    repo: "https://github.com/salmanprottoy/Doctor-Patient-Portal",
-    image: `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/doctorpatient.png`,
-    imageDetails: {
-      alt: "Doctor Patient Portal",
-    },
-  },
-
-  {
-    content: {
-      title: "City Riding Service",
-      desc: "A react project that can be as ride sharing application.",
-      techStack: ["Bootstrap", "React", "Firebase", "GoogleMap API"],
-    },
-    link: "https://city-riding-service.web.app/",
-    repo: "https://github.com/salmanprottoy/city-riding-service",
-    image: `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/cityridingservice.png`,
-    imageDetails: {
-      alt: "City Riding Service",
-    },
-  },
-
-  {
-    content: {
-      title: "Premier League Team Info",
-      desc: "A react project where all the team in the English Premier League Football can be readily represented.",
-      techStack: ["Bootstrap", "React", "Javascript", "API"],
-    },
-    link: "https://premier-league-team-info.netlify.app/",
-    repo: "https://github.com/salmanprottoy/premier-league-football-team-info",
-    image: `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/premierleagueteaminfo.png`,
-    imageDetails: {
-      alt: "Premier League Team Info",
-    },
-  },
-];
-
 export const Educations = [
   {
     institution: "University of Jyväskylä, Finland",
@@ -194,6 +36,16 @@ export const Educations = [
     institution: "American International University-Bangladesh",
     exam: "Bachelor of Science — Computer Science & Engineering",
     year: "January 2018 — September 2021",
+  },
+  {
+    institution: "Chattogram Cantonment Public College",
+    exam: "HSC — Science",
+    year: "2017",
+  },
+  {
+    institution: "Chattogram Cantonment Public College",
+    exam: "SSC — Science",
+    year: "2015",
   },
 ];
 

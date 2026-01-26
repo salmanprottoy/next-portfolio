@@ -2,6 +2,11 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { Prompt, Karla } from "next/font/google";
+import Script from "next/script";
+
+const profileImageUrl = process.env.NEXT_PUBLIC_S3_BASE_URL
+  ? `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/salmanprottoy.jpg`
+  : "/favicon.svg";
 
 // Prompt (semi-bold)
 const prompt = Prompt({
@@ -69,7 +74,7 @@ export const metadata: Metadata = {
     siteName: "Md. Salman Hossan Prottoy Portfolio",
     images: [
       {
-        url: `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/salmanprottoy.jpg`,
+        url: profileImageUrl,
         width: 1200,
         height: 630,
         alt: "Md. Salman Hossan Prottoy - Software Engineer",
@@ -81,7 +86,7 @@ export const metadata: Metadata = {
     title: "Md. Salman Hossan Prottoy - Software Engineer & Web Developer",
     description:
       "Software Engineer, Web Developer, and Open Source Contributor based in Bangladesh. Specialized in React, Node.js, Python, and full-stack development.",
-    images: [`${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/salmanprottoy.jpg`],
+    images: [profileImageUrl],
     creator: "@salman_prottoy",
   },
   robots: {
@@ -123,22 +128,20 @@ export default function RootLayout({
         {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
           <>
             {/* Google Analytics */}
-            <script
-              async
+            <Script
               src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}
+              strategy="afterInteractive"
             />
-            <script
-              dangerouslySetInnerHTML={{
-                __html: `
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  gtag('js', new Date());
-                  gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}', {
-                    page_path: window.location.pathname,
-                  });
-                `,
-              }}
-            />
+            <Script id="ga-init" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}', {
+                  page_path: window.location.pathname,
+                });
+              `}
+            </Script>
           </>
         )}
       </head>

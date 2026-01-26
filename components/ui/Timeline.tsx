@@ -47,7 +47,7 @@ export function TimelineItem({
       {description && (
         <ul className="space-y-2 text-muted-foreground">
           {description.map((item, i) => (
-            <li key={i} className="leading-relaxed">
+            <li key={typeof item === "string" ? item : i} className="leading-relaxed">
               • {item}
             </li>
           ))}
@@ -61,7 +61,11 @@ export default function Timeline({ items }: { items: TimelineEntry[] }) {
   return (
     <div className="w-full max-w-3xl mx-auto">
       {items.map((item, index) => (
-        <TimelineItem key={index} {...item} index={index} />
+        <TimelineItem
+          key={`${item.title}-${item.subtitle}-${item.date}`}
+          {...item}
+          index={index}
+        />
       ))}
     </div>
   );

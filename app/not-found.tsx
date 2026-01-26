@@ -32,11 +32,11 @@ export default function NotFound() {
           >
             Go Back Home
           </Link>
-          <Link 
-            href="/#projects"
+          <Link
+            href="/#experience"
             className="px-8 py-3 rounded-full border border-primary text-primary font-bold hover:bg-primary/10 transition-colors"
           >
-            View My Projects
+            View Experience
           </Link>
         </div>
       </div>

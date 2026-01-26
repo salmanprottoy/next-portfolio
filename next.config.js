@@ -15,9 +15,13 @@ const nextConfig = {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 60,
-    dangerouslyAllowSVG: true,
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    domains: ["salmanprottoy-portfolio.s3.ap-south-1.amazonaws.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "salmanprottoy-portfolio.s3.ap-south-1.amazonaws.com",
+        pathname: "/**",
+      },
+    ],
   },
 
   // Performance optimizations
@@ -167,5 +171,3 @@ module.exports = withSentryConfig(module.exports, {
   // https://vercel.com/docs/cron-jobs
   automaticVercelMonitors: true,
 });
-
-//SENTRY_AUTH_TOKEN=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
