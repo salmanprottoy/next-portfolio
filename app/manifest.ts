@@ -3,13 +3,9 @@ import { MetadataRoute } from "next";
 export default function manifest(): MetadataRoute.Manifest {
   const profileImageUrl = process.env.NEXT_PUBLIC_S3_BASE_URL
     ? `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/salmanprottoy.jpg`
-    : "/favicon.svg";
-  const profileImageType = process.env.NEXT_PUBLIC_S3_BASE_URL
-    ? "image/jpeg"
-    : "image/svg+xml";
-  const profileImageSizes = process.env.NEXT_PUBLIC_S3_BASE_URL
-    ? ["192x192", "512x512"]
-    : ["any", "any"];
+    : "/salman.jpg";
+  const profileImageType = "image/jpeg";
+  const profileImageSizes = ["192x192", "512x512"];
 
   return {
     name: "Salman Prottoy - Software Engineer & Web Developer",

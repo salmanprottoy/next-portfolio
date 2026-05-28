@@ -3,10 +3,13 @@ import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { Prompt, Karla } from "next/font/google";
 import Script from "next/script";
+import ThemeProvider from "@/components/providers/ThemeProvider";
+import { siteConfig } from "@/app/data/portfolio.config";
+import { jsonLdSchema } from "@/app/data/schema";
 
 const profileImageUrl = process.env.NEXT_PUBLIC_S3_BASE_URL
   ? `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/salmanprottoy.jpg`
-  : "/favicon.svg";
+  : "/salman.jpg";
 
 // Prompt (semi-bold)
 const prompt = Prompt({
@@ -24,18 +27,17 @@ const karla = Karla({
 
 export const metadata: Metadata = {
   title: {
-    default: "Md. Salman Hossan Prottoy - Software Engineer & Web Developer",
-    template: "%s | Md. Salman Hossan Prottoy",
+    default: siteConfig.defaultTitle,
+    template: `%s | ${siteConfig.author}`,
   },
-  description:
-    "Software Engineer, Web Developer, and Open Source Contributor based in Bangladesh. Specialized in React, Node.js, Python, and full-stack development.",
+  description: siteConfig.metaDescription,
   icons: {
     icon: "/favicon.svg",
     apple: "/favicon.svg",
   },
   keywords: [
-    "Md. Salman Hossan Prottoy",
-    "Salman Prottoy",
+    siteConfig.author,
+    siteConfig.fullName,
     "Software Engineer",
     "Web Developer",
     "Full Stack Developer",
@@ -49,45 +51,42 @@ export const metadata: Metadata = {
     "MongoDB",
     "PostgreSQL",
     "Open Source",
-    "Bangladesh",
     "Remote Developer",
   ],
-  authors: [{ name: "Md. Salman Hossan Prottoy" }],
-  creator: "Md. Salman Hossan Prottoy",
-  publisher: "Md. Salman Hossan Prottoy",
+  authors: [{ name: siteConfig.author }],
+  creator: siteConfig.author,
+  publisher: siteConfig.author,
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://salmanprottoy.vercel.app"),
+  metadataBase: new URL(siteConfig.siteUrl),
   alternates: {
     canonical: "/",
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://salmanprottoy.vercel.app",
-    title: "Md. Salman Hossan Prottoy - Software Engineer & Web Developer",
-    description:
-      "Software Engineer, Web Developer, and Open Source Contributor based in Bangladesh. Specialized in React, Node.js, Python, and full-stack development.",
-    siteName: "Md. Salman Hossan Prottoy Portfolio",
+    url: siteConfig.siteUrl,
+    title: siteConfig.defaultTitle,
+    description: siteConfig.metaDescription,
+    siteName: `${siteConfig.author} Portfolio`,
     images: [
       {
         url: profileImageUrl,
         width: 1200,
         height: 630,
-        alt: "Md. Salman Hossan Prottoy - Software Engineer",
+        alt: `${siteConfig.author} - Software Engineer`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Md. Salman Hossan Prottoy - Software Engineer & Web Developer",
-    description:
-      "Software Engineer, Web Developer, and Open Source Contributor based in Bangladesh. Specialized in React, Node.js, Python, and full-stack development.",
+    title: siteConfig.defaultTitle,
+    description: siteConfig.metaDescription,
     images: [profileImageUrl],
-    creator: "@salman_prottoy",
+    creator: `@${siteConfig.twitterHandle}`,
   },
   robots: {
     index: true,
@@ -107,8 +106,6 @@ export const metadata: Metadata = {
   },
 };
 
-import { jsonLdSchema } from "@/app/data/schema";
-
 // ... (keep imports)
 
 export default function RootLayout({
@@ -117,7 +114,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
@@ -145,8 +142,10 @@ export default function RootLayout({
           </>
         )}
       </head>
-      <body className={`${prompt.variable} ${karla.variable} font-sans`}>
-        {children}
+      <body className={`${prompt.variable} ${karla.variable} font-sans`} suppressHydrationWarning>
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
         <Analytics />
       </body>
     </html>

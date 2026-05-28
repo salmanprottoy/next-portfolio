@@ -1,40 +1,35 @@
+// ═══════════════════════════════════════════════════════════════
+//  SCHEMA.ORG JSON-LD — Re-built from portfolio.config.ts
+//  Edit app/data/portfolio.config.ts to customize.
+// ═══════════════════════════════════════════════════════════════
+
+import {
+  siteConfig,
+  socialMedia,
+  schemaSkills,
+  schemaEmployer,
+  schemaCountryCode,
+} from "./portfolio.config";
+
 const profileImageUrl = process.env.NEXT_PUBLIC_S3_BASE_URL
   ? `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/salmanprottoy.jpg`
-  : "/favicon.svg";
+  : "/salman.jpg";
 
 export const jsonLdSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
-  name: "Md. Salman Hossan Prottoy",
-  jobTitle: "Software Engineer",
-  description: "Software Engineer, Web Developer, and Open Source Contributor",
-  url: "https://salmanprottoy.vercel.app",
+  name: siteConfig.fullName,    jobTitle: siteConfig.jobTitle,
+  description: siteConfig.metaDescription,
+  url: siteConfig.siteUrl,
   image: profileImageUrl,
-  sameAs: [
-    "https://linkedin.com/in/salman-prottoy/",
-    "https://github.com/salmanprottoy/",
-    "https://twitter.com/salman_prottoy/",
-    "https://fb.com/salman.prottoy1/",
-  ],
-  knowsAbout: [
-    "JavaScript",
-    "TypeScript",
-    "React",
-    "Node.js",
-    "Python",
-    "Django",
-    "Next.js",
-    "MongoDB",
-    "PostgreSQL",
-    "Docker",
-    "Git",
-  ],
+  sameAs: socialMedia.map((s) => s.link),
+  knowsAbout: schemaSkills,
   worksFor: {
     "@type": "Organization",
-    name: "Brand Cloud Inc.",
+    name: schemaEmployer.name,
   },
   address: {
     "@type": "PostalAddress",
-    addressCountry: "BD",
+    addressCountry: schemaCountryCode,
   },
 };

@@ -13,7 +13,7 @@ export default function Section({ id, children, className }: SectionProps) {
     <section
       id={id}
       className={cn(
-        "min-h-screen w-full py-20 px-6 md:px-12 lg:px-24 flex flex-col justify-center relative overflow-hidden",
+        "w-full py-20 md:py-28 px-6 md:px-12 lg:px-24 flex flex-col justify-center relative overflow-hidden",
         className
       )}
     >

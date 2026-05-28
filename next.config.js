@@ -3,9 +3,6 @@ const nextConfig = {
   // Enable React Strict Mode for better development experience
   reactStrictMode: true,
 
-  // Enable SWC minification for faster builds
-  swcMinify: true,
-
   // Enable standalone output for Docker
   output: "standalone",
 
@@ -26,7 +23,6 @@ const nextConfig = {
 
   // Performance optimizations
   experimental: {
-    optimizeCss: true,
     // optimizePackageImports: ["@/components"],
   },
 
