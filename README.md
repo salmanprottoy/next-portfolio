@@ -2,8 +2,6 @@
 
 A modern, glassmorphism-styled portfolio template built with **Next.js 14**, **React 18**, **TypeScript**, **Tailwind CSS**, and **Framer Motion**. Features dark/light mode, animated backgrounds, sticky navigation, and responsive design.
 
-![Portfolio Preview](https://raw.githubusercontent.com/salmanprottoy/next-portfolio/main/public/favicon.svg)
-
 ## ✨ What's Included
 
 - **Dark / Light Mode Toggle** — Next Themes with animated sun/moon icon
