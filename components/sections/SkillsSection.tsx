@@ -1,40 +1,35 @@
 "use client";
 
 import { motion } from "framer-motion";
+import AccessibleIcon from "@/components/ui/AccessibleIcon";
 import {
-  Code2,
-  Layout,
-  Server,
-  Database,
-  Cloud,
   BarChart3,
-  Coffee,
-  MessageSquare,
   BookOpen,
+  Cloud,
+  Code2,
+  Database,
   Eye,
-  Users,
   Layers,
+  MessageSquare,
+  Server,
+  Users,
 } from "lucide-react";
 import {
-  SiJavascript,
-  SiTypescript,
-  SiPython,
-  SiGo,
-  SiReact,
-  SiNextdotjs,
-  SiVuedotjs,
-  SiVite,
-  SiNodedotjs,
-  SiDjango,
-  SiPrisma,
-  SiPostgresql,
-  SiMongodb,
-  SiOpensearch,
   SiDocker,
+  SiDjango,
   SiGit,
+  SiJavascript,
+  SiMongodb,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiPostgresql,
+  SiPython,
+  SiReact,
   SiTailwindcss,
-  SiPytorch,
-  SiHuggingface,
+  SiTypescript,
+  SiVercel,
+  SiVuedotjs,
+  SiGo,
 } from "react-icons/si";
 
 interface Skill {
@@ -46,147 +41,138 @@ interface SkillsSectionProps {
   skills: Skill[];
 }
 
-const skillCategories: Record<string, { label: string; icon: React.ElementType; skills: string[] }> = {
-  languages: {
+const skillCategories: Array<{
+  key: string;
+  label: string;
+  icon: React.ElementType;
+  skills: string[];
+}> = [
+  {
+    key: "languages",
     label: "Languages",
     icon: Code2,
-    skills: ["JavaScript", "TypeScript", "Python", "Go", "Java"],
+    skills: ["TypeScript", "JavaScript", "Python", "Go"],
   },
-  frontend: {
-    label: "Frontend",
-    icon: Layout,
-    skills: ["React", "Next.js", "Vue.js", "Tailwind CSS", "Vite"],
-  },
-  backend: {
-    label: "Backend",
+  {
+    key: "backend",
+    label: "Backend / API",
     icon: Server,
-    skills: ["Node.js", "Django", "Prisma"],
+    skills: ["Node.js", "Express.js", "GraphQL", "REST", "Django"],
   },
-  databases: {
-    label: "Databases",
+  {
+    key: "frontend",
+    label: "Frontend",
+    icon: Layers,
+    skills: ["React.js", "Next.js", "Vue.js", "Tailwind CSS"],
+  },
+  {
+    key: "data",
+    label: "Data stores",
     icon: Database,
-    skills: ["PostgreSQL", "MongoDB", "OpenSearch", "DynamoDB"],
+    skills: ["PostgreSQL", "MongoDB", "Redis", "ChromaDB", "DynamoDB"],
   },
-  devops: {
-    label: "DevOps & Cloud",
+  {
+    key: "cloud",
+    label: "Cloud / DevOps",
     icon: Cloud,
-    skills: ["Docker", "AWS", "Git", "CloudFormation"],
+    skills: ["AWS", "Docker", "CI/CD", "Vercel", "Nginx"],
   },
-  data: {
-    label: "Data & AI",
+  {
+    key: "ai",
+    label: "AI / ML",
     icon: BarChart3,
-    skills: ["Pandas", "PyTorch", "Scikit-learn", "Hugging Face", "NLP", "RAG", "Ollama", "CrewAI"],
+    skills: ["RAG Pipelines", "LangChain", "CrewAI", "TensorFlow", "LLMs integration"],
   },
-  other: {
-    label: "Other",
-    icon: Code2,
-    skills: [],
-  },
-};
+];
 
-/** Official brand icons via react-icons/si; Lucide fallbacks for non-brand skills */
+/** Official brand icons where available; Lucide icons keep the rest visually consistent. */
 const skillIconMap: Record<string, React.ElementType> = {
-  JavaScript: SiJavascript,
   TypeScript: SiTypescript,
+  JavaScript: SiJavascript,
   Python: SiPython,
   Go: SiGo,
-  Java: Coffee,
-  React: SiReact,
+  "Node.js": SiNodedotjs,
+  "React.js": SiReact,
   "Next.js": SiNextdotjs,
   "Vue.js": SiVuedotjs,
-  Vite: SiVite,
-  "Node.js": SiNodedotjs,
-  Django: SiDjango,
-  Prisma: SiPrisma,
+  "Tailwind CSS": SiTailwindcss,
   PostgreSQL: SiPostgresql,
   MongoDB: SiMongodb,
-  DynamoDB: Database,
-  OpenSearch: SiOpensearch,
   Docker: SiDocker,
-  AWS: Cloud,
+  Django: SiDjango,
   Git: SiGit,
-  "Tailwind CSS": SiTailwindcss,
-  PyTorch: SiPytorch,
-  "Hugging Face": SiHuggingface,
-  // Lucide fallbacks for non-brand / research skills
-  Pandas: BarChart3,
-  "Scikit-learn": BarChart3,
-  NLP: MessageSquare,
-  RAG: BookOpen,
-  Ollama: Eye,
+  Vercel: SiVercel,
+  "Express.js": Server,
+  GraphQL: MessageSquare,
+  REST: Code2,
+  Redis: Database,
+  ChromaDB: Database,
+  DynamoDB: Database,
+  AWS: Cloud,
+  "CI/CD": SiGit,
+  Nginx: Server,
+  "RAG Pipelines": BookOpen,
+  LangChain: Layers,
   CrewAI: Users,
-  CloudFormation: Layers,
+  TensorFlow: BarChart3,
+  "LLMs integration": Eye,
 };
 
 export default function SkillsSection({ skills }: SkillsSectionProps) {
-  // Map provided skills to categories
-  const allCategorized = new Set<string>();
-  Object.values(skillCategories).forEach((cat) => {
-    cat.skills.forEach((s) => allCategorized.add(s));
-  });
-
-  const categorized = Object.entries(skillCategories).map(([key, cat]) => ({
-    key,
-    ...cat,
-    matched:
-      key === "other"
-        ? skills.filter((s) => !allCategorized.has(s.name))
-        : skills.filter((s) => cat.skills.includes(s.name)),
-  })).filter((cat) => cat.matched.length > 0 || cat.key !== "other");
+  const categorized = skillCategories
+    .map((category) => ({
+      ...category,
+      matched: category.skills
+        .map((name) => skills.find((skill) => skill.name === name))
+        .filter((skill): skill is Skill => Boolean(skill)),
+    }))
+    .filter((category) => category.matched.length > 0);
 
   return (
-    <div className="space-y-12">
-      <div className="text-center space-y-3">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-3xl md:text-4xl font-bold font-heading"
-        >
-          Technical Skills
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-          className="text-muted-foreground max-w-xl mx-auto"
-        >
-          Technologies and tools I work with across the full stack
-        </motion.p>
+    <div className="space-y-9">
+      <div className="flex flex-col gap-3 border-b border-border/60 pb-5 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p className="section-kicker mb-2">Technical toolkit</p>
+          <h3 className="font-heading text-balance text-3xl font-semibold tracking-[-0.045em] text-foreground md:text-4xl">
+            The tools behind the work.
+          </h3>
+        </div>
+        <p className="max-w-sm text-sm leading-relaxed text-muted-foreground sm:text-right">
+          A practical stack spanning product interfaces, distributed services, cloud infrastructure, and applied AI.
+        </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
-        {categorized.map((cat, catIndex) => (
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {categorized.map((category, categoryIndex) => (
           <motion.div
-            key={cat.key}
-            initial={{ opacity: 0, y: 30 }}
+            key={category.key}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: catIndex * 0.1, duration: 0.5 }}
-            className="glass rounded-2xl p-5 glow-hover group"
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ delay: categoryIndex * 0.07, duration: 0.45 }}
+            className="glass glow-hover rounded-2xl p-5"
           >
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center">
-                <cat.icon className="w-4 h-4 text-primary" />
+            <div className="mb-5 flex items-center gap-3">
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                <AccessibleIcon icon={category.icon} className="h-4 w-4" />
               </div>
-              <h3 className="font-semibold text-sm text-foreground">{cat.label}</h3>
+              <h4 className="text-sm font-semibold text-foreground">{category.label}</h4>
             </div>
             <div className="flex flex-wrap gap-2">
-              {cat.matched.map((skill, skillIndex) => {
+              {category.matched.map((skill, skillIndex) => {
                 const Icon = skillIconMap[skill.name] || Code2;
                 return (
-                  <motion.div
+                  <motion.span
                     key={skill.name}
-                    initial={{ opacity: 0, scale: 0.8 }}
+                    initial={{ opacity: 0, scale: 0.92 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
-                    transition={{ delay: catIndex * 0.1 + skillIndex * 0.05 }}
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-secondary/50 hover:bg-primary/10 border border-transparent hover:border-primary/20 transition-all text-xs font-medium"
+                    transition={{ delay: categoryIndex * 0.07 + skillIndex * 0.035 }}
+                    className="inline-flex items-center gap-1.5 rounded-lg border border-border/70 bg-background/35 px-2.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/30 hover:bg-primary/10 hover:text-foreground"
                   >
-                    <Icon className="w-3.5 h-3.5 text-muted-foreground group-hover:text-primary transition-colors" />
-                    {skill.name}
-                  </motion.div>
+                    <AccessibleIcon icon={Icon} className="h-3.5 w-3.5 text-primary/75" />
+                    <span translate="no">{skill.name}</span>
+                  </motion.span>
                 );
               })}
             </div>

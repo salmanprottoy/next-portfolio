@@ -1,18 +1,16 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ReactNode } from "react";
+import MotionReveal from "@/components/ui/MotionReveal";
 
 export default function SectionMotion({ children }: { children: ReactNode }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-      className="w-full max-w-7xl mx-auto z-10"
+    <MotionReveal
+      distance={50}
+      duration={0.8}
+      className="motion-safe relative z-10 mx-auto w-full max-w-7xl"
     >
       {children}
-    </motion.div>
+    </MotionReveal>
   );
 }

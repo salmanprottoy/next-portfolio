@@ -1,35 +1,22 @@
 // ═══════════════════════════════════════════════════════════════
 //  PORTFOLIO CONFIG — EDIT THIS FILE TO CUSTOMIZE YOUR SITE
 // ═══════════════════════════════════════════════════════════════
-//  This is the ONLY file you need to edit to personalize the
-//  portfolio for yourself. All components read from here.
+//  All personal content lives here so the UI can stay focused on
+//  telling the story clearly.
 // ═══════════════════════════════════════════════════════════════
 
 // ─── Site / Branding ───────────────────────────────────────────
 export const siteConfig = {
-  /** Your full name — used in meta tags, hero, footer, etc. */
   fullName: "Md. Salman Hossan Prottoy",
-  /** Short name or initials — used for the logo mark */
   shortName: "SP",
-  /** Default page title used in <title> and OpenGraph */
-  defaultTitle: "Md. Salman Hossan Prottoy - Software Engineer & Web Developer",
-  /** Job title used for schema.org JSON-LD */
+  defaultTitle: "Md. Salman Hossan Prottoy — Software Engineer & AI Builder",
   jobTitle: "Software Engineer",
-  /** Meta description for SEO */
   metaDescription:
-    "Software Engineer, Web Developer, and Open Source Contributor based in Bangladesh. Specialized in React, Node.js, Python, and full-stack development.",
-  /** Site URL (no trailing slash) — used for sitemap, canonical, OG */
+    "Software engineer and MSc Artificial Intelligence student building production web products, applied AI systems, and researching multi-objective optimization with TypeScript, React, Go, Python, and AWS.",
   siteUrl: "https://salmanprottoy.vercel.app",
-  /** Author name for metadata */
   author: "Md. Salman Hossan Prottoy",
-  /** Twitter / X handle (without @) */
   twitterHandle: "salman_prottoy",
-  /** Google Analytics Measurement ID (optional — leave empty to disable) */
-  googleAnalyticsId: "",
-  /** Sentry DSN (optional — leave empty to disable) */
-  sentryDsn: "",
-  /** Last updated string shown in the footer */
-  lastUpdated: "May 2026",
+  lastUpdated: "September 2026",
 };
 
 // ─── Contact ───────────────────────────────────────────────────
@@ -41,15 +28,46 @@ export const contact = {
 // ─── Hero Section ─────────────────────────────────────────────
 export const heroConfig = {
   name: siteConfig.fullName,
-  /** Two title badges shown under the name */
+  eyebrow: "Software engineer · AI systems builder",
   titleA: "Software Engineer",
-  titleB: "AI Researcher",
-  /** Availability badge text (set to "" to hide) */
-  availabilityText: "Available for opportunities",
-  /** Hero CTA button text */
-  ctaContactText: "Contact Me",
-  ctaScrollText: "View Experience",
+  titleB: "AI Systems Builder",
+  location: "Jyväskylä, Finland",
+  intro:
+    "I turn messy product problems into reliable software — then make AI useful in the real world.",
+  availabilityText: "Open to software & AI opportunities",
+  ctaContactText: "Let's talk",
+  ctaScrollText: "Explore the work",
 };
+
+// ─── Impact Signals ────────────────────────────────────────────
+export const impactStats = [
+  { value: "500+", label: "RAG users reached" },
+  { value: "2,000+", label: "documents / hour at peak" },
+  { value: "40%", label: "travel platform endpoints" },
+  { value: "35%", label: "monitoring frontend" },
+];
+
+// ─── Working Focus ─────────────────────────────────────────────
+export const focusAreas = [
+  {
+    label: "SHIP",
+    title: "Production-minded",
+    description:
+      "From zero-downtime data migrations to CI/CD, I care about the details that keep software dependable after launch.",
+  },
+  {
+    label: "EXPLORE",
+    title: "Applied AI",
+    description:
+      "I build practical RAG and LLM experiences that connect retrieval, infrastructure, and a useful end-user workflow.",
+  },
+  {
+    label: "CONNECT",
+    title: "Team multiplier",
+    description:
+      "I enjoy turning hard-won engineering lessons into clear standards, reusable components, and better collaboration.",
+  },
+];
 
 // ─── Social Links ─────────────────────────────────────────────
 export const socialMedia = [
@@ -85,56 +103,44 @@ export const socialMedia = [
   },
 ];
 
-/** Which social platforms appear in the header / footer (must match a name above) */
+/** Social platforms shown in the header */
 export const featuredSocials = ["github", "linkedin"];
 
 // ─── Resume ────────────────────────────────────────────────────
 export const resume = {
-  link: "https://drive.google.com/file/d/19Xjj5BK8paFgnI-HIOxWN8R1QvAg9L5f/view",
+  link: "https://users.jyu.fi/~mshprott/",
   text: "Resume",
 };
 
 // ─── About ─────────────────────────────────────────────────────
 export const AboutMe = [
-  "I am a Master's student in Artificial Intelligence at the University of Jyväskylä, Finland, and a software engineer focused on building scalable, production-ready systems. My interests span language models, retrieval-augmented generation, full-stack development, and cloud-native architectures.",
-  "Alongside industry work, I enjoy working on applied research problems at the intersection of natural language processing and trustworthy AI, with prior experience on fake news detection for Bangla.",
+  "I am a software engineer and Master's student in Artificial Intelligence at the University of Jyväskylä, Finland, currently starting my Master's thesis in multi-objective optimization. I build full-stack products with TypeScript, React, Go, Python, and AWS, with a particular interest in making language-model systems reliable enough to use beyond a demo.",
+  "Most recently at Brand Cloud Inc., I worked across production TypeScript/React systems, zero-downtime PostgreSQL migrations, CI/CD, and a RAG application used by 500+ people. Earlier at W3 Engineers, I helped move backend services from Django to Go and connected data-heavy systems across a multi-tenant travel platform.",
 ];
 
 // ─── Experience ────────────────────────────────────────────────
 export const Experience = [
   {
-    jobTitle: "Software Engineer (Remote)",
-    company: "Brand Cloud Inc., Tokyo, Japan",
-    date: "September 2023 — Present",
+    jobTitle: "Software Engineer",
+    company: "Brand Cloud Inc. · Tokyo, Japan (Remote)",
+    date: "September 2023 — June 2026",
     bullets: [
-      "Architected and delivered scalable, end-to-end full-stack solutions for multiple major projects, including payment integration and automated communication services.",
-      "Engineered core components for a Retrieval-Augmented Generation (RAG) application, integrating LLMs into a containerized, cloud-native architecture.",
-      "Designed and implemented CI/CD pipelines to automate end-to-end deployment.",
-      "Mentored teammates and established engineering best practices.",
-      "Designed and developed scalable APIs and backend features.",
-      "Maintained and optimized cron jobs and migration scripts.",
-      "Integrated Elastic File System and improved platform UX where needed.",
+      "Migrated CMS content storage to PostgreSQL on Amazon RDS with zero downtime for end users, integrating backend services across the platform.",
+      "Grew a RAG-based application to 500+ users and 2,000+ documents processed per hour at peak, combining vector search, caching, and containerized Docker infrastructure to let users query multiple LLMs over uploaded documents.",
+      "Designed and maintained automated GitHub CI/CD pipelines that validated changes before merge, speeding up pull-request review while following DevSecOps practices.",
+      "Mentored 2–3 junior engineers and established team-wide coding standards, improving sprint delivery consistency.",
+      "Shipped full-stack, business-critical features on a TypeScript/React (Next.js) stack deployed and maintained on Vercel.",
     ],
   },
   {
     jobTitle: "Junior Software Engineer",
-    company: "W3 Engineers Limited, Dhaka, Bangladesh",
+    company: "W3 Engineers Limited · Dhaka, Bangladesh",
     date: "November 2021 — August 2023",
     bullets: [
-      "Developed and maintained scalable RESTful APIs using Django, then migrated and optimized them to Go, implementing best practices for authentication, authorization, and data validation, supporting 5,000+ daily active users.",
-      "Engineered and optimized critical data processing pipelines using cron jobs with parallel processing capabilities, reducing processing time by 70% and improving system reliability for enterprise-level applications.",
-      "Designed and implemented comprehensive database migration strategies, integrating AWS Elastic File System for distributed storage solutions, enabling seamless data transitions across multiple database platforms while improving file access performance by 45%.",
-      "Enhanced enterprise application user experience by developing reusable Vue.js components and implementing responsive design patterns, resulting in 30% improvement in user engagement metrics and streamlined interface workflows.",
-    ],
-  },
-  {
-    jobTitle: "Undergraduate Teaching Assistant",
-    company: "American International University — Bangladesh",
-    date: "May 2021 — August 2021",
-    bullets: [
-      "Provided academic support for the Web Technologies course (≈80 students).",
-      "Assisted in lesson planning and preparation of instructional materials.",
-      "Collaborated with faculty to identify learning gaps and implement targeted interventions.",
+      "Contributed client-server integrations via REST and GraphQL APIs in Go and Node.js, covering roughly 40% of the platform's endpoints for a 30+ domain multi-tenant travel platform.",
+      "Contributed to the backend migration from Django to Go, helping significantly reduce response latency across the platform's core services.",
+      "Built data pipelines to unify property data from multiple external providers into a single schema, using parallel processing and Amazon SQS asynchronous messaging on AWS.",
+      "Built reusable, production Vue.js UI components powering 35% of the frontend of an enterprise network-monitoring application, integrating backend APIs to improve the end-user experience.",
     ],
   },
 ];
@@ -142,142 +148,82 @@ export const Experience = [
 // ─── Education ─────────────────────────────────────────────────
 export const Educations = [
   {
-    institution: "University of Jyväskylä, Finland",
-    exam: "Master of Science — Artificial Intelligence",
-    year: "September 2025 — Present",
+    institution: "University of Jyväskylä · Jyväskylä, Finland",
+    exam: "Master of Science in Artificial Intelligence",
+    year: "2027",
+    detail: "Thesis underway · multi-objective optimization",
   },
   {
-    institution: "American International University-Bangladesh",
-    exam: "Bachelor of Science — Computer Science & Engineering",
-    year: "January 2018 — September 2021",
-  },
-  {
-    institution: "Chattogram Cantonment Public College",
-    exam: "HSC — Science",
-    year: "2017",
-  },
-  {
-    institution: "Chattogram Cantonment Public College",
-    exam: "SSC — Science",
-    year: "2015",
+    institution: "American International University-Bangladesh · Dhaka, Bangladesh",
+    exam: "Bachelor of Science in Computer Science & Engineering",
+    year: "2021",
+    detail: "Completed",
   },
 ];
 
 // ─── Skills ────────────────────────────────────────────────────
 export const Skills = [
-  { name: "JavaScript", icon: "javascript" },
   { name: "TypeScript", icon: "typescript" },
+  { name: "JavaScript", icon: "javascript" },
   { name: "Python", icon: "python" },
   { name: "Go", icon: "go" },
-  { name: "Java", icon: "java" },
-  { name: "React", icon: "react" },
+  { name: "Node.js", icon: "nodedotjs" },
+  { name: "Express.js", icon: "express" },
+  { name: "GraphQL", icon: "graphql" },
+  { name: "REST", icon: "rest" },
+  { name: "Django", icon: "django" },
+  { name: "React.js", icon: "react" },
   { name: "Next.js", icon: "nextdotjs" },
   { name: "Vue.js", icon: "vuedotjs" },
-  { name: "Vite", icon: "vite" },
-  { name: "Node.js", icon: "nodedotjs" },
-  { name: "Django", icon: "django" },
-  { name: "Prisma", icon: "prisma" },
+  { name: "Tailwind CSS", icon: "tailwindcss" },
   { name: "PostgreSQL", icon: "postgresql" },
   { name: "MongoDB", icon: "mongodb" },
+  { name: "Redis", icon: "redis" },
+  { name: "ChromaDB", icon: "chromadb" },
   { name: "DynamoDB", icon: "dynamodb" },
-  { name: "OpenSearch", icon: "opensearch" },
-  { name: "Docker", icon: "docker" },
   { name: "AWS", icon: "aws" },
-  { name: "Git", icon: "git" },
-  { name: "Tailwind CSS", icon: "tailwindcss" },
-  { name: "Pandas", icon: "pandas" },
-  { name: "PyTorch", icon: "pytorch" },
-  { name: "Scikit-learn", icon: "scikitlearn" },
-  { name: "Hugging Face", icon: "huggingface" },
-  { name: "NLP", icon: "nlp" },
-  { name: "RAG", icon: "rag" },
-  { name: "Ollama", icon: "ollama" },
+  { name: "Docker", icon: "docker" },
+  { name: "CI/CD", icon: "cicd" },
+  { name: "Vercel", icon: "vercel" },
+  { name: "Nginx", icon: "nginx" },
+  { name: "RAG Pipelines", icon: "rag" },
+  { name: "LangChain", icon: "langchain" },
   { name: "CrewAI", icon: "crewai" },
-  { name: "CloudFormation", icon: "cloudformation" },
-];
-
-// ─── Research ──────────────────────────────────────────────────
-export const ResearchExperience = [
-  {
-    title: "Undergraduate Research Assistant",
-    institution: "American International University — Bangladesh",
-    date: "2021",
-    bullets: [
-      "Conducted background studies on fake news detection and imbalance handling.",
-      "Collected and analyzed datasets; co-authored a paper presented at IC4IR 2021.",
-    ],
-  },
-];
-
-// ─── Publications ──────────────────────────────────────────────
-export const Publications = [
-  {
-    authors:
-      "Hossain, M.M., Awosaf, Z., Prottoy, M.S.H., Alvy, A.S.M., Morol, M.K.",
-    title:
-      "Approaches for Improving the Performance of Fake News Detection in Bangla: Imbalance Handling and Model Stacking",
-    conference:
-      "Proceedings of International Conference on Fourth Industrial Revolution and Beyond 2021",
-    publisher:
-      "Lecture Notes in Networks and Systems, vol 437. Springer, Singapore",
-    year: "2022",
-    doi: "https://link.springer.com/chapter/10.1007/978-981-19-2445-3_51",
-  },
-];
-
-// ─── Honors & Awards ───────────────────────────────────────────
-export const HonorsAndAwards = [
-  {
-    title: "Vice Chancellor's Award",
-    institution: "American International University-Bangladesh",
-    date: "March 2023",
-    description:
-      'Vice Chancellor\'s Award for Meritorious Effort in the completion of the design project entitled "Approaches for Improving the Performance of Fake News Detection in Bangla: Imbalance Handling and Model Stacking."',
-  },
-];
-
-// ─── Extra-Curricular ──────────────────────────────────────────
-export const ExtraCurricular = [
-  {
-    title: "Cadet Corporal",
-    organization: "Bangladesh National Cadet Corps (BNCC)",
-    date: "2015 — 2017",
-    bullets: [
-      "Completed BTE-01/2016-17 training.",
-      "Trained junior cadets and assisted with event organization.",
-    ],
-  },
+  { name: "TensorFlow", icon: "tensorflow" },
+  { name: "LLMs integration", icon: "llm" },
 ];
 
 // ═══════════════════════════════════════════════════════════════
 //  OPTIONAL: JSON-LD Structured Data (Schema.org)
-//  This powers the rich snippet that search engines show.
 // ═══════════════════════════════════════════════════════════════
 
-/** List of skills for the "knowsAbout" schema field */
 export const schemaSkills = [
-  "JavaScript",
   "TypeScript",
-  "React",
-  "Node.js",
+  "JavaScript",
   "Python",
-  "Java",
+  "Go",
+  "Node.js",
+  "Express.js",
+  "GraphQL",
+  "REST",
   "Django",
+  "React.js",
   "Next.js",
-  "MongoDB",
+  "Vue.js",
   "PostgreSQL",
+  "MongoDB",
+  "Redis",
+  "ChromaDB",
   "DynamoDB",
+  "AWS",
   "Docker",
-  "Git",
-  "PyTorch",
-  "NLP",
-  "RAG",
+  "RAG Pipelines",
+  "LangChain",
+  "CrewAI",
+  "TensorFlow",
+  "LLMs integration",
+  "Multi-objective optimization",
 ];
 
-/** Current employer for schema */
-export const schemaEmployer = {
-  name: "Brand Cloud Inc.",
-};
-
-/** Country code for schema address */
-export const schemaCountryCode = "BD";
+/** Country code for the current study location */
+export const schemaCountryCode = "FI";

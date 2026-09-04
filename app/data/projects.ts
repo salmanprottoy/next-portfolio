@@ -1,43 +1,64 @@
 // ═══════════════════════════════════════════════════════════════
 //  PROJECTS — Edit this array to showcase your own work.
-//  Set liveUrl or sourceUrl to "#" or undefined to hide that link.
 // ═══════════════════════════════════════════════════════════════
+
+export type ProjectKind = "ai" | "platform" | "research" | "frontend";
 
 export interface Project {
   title: string;
+  eyebrow: string;
   description: string;
   tags: string[];
+  kind: ProjectKind;
+  metric?: string;
+  metricLabel?: string;
   liveUrl?: string;
   sourceUrl?: string;
 }
 
 export const Projects: Project[] = [
   {
-    title: "Forest Fire MAS — BDI Multi-Agent System",
+    title: "RAG application",
+    eyebrow: "Production AI · Brand Cloud",
     description:
-      "Autonomous forest fire emergency response built with JADE (Java) and extended with a Python BDI layer using CrewAI and Ollama. Four agents cooperate across fire detection, severity assessment, resource coordination, and emergency dispatch — with multi-zone conflict resolution, uncertainty handling, and belief revision in cascading scenarios.",
-    tags: ["Java", "JADE", "Python", "CrewAI", "Ollama", "Multi-Agent Systems", "BDI"],
+      "A document intelligence workflow where users query multiple LLMs over uploaded content. The system combines retrieval, caching, and Docker-based services into a product that can handle real usage rather than just a notebook demo.",
+    tags: ["RAG", "LLMs", "Vector search", "Docker"],
+    kind: "ai",
+    metric: "500+",
+    metricLabel: "users",
     sourceUrl: "#",
   },
   {
-    title: "UniPilot — AI Academic Copilot",
+    title: "CMS data migration",
+    eyebrow: "Platform reliability · Brand Cloud",
     description:
-      "AI-powered academic workspace built on Finland's shared higher education data infrastructure (HEDS / Opin.fi). Features at-risk graduation scoring, AI study plan generation via AWS Bedrock, multi-turn AI readiness checks, conversational course assistance, and teacher tools for course descriptions.",
-    tags: ["TypeScript", "React", "Vite", "AWS Lambda", "AWS Bedrock", "DynamoDB", "CloudFormation"],
+      "Moved CMS content storage to PostgreSQL on Amazon RDS while keeping the product available. Backend services across the platform were integrated around the new source of truth without a disruptive cutover.",
+    tags: ["PostgreSQL", "Amazon RDS", "TypeScript", "Zero downtime"],
+    kind: "platform",
+    metric: "0",
+    metricLabel: "downtime",
     sourceUrl: "#",
   },
   {
-    title: "RAG-MT & QA — Finnish Culture Knowledge Base",
+    title: "Travel data platform",
+    eyebrow: "Distributed systems · W3 Engineers",
     description:
-      "Domain-specific retrieval-augmented generation for English-to-Finnish machine translation and question answering over a Finnish culture knowledge base. Evaluates baseline MT, naive RAG, and filtered context selection with BLEU, COMET, and entity novelty metrics. Achieves 95% QA accuracy.",
-    tags: ["Python", "PyTorch", "Hugging Face", "RAG", "NMT", "MarianMT", "NLP"],
+      "Unified property data from multiple external providers into one schema, using parallel processing and Amazon SQS asynchronous messaging across a multi-tenant travel platform.",
+    tags: ["Go", "Node.js", "REST", "GraphQL", "AWS SQS"],
+    kind: "platform",
+    metric: "30+",
+    metricLabel: "domains",
     sourceUrl: "#",
   },
   {
-    title: "Fake News Detection (Bangla)",
+    title: "Bangla fake-news detection",
+    eyebrow: "Published research · IC4IR 2021",
     description:
-      "A machine learning system for detecting fake news in Bangla language. Implements imbalance handling techniques and model stacking to improve classification accuracy on low-resource datasets.",
-    tags: ["Python", "Pandas", "Scikit-learn", "NLP", "Machine Learning"],
-    sourceUrl: "#",
+      "Explored imbalance handling and model stacking for fake-news classification in Bangla, contributing to research published in Springer’s Lecture Notes in Networks and Systems.",
+    tags: ["Python", "NLP", "TensorFlow", "Model stacking"],
+    kind: "research",
+    metric: "2022",
+    metricLabel: "published",
+    sourceUrl: "https://link.springer.com/chapter/10.1007/978-981-19-2445-3_51",
   },
 ];

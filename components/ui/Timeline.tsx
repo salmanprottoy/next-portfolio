@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import AccessibleIcon from "@/components/ui/AccessibleIcon";
+import MotionReveal from "@/components/ui/MotionReveal";
 import { Calendar, MapPin } from "lucide-react";
 
 export interface TimelineEntry {
@@ -22,52 +23,50 @@ export function TimelineItem({
   index,
 }: TimelineItemProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ delay: index * 0.08, duration: 0.5 }}
-      className="relative pl-8 pb-10 last:pb-0"
+    <MotionReveal
+      delay={index * 0.08}
+      distance={18}
+      duration={0.5}
+      className="group relative pl-10 pb-8 last:pb-0 md:pl-16"
     >
-      {/* Timeline line */}
-      <div className="absolute left-[11px] top-3 bottom-0 w-px bg-gradient-to-b from-primary/50 via-primary/20 to-transparent last:hidden" />
+      <div className="absolute bottom-0 left-[0.45rem] top-3 w-px bg-gradient-to-b from-primary/70 via-primary/25 to-transparent md:left-[0.7rem]" aria-hidden="true" />
+      <div className="absolute left-0 top-0 flex h-7 w-7 items-center justify-center rounded-lg border border-primary/40 bg-background font-mono text-[0.62rem] text-primary shadow-[0_0_0_4px_hsl(var(--background))] md:h-8 md:w-8" aria-hidden="true">
+        {String(index + 1).padStart(2, "0")}
+      </div>
 
-      {/* Timeline dot */}
-      <div className="absolute left-[7px] top-2 w-2.5 h-2.5 rounded-full bg-primary shadow-[0_0_8px_rgba(45,212,191,0.5)] ring-[3px] ring-background" />
-
-      {/* Content card */}
-      <div className="glass rounded-xl p-5 md:p-6 glow-hover transition-all duration-300">
-        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-2">
-          <h3 className="text-lg md:text-xl font-bold text-foreground">{title}</h3>
-          <span className="text-xs md:text-sm text-muted-foreground font-mono flex items-center gap-1.5 bg-secondary/50 px-2.5 py-1 rounded-full w-fit">
-            <Calendar className="w-3 h-3 text-primary" />
+      <article className="glass glow-hover rounded-2xl p-5 transition-transform duration-300 group-hover:-translate-y-0.5 md:p-7">
+        <div className="mb-5 flex flex-col gap-3 border-b border-border/60 pb-5 sm:flex-row sm:items-start sm:justify-between">
+          <div className="min-w-0">
+            <h3 className="font-heading text-balance text-xl font-semibold tracking-[-0.025em] text-foreground md:text-2xl">{title}</h3>
+            <div className="mt-2 flex items-start gap-2 text-sm font-medium text-primary">
+              <AccessibleIcon icon={MapPin} className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary/70" />
+              <span>{subtitle}</span>
+            </div>
+          </div>
+          <span className="inline-flex w-fit shrink-0 items-center gap-1.5 rounded-full border border-border/70 bg-background/35 px-2.5 py-1 font-mono text-[0.68rem] text-muted-foreground">
+            <AccessibleIcon icon={Calendar} className="h-3 w-3 text-accent" />
             {date}
           </span>
         </div>
 
-        <div className="text-sm md:text-base text-primary font-medium mb-3 flex items-center gap-2">
-          <MapPin className="w-3.5 h-3.5 flex-shrink-0 text-primary/70" />
-          <span className="truncate">{subtitle}</span>
-        </div>
-
         {description && (
-          <ul className="space-y-1.5 text-muted-foreground text-sm leading-relaxed">
-            {description.map((item, i) => (
-              <li key={typeof item === "string" ? `${item}-${i}` : i} className="flex gap-2">
-                <span className="text-primary mt-1.5 flex-shrink-0 w-1 h-1 rounded-full bg-primary" />
+          <ul className="space-y-3 text-sm leading-relaxed text-muted-foreground md:text-[0.95rem]">
+            {description.map((item, itemIndex) => (
+              <li key={typeof item === "string" ? `${item}-${itemIndex}` : itemIndex} className="flex gap-3">
+                <span className="mt-[0.55rem] h-1.5 w-1.5 shrink-0 rounded-full bg-primary/80 shadow-[0_0_8px_hsl(var(--primary)/0.45)]" aria-hidden="true" />
                 <span>{item}</span>
               </li>
             ))}
           </ul>
         )}
-      </div>
-    </motion.div>
+      </article>
+    </MotionReveal>
   );
 }
 
 export default function Timeline({ items }: { items: TimelineEntry[] }) {
   return (
-    <div className="w-full max-w-3xl mx-auto">
+    <div className="mx-auto w-full max-w-4xl">
       {items.map((item, index) => (
         <TimelineItem
           key={`${item.title}-${item.subtitle}-${item.date}`}

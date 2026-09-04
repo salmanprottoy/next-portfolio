@@ -1,32 +1,23 @@
 import { MetadataRoute } from "next";
+import { siteConfig } from "@/app/data/portfolio.config";
+import { themeColors } from "@/lib/theme";
 
 export default function manifest(): MetadataRoute.Manifest {
   const profileImageUrl = process.env.NEXT_PUBLIC_S3_BASE_URL
     ? `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/salmanprottoy.jpg`
     : "/salman.jpg";
-  const profileImageType = "image/jpeg";
-  const profileImageSizes = ["192x192", "512x512"];
 
   return {
-    name: "Salman Prottoy - Software Engineer & Web Developer",
+    name: `${siteConfig.fullName} — Software Engineer & AI Builder`,
     short_name: "Salman Prottoy",
-    description:
-      "Software Engineer, Web Developer, and Open Source Contributor based in Bangladesh",
+    description: siteConfig.metaDescription,
     start_url: "/",
     display: "standalone",
-    background_color: "#0f0f23",
-    theme_color: "#64ffda",
+    background_color: themeColors.dark.background,
+    theme_color: themeColors.dark.primary,
     icons: [
-      {
-        src: profileImageUrl,
-        sizes: profileImageSizes[0],
-        type: profileImageType,
-      },
-      {
-        src: profileImageUrl,
-        sizes: profileImageSizes[1],
-        type: profileImageType,
-      },
+      { src: profileImageUrl, sizes: "192x192", type: "image/jpeg" },
+      { src: profileImageUrl, sizes: "512x512", type: "image/jpeg" },
     ],
     categories: ["business", "productivity"],
     lang: "en",

@@ -1,12 +1,13 @@
 // ═══════════════════════════════════════════════════════════════
-//  DATA EXPORTS — All data is centralized in portfolio.config.ts
-//  You should edit app/data/portfolio.config.ts to customize.
+//  DATA EXPORTS — All portfolio content is centralized in config.
 // ═══════════════════════════════════════════════════════════════
 
 export {
   siteConfig,
   contact,
   heroConfig,
+  impactStats,
+  focusAreas,
   socialMedia,
   featuredSocials,
   resume,
@@ -14,11 +15,6 @@ export {
   Experience,
   Educations,
   Skills,
-  ResearchExperience,
-  Publications,
-  HonorsAndAwards,
-  ExtraCurricular,
   schemaSkills,
-  schemaEmployer,
   schemaCountryCode,
 } from "./portfolio.config";

@@ -37,7 +37,6 @@ cp example.env .env.local
 
 Edit `.env.local` if you need:
 - `NEXT_PUBLIC_S3_BASE_URL` — for hosting your profile image on a CDN
-- `NEXT_PUBLIC_GA_MEASUREMENT_ID` — for Google Analytics
 
 ### 4. Customize your data
 
@@ -154,7 +153,6 @@ docker-compose up -d
 - **Icons**: Lucide React
 - **Theme**: next-themes
 - **Analytics**: Vercel Analytics (optional)
-- **Error Tracking**: Sentry (optional)
 
 ## 🛡️ Scripts
 

@@ -15,7 +15,6 @@
     "convert:icons": "ts-node app/utils/convert-svgs-to-icons.ts"
   },
   "dependencies": {
-    "@sentry/nextjs": "^9.15.0",
     "@vercel/analytics": "^1.5.0",
     "clsx": "^2.1.1",
     "framer-motion": "^12.6.0",

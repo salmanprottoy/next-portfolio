@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import useReducedMotionPreference from "@/hooks/useReducedMotionPreference";
 
 interface Particle {
   x: number;
@@ -13,8 +14,10 @@ interface Particle {
 
 export default function AnimatedBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const particlesRef = useRef<Particle[]>([]);  const mouseRef = useRef({ x: -1000, y: -1000 });
+  const particlesRef = useRef<Particle[]>([]);
+  const mouseRef = useRef({ x: -1000, y: -1000 });
   const rafRef = useRef<number>(0);
+  const prefersReducedMotion = useReducedMotionPreference();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -31,8 +34,8 @@ export default function AnimatedBackground() {
 
     const initParticles = () => {
       const particleCount = Math.min(
-        Math.floor((canvas.width * canvas.height) / 15000),
-        80
+        Math.floor((canvas.width * canvas.height) / 22000),
+        60
       );
       particlesRef.current = Array.from({ length: particleCount }, () => ({
         x: Math.random() * canvas.width,
@@ -56,8 +59,8 @@ export default function AnimatedBackground() {
       if (!ctx || !canvas) return;
 
       const isCurrentlyDark = document.documentElement.classList.contains("dark");
-      const currentParticleColor = isCurrentlyDark ? "45, 212, 191" : "20, 184, 166";
-      const currentLineColor = isCurrentlyDark ? "45, 212, 191" : "20, 184, 166";
+      const currentParticleColor = isCurrentlyDark ? "73, 224, 180" : "19, 148, 117";
+      const currentLineColor = isCurrentlyDark ? "73, 224, 180" : "19, 148, 117";
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -129,7 +132,11 @@ export default function AnimatedBackground() {
     };
 
     resize();
-    draw();
+    if (prefersReducedMotion === false) {
+      draw();
+    } else {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
 
     window.addEventListener("resize", resize);
     window.addEventListener("mousemove", handleMouseMove);
@@ -141,12 +148,13 @@ export default function AnimatedBackground() {
       window.removeEventListener("mouseleave", handleMouseLeave);
       cancelAnimationFrame(rafRef.current);
     };
-  }, []);
+  }, [prefersReducedMotion]);
 
   return (
     <canvas
       ref={canvasRef}
       className="fixed inset-0 w-full h-full pointer-events-none z-0"
+      aria-hidden="true"
       style={{ opacity: 0.8 }}
     />
   );

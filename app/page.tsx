@@ -1,8 +1,16 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { ExternalLink, Award, BookOpen, GraduationCap, FlaskConical, Users } from "lucide-react";
+import { motion } from "framer-motion";
+import {
+  ArrowUpRight,
+  BriefcaseBusiness,
+  GraduationCap,
+  Mail,
+  Quote,
+  Sparkles,
+} from "lucide-react";
+import AccessibleIcon from "@/components/ui/AccessibleIcon";
 import Header from "@/components/organisms/Header";
 import Footer from "@/components/organisms/Footer";
 import Section from "@/components/ui/Section";
@@ -11,20 +19,46 @@ import HeroSection from "@/components/sections/HeroSection";
 import SkillsSection from "@/components/sections/SkillsSection";
 import ProjectsSection from "@/components/sections/ProjectsSection";
 import GlassCard from "@/components/ui/GlassCard";
-import AnimatedBackground from "@/components/ui/AnimatedBackground";
-import { motion } from "framer-motion";
 import {
-  Experience,
-  Educations,
-  Skills,
   AboutMe,
+  Educations,
+  Experience,
+  Skills,
   contact,
+  focusAreas,
   heroConfig,
-  ResearchExperience,
-  Publications,
-  HonorsAndAwards,
-  ExtraCurricular,
+  impactStats,
+  resume,
 } from "@/app/data/Data";
+
+function SectionHeading({
+  kicker,
+  title,
+  description,
+}: {
+  kicker: string;
+  title: string;
+  description?: string;
+}) {
+  return (
+    <div className="mb-10 flex flex-col gap-4 md:mb-14 md:flex-row md:items-end md:justify-between">
+      <div>
+        <div className="mb-3 flex items-center gap-3">
+          <span className="section-kicker">{kicker}</span>
+          <span className="section-rule max-w-20" />
+        </div>
+        <h2 className="font-heading text-balance text-4xl font-semibold tracking-[-0.055em] text-foreground md:text-6xl">
+          {title}
+        </h2>
+      </div>
+      {description && (
+        <p className="max-w-sm text-sm leading-relaxed text-muted-foreground md:text-right">
+          {description}
+        </p>
+      )}
+    </div>
+  );
+}
 
 export default function Home() {
   const profileImageUrl = process.env.NEXT_PUBLIC_S3_BASE_URL
@@ -32,327 +66,215 @@ export default function Home() {
     : "/salman.jpg";
 
   return (
-    <main className="bg-background text-foreground overflow-x-hidden font-sans selection:bg-primary/30 relative">
-      <AnimatedBackground />
-      <Header />
+    <div className="portfolio-shell relative min-h-screen overflow-x-hidden bg-background font-sans text-foreground selection:bg-primary/30">
+        <a
+          id="skip-link"
+          href="#main-content"
+          className="focus-ring skip-link"
+          onClick={(event) => {
+            event.preventDefault();
+            document.dispatchEvent(new Event("portfolio:skip-to-content"));
+            window.requestAnimationFrame(() => {
+              const mainContent = document.getElementById("main-content");
+              mainContent?.focus({ preventScroll: true });
+              window.history.replaceState(null, "", "#main-content");
+            });
+          }}
+        >
+          Skip to content
+        </a>
+        <div className="grid-canvas pointer-events-none fixed inset-0 z-0 opacity-70" aria-hidden="true" />
+        <Header />
+        <main id="main-content" tabIndex={-1}>
 
-      {/* Hero Section */}
-      <Section id="hero" className="pt-32 pb-24 md:pt-44 md:pb-36 min-h-[90vh]">
+      <Section id="hero" className="min-h-[90vh] pt-32 md:pt-44">
         <HeroSection
           name={heroConfig.name}
+          eyebrow={heroConfig.eyebrow}
           titleA={heroConfig.titleA}
           titleB={heroConfig.titleB}
+          intro={heroConfig.intro}
+          location={heroConfig.location}
           imageUrl={profileImageUrl}
           imageAlt={heroConfig.name}
           contactEmail={contact.email}
+          resumeUrl="/api/resume"
+          resumeText={resume.text}
           availabilityText={heroConfig.availabilityText}
           ctaContactText={heroConfig.ctaContactText}
           ctaScrollText={heroConfig.ctaScrollText}
         />
       </Section>
 
-      {/* About Section */}
-      <Section id="about">
-        <div className="grid md:grid-cols-2 gap-10 items-center">
+      <Section id="about" className="border-t border-border/50 pt-16 md:pt-24">
+        <SectionHeading
+          kicker="About"
+          title="Useful software, thoughtfully made."
+          description="A little context on how I work and what I bring to a team."
+        />
+
+        <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.6 }}
-            className="space-y-6"
+            className="space-y-5"
           >
-            <div className="space-y-3">
-              <span className="text-primary text-sm font-medium tracking-wider uppercase">Get to know me</span>
-              <h2 className="text-3xl md:text-5xl font-bold font-heading">
-                About Me
-              </h2>
+            {AboutMe.map((paragraph, index) => (
+              <p key={index} className="max-w-2xl text-lg leading-relaxed text-muted-foreground md:text-xl">
+                {paragraph}
+              </p>
+            ))}
+            <div className="mt-8 flex items-start gap-3 border-l-2 border-accent/70 py-1 pl-4 text-sm text-muted-foreground">
+              <AccessibleIcon icon={Quote} className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+              <p>Build for the happy path. Design for everything that happens after it.</p>
             </div>
-            <div className="space-y-4 text-muted-foreground leading-relaxed">
-              {AboutMe.map((paragraph, i) => (
-                <p key={i} className="text-base md:text-lg">{paragraph}</p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.6, delay: 0.12 }}
+            className="signal-card rounded-2xl p-5 sm:p-7"
+          >
+            <div className="mb-6 flex items-center justify-between border-b border-border/70 pb-4">
+              <span className="section-kicker">Selected signals</span>
+              <AccessibleIcon icon={Sparkles} className="h-4 w-4 text-accent" />
+            </div>
+            <div className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-border/70 bg-border/70">
+              {impactStats.map((stat) => (
+                <div key={stat.label} className="bg-card/85 p-4 sm:p-5">
+                  <p className="font-heading tabular-nums text-3xl font-semibold tracking-tight text-primary sm:text-4xl">{stat.value}</p>
+                  <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{stat.label}</p>
+                </div>
               ))}
             </div>
           </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-            className="relative group"
-          >
-            <div className="absolute -inset-4 bg-gradient-to-r from-primary/30 via-purple-500/20 to-primary/10 rounded-3xl opacity-40 group-hover:opacity-60 blur-2xl transition-opacity duration-700" />
-            <GlassCard gradientBorder className="relative aspect-[4/5] md:aspect-square rounded-2xl overflow-hidden p-0">
-              <Image
-                src={profileImageUrl}
-                alt="About Me"
-                fill
-                sizes="(min-width: 768px) 50vw, 90vw"
-                className="object-cover group-hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
-            </GlassCard>
-          </motion.div>
         </div>
       </Section>
 
-      {/* Experience Section */}
-      <Section id="experience">
-        <div className="space-y-12">
-          <div className="text-center space-y-3">
-            <span className="text-primary text-sm font-medium tracking-wider uppercase">Work History</span>
-            <h2 className="text-3xl md:text-5xl font-bold font-heading">
-              Experience
-            </h2>
-          </div>
-
-          <Timeline
-            items={Experience.map((exp) => ({
-              title: exp.jobTitle,
-              subtitle: exp.company,
-              date: exp.date,
-              description: exp.bullets,
-            }))}
-          />
+      <Section id="experience" className="border-t border-border/50">
+        <SectionHeading
+          kicker="Experience"
+          title="Where I have shipped."
+          description="Production systems, migrations, and product work across Japan and Bangladesh."
+        />
+        <div className="mb-8 flex items-center gap-3 text-sm text-muted-foreground">
+          <AccessibleIcon icon={BriefcaseBusiness} className="h-4 w-4 text-primary" />
+          <span>Software engineering · full stack · infrastructure · applied AI</span>
         </div>
+        <Timeline
+          items={Experience.map((experience) => ({
+            title: experience.jobTitle,
+            subtitle: experience.company,
+            date: experience.date,
+            description: experience.bullets,
+          }))}
+        />
       </Section>
 
-      {/* Education Section */}
-      <Section id="education">
-        <div className="space-y-12">
-          <div className="text-center space-y-3">
-            <span className="text-primary text-sm font-medium tracking-wider uppercase">Academic Background</span>
-            <h2 className="text-3xl md:text-5xl font-bold font-heading">
-              Education
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-4 max-w-4xl mx-auto">
-            {Educations.map((edu, index) => (
-              <motion.div
-                key={`${edu.exam}-${edu.year}`}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <GlassCard hover className="h-full">
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <GraduationCap className="w-5 h-5 text-primary" />
-                    </div>
-                    <div className="space-y-1">
-                      <h3 className="font-bold text-foreground">{edu.exam}</h3>
-                      <p className="text-sm text-primary font-medium">{edu.institution}</p>
-                      <p className="text-xs text-muted-foreground font-mono">{edu.year}</p>
-                    </div>
-                  </div>
-                </GlassCard>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </Section>
-
-      {/* Research Section */}
-      <Section id="research">
-        <div className="space-y-12">
-          <div className="text-center space-y-3">
-            <span className="text-primary text-sm font-medium tracking-wider uppercase">Research Work</span>
-            <h2 className="text-3xl md:text-5xl font-bold font-heading">
-              Research
-            </h2>
-          </div>
-
-          <div className="max-w-3xl mx-auto space-y-4">
-            {ResearchExperience.map((res, index) => (
-              <motion.div
-                key={res.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <GlassCard hover className="relative overflow-hidden">
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-bl-full" />
-                  <div className="flex items-start gap-4 relative">
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <FlaskConical className="w-5 h-5 text-primary" />
-                    </div>
-                    <div className="space-y-2">
-                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
-                        <h3 className="font-bold text-foreground">{res.title}</h3>
-                        <span className="text-xs text-muted-foreground font-mono bg-secondary/50 px-2 py-0.5 rounded-full w-fit">{res.date}</span>
-                      </div>
-                      <p className="text-sm text-primary font-medium">{res.institution}</p>
-                      <ul className="space-y-1 text-sm text-muted-foreground">
-                        {res.bullets.map((bullet, i) => (
-                          <li key={i} className="flex gap-2">
-                            <span className="text-primary mt-1.5 flex-shrink-0 w-1 h-1 rounded-full bg-primary" />
-                            {bullet}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </GlassCard>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </Section>
-
-      {/* Publications Section */}
-      <Section id="publications">
-        <div className="space-y-12">
-          <div className="text-center space-y-3">
-            <span className="text-primary text-sm font-medium tracking-wider uppercase">Published Work</span>
-            <h2 className="text-3xl md:text-5xl font-bold font-heading">
-              Publications
-            </h2>
-          </div>
-
-          <div className="max-w-3xl mx-auto space-y-4">
-            {Publications.map((pub, index) => (
-              <motion.div
-                key={pub.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <GlassCard gradientBorder glow className="relative overflow-hidden">
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <BookOpen className="w-5 h-5 text-primary" />
-                    </div>
-                    <div className="space-y-2 flex-1 min-w-0">
-                      <h3 className="font-bold text-foreground text-base md:text-lg leading-snug">{pub.title}</h3>
-                      <p className="text-sm text-primary font-medium">{pub.conference}</p>
-                      <p className="text-xs text-muted-foreground">{pub.publisher}</p>
-                      <div className="flex flex-wrap items-center gap-3 pt-1">
-                        <span className="text-xs text-muted-foreground font-mono bg-secondary/50 px-2 py-0.5 rounded-full">{pub.year}</span>
-                        {pub.doi && (
-                          <Link
-                            href={pub.doi}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 text-xs text-primary hover:underline font-medium"
-                          >
-                            View Publication <ExternalLink className="w-3 h-3" />
-                          </Link>
-                        )}
-                      </div>
-                      <p className="text-xs text-muted-foreground/80 italic">Authors: {pub.authors}</p>
-                    </div>
-                  </div>
-                </GlassCard>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </Section>
-
-      {/* Honors & Awards Section */}
-      <Section id="honors">
-        <div className="space-y-12">
-          <div className="text-center space-y-3">
-            <span className="text-primary text-sm font-medium tracking-wider uppercase">Recognition</span>
-            <h2 className="text-3xl md:text-5xl font-bold font-heading">
-              Honors & Awards
-            </h2>
-          </div>
-
-          <div className="max-w-3xl mx-auto grid gap-4">
-            {HonorsAndAwards.map((award, index) => (
-              <motion.div
-                key={award.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <GlassCard hover className="relative overflow-hidden">
-                  <div className="absolute -right-4 -top-4 w-20 h-20 bg-primary/5 rounded-full" />
-                  <div className="flex items-start gap-4 relative">
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <Award className="w-5 h-5 text-primary" />
-                    </div>
-                    <div className="space-y-1 flex-1">
-                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
-                        <h3 className="font-bold text-foreground">{award.title}</h3>
-                        <span className="text-xs text-muted-foreground font-mono bg-secondary/50 px-2 py-0.5 rounded-full w-fit">{award.date}</span>
-                      </div>
-                      <p className="text-sm text-primary font-medium">{award.institution}</p>
-                      <p className="text-sm text-muted-foreground leading-relaxed">{award.description}</p>
-                    </div>
-                  </div>
-                </GlassCard>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </Section>
-
-      {/* Extra-Curricular Section */}
-      <Section id="extra">
-        <div className="space-y-12">
-          <div className="text-center space-y-3">
-            <span className="text-primary text-sm font-medium tracking-wider uppercase">Beyond the Desk</span>
-            <h2 className="text-3xl md:text-5xl font-bold font-heading">
-              Extra-Curricular
-            </h2>
-          </div>
-
-          <div className="max-w-3xl mx-auto grid gap-4">
-            {ExtraCurricular.map((item, index) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <GlassCard hover className="relative overflow-hidden">
-                  <div className="absolute -right-4 -top-4 w-20 h-20 bg-primary/5 rounded-full" />
-                  <div className="flex items-start gap-4 relative">
-                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <Users className="w-5 h-5 text-primary" />
-                    </div>
-                    <div className="space-y-2 flex-1">
-                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
-                        <h3 className="font-bold text-foreground">{item.title}</h3>
-                        <span className="text-xs text-muted-foreground font-mono bg-secondary/50 px-2 py-0.5 rounded-full w-fit">{item.date}</span>
-                      </div>
-                      <p className="text-sm text-primary font-medium">{item.organization}</p>
-                      <ul className="space-y-1 text-sm text-muted-foreground">
-                        {item.bullets.map((bullet, i) => (
-                          <li key={i} className="flex gap-2">
-                            <span className="text-primary mt-1.5 flex-shrink-0 w-1 h-1 rounded-full bg-primary" />
-                            {bullet}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </GlassCard>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </Section>
-
-      {/* Projects Section */}
-      <Section id="projects">
+      <Section id="projects" className="border-t border-border/50">
         <ProjectsSection />
       </Section>
 
-      {/* Skills Section */}
-      <Section id="skills">
+      <Section id="education" className="border-t border-border/50">
+        <SectionHeading
+          kicker="Education"
+          title="Always still learning."
+          description="The academic foundation behind my curiosity for intelligent systems, including my current thesis work."
+        />
+        <div className="grid gap-4 md:grid-cols-2">
+          {Educations.map((education, index) => (
+            <motion.div
+              key={`${education.exam}-${education.year}`}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
+            >
+              <GlassCard hover className="h-full">
+                <div className="flex h-full flex-col justify-between gap-10">
+                  <div className="flex items-start justify-between gap-5">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                      <AccessibleIcon icon={GraduationCap} className="h-5 w-5" />
+                    </div>
+                    <span className="font-mono text-xs text-muted-foreground">{education.year}</span>
+                  </div>
+                  <div>
+                    <h3 className="font-heading text-xl font-semibold tracking-tight text-foreground">{education.exam}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-primary">{education.institution}</p>
+                    {education.detail && (
+                      <p className="mt-3 inline-flex rounded-full border border-accent/30 bg-accent/10 px-2.5 py-1 font-mono text-[0.62rem] uppercase tracking-[0.12em] text-accent">
+                        {education.detail}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </GlassCard>
+            </motion.div>
+          ))}
+        </div>
+      </Section>
+
+      <Section id="toolkit" className="border-t border-border/50">
+        <SectionHeading
+          kicker="Toolkit"
+          title="How I approach the work."
+          description="A practical mix of product thinking, systems craft, and curiosity."
+        />
+
+        <div className="mb-16 grid gap-4 lg:grid-cols-3">
+          {focusAreas.map((area, index) => (
+            <motion.div
+              key={area.label}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
+              className="glass glow-hover rounded-2xl p-6"
+            >
+              <p className="mb-12 font-mono text-[0.68rem] tracking-[0.18em] text-accent">{area.label}</p>
+              <h3 className="font-heading text-2xl font-semibold tracking-tight text-foreground">{area.title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{area.description}</p>
+            </motion.div>
+          ))}
+        </div>
+
         <SkillsSection skills={Skills} />
       </Section>
 
-      <Footer />
-    </main>
+      <Section id="contact" className="border-t border-border/50 pb-16">
+        <div className="signal-card relative overflow-hidden rounded-[1.75rem] p-7 sm:p-10 md:p-14">
+          <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-primary/10 blur-3xl" aria-hidden="true" />
+          <div className="relative flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+            <div className="max-w-2xl">
+              <p className="section-kicker mb-4">Contact</p>
+              <h2 className="font-heading text-balance text-4xl font-semibold tracking-[-0.055em] text-foreground md:text-6xl">
+                Have a hard problem?
+                <span className="block text-primary">Let&apos;s make it useful.</span>
+              </h2>
+              <p className="mt-5 max-w-lg text-lg leading-relaxed text-muted-foreground">
+                I&apos;m always interested in thoughtful product teams, ambitious engineering challenges, and applied AI that earns its place in the workflow.
+              </p>
+            </div>
+            <div className="flex shrink-0 flex-col items-start gap-3">
+              <Link
+                href={`mailto:${contact.email}`}
+                className="focus-ring group inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 font-semibold text-primary-foreground shadow-lg shadow-primary/20 transition-[background-color,box-shadow,transform] hover:-translate-y-0.5 hover:bg-primary/90"
+              >
+                <AccessibleIcon icon={Mail} className="h-4 w-4" />
+                {contact.email}
+                <AccessibleIcon icon={ArrowUpRight} className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </Section>
+
+        </main>
+        <Footer />
+    </div>
   );
 }

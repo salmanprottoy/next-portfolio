@@ -12,8 +12,9 @@ export default function Section({ id, children, className }: SectionProps) {
   return (
     <section
       id={id}
+      tabIndex={-1}
       className={cn(
-        "w-full py-20 md:py-28 px-6 md:px-12 lg:px-24 flex flex-col justify-center relative overflow-hidden",
+        "w-full scroll-mt-24 px-5 py-20 md:px-10 md:py-28 lg:px-20 relative overflow-hidden",
         className
       )}
     >

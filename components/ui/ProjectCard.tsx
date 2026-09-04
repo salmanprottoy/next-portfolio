@@ -1,79 +1,101 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ExternalLink, Github, Layers } from "lucide-react";
+import AccessibleIcon from "@/components/ui/AccessibleIcon";
+import MotionReveal from "@/components/ui/MotionReveal";
+import {
+  BookOpen,
+  Code2,
+  Database,
+  ExternalLink,
+  Github,
+  Layers,
+  Sparkles,
+} from "lucide-react";
 import Link from "next/link";
+import type { ProjectKind } from "@/app/data/projects";
 
 interface ProjectCardProps {
   title: string;
+  eyebrow: string;
   description: string;
   tags: string[];
+  kind: ProjectKind;
+  metric?: string;
+  metricLabel?: string;
   liveUrl?: string;
   sourceUrl?: string;
   index?: number;
 }
 
+const kindMap: Record<ProjectKind, { icon: React.ElementType; color: string; background: string }> = {
+  ai: { icon: Sparkles, color: "text-primary", background: "bg-primary/10" },
+  platform: { icon: Database, color: "text-accent", background: "bg-accent/10" },
+  research: { icon: BookOpen, color: "text-primary", background: "bg-primary/10" },
+  frontend: { icon: Code2, color: "text-accent", background: "bg-accent/10" },
+};
+
 export default function ProjectCard({
   title,
+  eyebrow,
   description,
   tags,
+  kind,
+  metric,
+  metricLabel,
   liveUrl,
   sourceUrl,
   index = 0,
 }: ProjectCardProps) {
+  const visual = kindMap[kind];
+  const Icon = visual.icon;
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ delay: index * 0.1, duration: 0.5 }}
+    <MotionReveal
+      delay={index * 0.08}
+      distance={24}
+      duration={0.5}
       className="group h-full"
     >
-      <div className="glass rounded-2xl overflow-hidden h-full flex flex-col glow-hover transition-all duration-300 hover:-translate-y-1">
-        {/* Top accent bar */}
-        <div className="h-1 bg-gradient-to-r from-primary/60 via-primary to-primary/60" />
-
-        {/* Icon / visual header */}
-        <div className="p-6 pb-0">
-          <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-            <Layers className="w-6 h-6 text-primary" />
+      <article className="glass glow-hover flex h-full flex-col overflow-hidden rounded-2xl transition-transform duration-300 group-hover:-translate-y-1">
+        <div className="flex items-start justify-between gap-4 border-b border-border/60 p-5 sm:p-6">
+          <div className={`flex h-11 w-11 items-center justify-center rounded-xl ${visual.background} ${visual.color}`}>
+            <AccessibleIcon icon={Icon} className="h-5 w-5" />
           </div>
+          {metric && metricLabel && (
+            <div className="text-right">
+              <p className={`font-heading tabular-nums text-2xl font-semibold tracking-tight ${visual.color}`}>{metric}</p>
+              <p className="font-mono text-[0.62rem] uppercase tracking-wider text-muted-foreground">{metricLabel}</p>
+            </div>
+          )}
         </div>
 
-        {/* Content */}
-        <div className="px-6 py-2 flex-1 flex flex-col">
-          <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+        <div className="flex flex-1 flex-col p-5 sm:p-6">
+          <p className="mb-3 font-mono text-[0.64rem] uppercase tracking-[0.15em] text-muted-foreground">{eyebrow}</p>
+          <h3 className="font-heading text-balance text-2xl font-semibold tracking-[-0.04em] text-foreground transition-colors group-hover:text-primary">
             {title}
           </h3>
-          <p className="text-sm text-muted-foreground leading-relaxed mb-4 flex-1">
-            {description}
-          </p>
+          <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{description}</p>
 
-          {/* Tech tags */}
-          <div className="flex flex-wrap gap-1.5 mb-4">
+          <div className="mt-6 flex flex-wrap gap-1.5">
             {tags.map((tag) => (
-              <span
-                key={tag}
-                className="px-2 py-0.5 rounded-md bg-secondary/50 text-xs text-muted-foreground font-medium"
-              >
+              <span key={tag} translate="no" className="rounded-md border border-border/70 bg-background/35 px-2 py-1 font-mono text-[0.64rem] text-muted-foreground">
                 {tag}
               </span>
             ))}
           </div>
         </div>
 
-        {/* Actions */}
-        <div className="px-6 py-4 border-t border-border/50 flex items-center gap-3">
+        <div className="flex min-h-14 items-center gap-4 border-t border-border/60 px-5 py-3 sm:px-6">
           {liveUrl && liveUrl !== "#" && (
             <Link
               href={liveUrl}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`View live demo for ${title}`}
-              className="flex items-center gap-1.5 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+              className="focus-ring inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-colors hover:text-primary/75"
             >
-              <ExternalLink className="w-3.5 h-3.5" />
-              Live Demo
+              <AccessibleIcon icon={ExternalLink} className="h-3.5 w-3.5" />
+              Live demo
             </Link>
           )}
           {sourceUrl && sourceUrl !== "#" && (
@@ -81,15 +103,21 @@ export default function ProjectCard({
               href={sourceUrl}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`View source code for ${title}`}
-              className="flex items-center gap-1.5 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              aria-label={`View source or publication for ${title}`}
+              className="focus-ring inline-flex items-center gap-1.5 text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground"
             >
-              <Github className="w-3.5 h-3.5" />
-              Source
+              <AccessibleIcon icon={kind === "research" ? BookOpen : Github} className="h-3.5 w-3.5" />
+              {kind === "research" ? "Publication" : "Source"}
             </Link>
           )}
+          {!liveUrl && (!sourceUrl || sourceUrl === "#") && (
+            <span className="inline-flex items-center gap-1.5 font-mono text-[0.64rem] uppercase tracking-wider text-muted-foreground/65">
+              <AccessibleIcon icon={Layers} className="h-3.5 w-3.5" />
+              Private case study
+            </span>
+          )}
         </div>
-      </div>
-    </motion.div>
+      </article>
+    </MotionReveal>
   );
 }

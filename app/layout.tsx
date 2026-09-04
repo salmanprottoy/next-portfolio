@@ -1,29 +1,35 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { Prompt, Karla } from "next/font/google";
-import Script from "next/script";
+import AccessibilityProvider from "@/components/providers/AccessibilityProvider";
 import ThemeProvider from "@/components/providers/ThemeProvider";
 import { siteConfig } from "@/app/data/portfolio.config";
 import { jsonLdSchema } from "@/app/data/schema";
+import { themeColors } from "@/lib/theme";
 
 const profileImageUrl = process.env.NEXT_PUBLIC_S3_BASE_URL
   ? `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/salmanprottoy.jpg`
   : "/salman.jpg";
 
-// Prompt (semi-bold)
+// Prompt provides the editorial display voice.
 const prompt = Prompt({
   subsets: ["latin"],
-  weight: "600",
+  weight: ["500", "600", "700"],
   variable: "--font-prompt",
 });
 
-// Karla (light)
+// Karla keeps long-form content readable.
 const karla = Karla({
   subsets: ["latin"],
-  weight: "300",
+  weight: ["300", "400", "500", "600"],
   variable: "--font-karla",
 });
+
+export const viewport: Viewport = {
+  colorScheme: "dark light",
+  viewportFit: "cover",
+};
 
 export const metadata: Metadata = {
   title: {
@@ -39,10 +45,10 @@ export const metadata: Metadata = {
     siteConfig.author,
     siteConfig.fullName,
     "Software Engineer",
-    "Web Developer",
+    "AI Systems Builder",
     "Full Stack Developer",
     "React Developer",
-    "Node.js Developer",
+    "Go Developer",
     "Python Developer",
     "TypeScript",
     "JavaScript",
@@ -50,8 +56,10 @@ export const metadata: Metadata = {
     "Django",
     "MongoDB",
     "PostgreSQL",
-    "Open Source",
-    "Remote Developer",
+    "AWS",
+    "RAG",
+    "Applied AI",
+    "Multi-objective optimization",
   ],
   authors: [{ name: siteConfig.author }],
   creator: siteConfig.author,
@@ -77,7 +85,7 @@ export const metadata: Metadata = {
         url: profileImageUrl,
         width: 1200,
         height: 630,
-        alt: `${siteConfig.author} - Software Engineer`,
+        alt: `${siteConfig.author} — Software Engineer & AI Systems Builder`,
       },
     ],
   },
@@ -99,11 +107,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "your-google-verification-code",
-    yandex: "your-yandex-verification-code",
-    yahoo: "your-yahoo-verification-code",
-  },
 };
 
 // ... (keep imports)
@@ -116,35 +119,17 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <meta name="theme-color" content={themeColors.dark.background} data-theme-color="true" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(jsonLdSchema),
           }}
         />
-        {process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID && (
-          <>
-            {/* Google Analytics */}
-            <Script
-              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}
-              strategy="afterInteractive"
-            />
-            <Script id="ga-init" strategy="afterInteractive">
-              {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}', {
-                  page_path: window.location.pathname,
-                });
-              `}
-            </Script>
-          </>
-        )}
       </head>
-      <body className={`${prompt.variable} ${karla.variable} font-sans`} suppressHydrationWarning>
+      <body suppressHydrationWarning className={`${prompt.variable} ${karla.variable} font-sans`}>
         <ThemeProvider>
-          {children}
+          <AccessibilityProvider>{children}</AccessibilityProvider>
         </ThemeProvider>
         <Analytics />
       </body>

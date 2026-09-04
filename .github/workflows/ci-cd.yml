@@ -300,17 +300,7 @@ jobs:
             },
           };
 
-          // Sentry configuration for static export
-          const { withSentryConfig } = require("@sentry/nextjs");
-
-          module.exports = withSentryConfig(nextConfig, {
-            org: "american-international-univ-r0",
-            project: "next-portfolio",
-            silent: !process.env.CI,
-            widenClientFileUpload: true,
-            disableLogger: true,
-            automaticVercelMonitors: true,
-          });
+          module.exports = nextConfig;
           EOF
 
       - name: Build with Next.js

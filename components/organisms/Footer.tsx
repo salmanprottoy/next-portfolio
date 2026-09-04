@@ -3,20 +3,22 @@
 import React from "react";
 import { motion } from "framer-motion";
 import {
-  Github,
-  Linkedin,
-  Twitter,
-  Facebook,
-  Instagram,
-  Youtube,
-  Heart,
-  Phone,
-  Mail,
-  FileText,
   ArrowUp,
+  Facebook,
+  FileText,
+  Github,
+  Heart,
+  Instagram,
+  Linkedin,
+  Mail,
+  Phone,
+  Twitter,
+  Youtube,
 } from "lucide-react";
 import Link from "next/link";
-import { socialMedia, resume, siteConfig, contact } from "@/app/data/Data";
+import { contact, resume, siteConfig, socialMedia } from "@/app/data/Data";
+import AccessibleIcon from "@/components/ui/AccessibleIcon";
+import useReducedMotionPreference from "@/hooks/useReducedMotionPreference";
 
 const socialIconMap: Record<string, React.ElementType> = {
   github: Github,
@@ -27,98 +29,98 @@ const socialIconMap: Record<string, React.ElementType> = {
   youtube: Youtube,
 };
 
-const Footer = () => {
+export default function Footer() {
+  const prefersReducedMotion = useReducedMotionPreference();
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: prefersReducedMotion === true ? "auto" : "smooth" });
   };
 
   return (
-    <footer className="w-full px-4 md:px-8 pb-6">
+    <footer data-site-footer className="site-footer safe-area-inline relative z-10 w-full md:px-8">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 18 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className="glass-strong rounded-2xl px-6 md:px-8 py-8"
+        transition={{ duration: 0.6 }}
+        className="glass-strong rounded-2xl px-6 py-7 md:px-8"
       >
-        {/* Top row: Social links + Back to top */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-6 border-b border-border/40">
-          {/* All social links */}
-          <div className="flex items-center gap-1">
-            {socialMedia.map((item) => {
-              const Icon = socialIconMap[item.name];
-              if (!Icon) return null;
-              return (
-                <Link
-                  key={item.name}
-                  href={item.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 rounded-full text-muted-foreground hover:text-primary hover:bg-primary/10 transition-all"
-                  aria-label={item.label}
-                  title={item.label}
-                >
-                  <Icon className="w-5 h-5" />
-                </Link>
-              );
-            })}
+        <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+          <div>
+            <a href="#hero" className="focus-ring group inline-flex items-center gap-2">
+              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-sm font-bold text-primary-foreground transition-transform group-hover:rotate-6">
+                SP
+              </span>
+              <span className="font-heading text-lg font-semibold tracking-tight text-foreground">Keep in touch.</span>
+            </a>
+            <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
+              Building dependable software and exploring useful AI from Jyväskylä, Finland.
+            </p>
           </div>
 
-          {/* Resume + Back to top */}
-          <div className="flex items-center gap-2">
-            <Link
-              href={resume.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/10 hover:bg-primary/20 text-primary text-sm font-medium transition-colors"
-            >
-              <FileText className="w-3.5 h-3.5" />
-              <span>Resume</span>
-            </Link>
-            <button
-              onClick={scrollToTop}
-              className="p-2 rounded-full text-muted-foreground hover:text-primary hover:bg-primary/10 transition-all"
-              aria-label="Back to top"
-              title="Back to top"
-            >
-              <ArrowUp className="w-4 h-4" />
-            </button>
+          <div className="flex flex-col items-start gap-3 md:items-end">
+            <div className="flex flex-wrap items-center gap-1">
+              {socialMedia.map((item) => {
+                const Icon = socialIconMap[item.name];
+                if (!Icon) return null;
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="focus-ring touch-target rounded-full p-2.5 text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
+                    aria-label={item.label}
+                    title={item.label}
+                  >
+                    <AccessibleIcon icon={Icon} className="h-4 w-4" />
+                  </Link>
+                );
+              })}
+              <Link
+                href="/api/resume"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="focus-ring ml-2 inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-2 text-xs font-semibold text-primary transition-colors hover:bg-primary/20"
+              >
+                <AccessibleIcon icon={FileText} className="h-3.5 w-3.5" />
+                {resume.text}
+              </Link>
+            </div>
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-muted-foreground/75 md:justify-end">
+              <a href={`mailto:${contact.email}`} className="focus-ring inline-flex items-center gap-1.5 transition-colors hover:text-primary">
+                <AccessibleIcon icon={Mail} className="h-3 w-3" />
+                {contact.email}
+              </a>
+              <a href={`tel:${contact.phone}`} className="focus-ring inline-flex items-center gap-1.5 transition-colors hover:text-primary">
+                <AccessibleIcon icon={Phone} className="h-3 w-3" />
+                {contact.phone}
+              </a>
+              <Link href="/privacy-policy" className="focus-ring transition-colors hover:text-primary">
+                Privacy policy
+              </Link>
+            </div>
           </div>
         </div>
 
-        {/* Bottom row: Info + Contact */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 pt-6">
-          <div className="text-center md:text-left space-y-1.5">
-            <p className="text-sm text-muted-foreground">
-              Built with{" "}
-              <Heart className="w-3 h-3 inline text-red-400 fill-red-400" />{" "}
-              by {siteConfig.fullName}
-            </p>
-            <p className="text-xs text-muted-foreground/50">
-              © {new Date().getFullYear()} · Last updated {siteConfig.lastUpdated}
-            </p>
-          </div>
-
-          <div className="flex flex-wrap items-center justify-center md:justify-end gap-3">
-            <a
-              href={`mailto:${contact.email}`}
-              className="inline-flex items-center gap-1 text-xs text-muted-foreground/70 hover:text-primary transition-colors"
+        <div className="mt-7 flex flex-col gap-3 border-t border-border/60 pt-5 text-xs text-muted-foreground/60 sm:flex-row sm:items-center sm:justify-between">
+          <p>
+            © <span suppressHydrationWarning>{new Date().getFullYear()}</span> {siteConfig.fullName} · Last updated {siteConfig.lastUpdated}
+          </p>
+          <div className="flex items-center gap-3">
+            <span className="inline-flex items-center gap-1">
+              Made with <AccessibleIcon icon={Heart} className="h-3 w-3 fill-red-400 text-red-400" /> and curiosity
+            </span>
+            <button
+              onClick={scrollToTop}
+              className="focus-ring touch-target rounded-full p-1.5 text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
+              aria-label="Back to top"
+              title="Back to top"
             >
-              <Mail className="w-3 h-3" />
-              {contact.email}
-            </a>
-            <a
-              href={`tel:${contact.phone}`}
-              className="inline-flex items-center gap-1 text-xs text-muted-foreground/70 hover:text-primary transition-colors"
-            >
-              <Phone className="w-3 h-3" />
-              {contact.phone}
-            </a>
+              <AccessibleIcon icon={ArrowUp} className="h-3.5 w-3.5" />
+            </button>
           </div>
         </div>
       </motion.div>
     </footer>
   );
-};
-
-export default Footer;
+}
