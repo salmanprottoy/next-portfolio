@@ -8,7 +8,7 @@ export default function manifest(): MetadataRoute.Manifest {
     : "/salman.jpg";
 
   return {
-    name: `${siteConfig.fullName} — Software Engineer & AI Builder`,
+    name: `${siteConfig.fullName} — Software Engineer & AI Systems Builder`,
     short_name: "Salman Prottoy",
     description: siteConfig.metaDescription,
     start_url: "/",

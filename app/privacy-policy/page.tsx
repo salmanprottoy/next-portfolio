@@ -11,9 +11,9 @@ export default function PrivacyPolicyPage() {
   return (
     <main className="min-h-screen px-4 pb-16 pt-28 md:px-8">
       <div className="mx-auto max-w-3xl">
-        <div className="glass-strong space-y-10 rounded-2xl p-8 md:p-12">
+        <div className="glass-strong space-y-10 p-8 md:p-12">
           <div className="space-y-3 text-center">
-            <div className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
+            <div className="icon-tile mx-auto h-12 w-12">
               <Shield className="h-6 w-6" aria-hidden="true" />
             </div>
             <h1 className="text-3xl font-bold tracking-tight">Privacy Policy</h1>

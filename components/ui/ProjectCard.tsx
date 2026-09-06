@@ -56,9 +56,9 @@ export default function ProjectCard({
       duration={0.5}
       className="group h-full"
     >
-      <article className="glass glow-hover flex h-full flex-col overflow-hidden rounded-2xl transition-transform duration-300 group-hover:-translate-y-1">
+      <article className="glass glow-hover flex h-full flex-col overflow-hidden transition-transform duration-300 group-hover:-translate-y-1">
         <div className="flex items-start justify-between gap-4 border-b border-border/60 p-5 sm:p-6">
-          <div className={`flex h-11 w-11 items-center justify-center rounded-xl ${visual.background} ${visual.color}`}>
+          <div className={`icon-tile ${visual.background} ${visual.color}`}>
             <AccessibleIcon icon={Icon} className="h-5 w-5" />
           </div>
           {metric && metricLabel && (
@@ -71,14 +71,14 @@ export default function ProjectCard({
 
         <div className="flex flex-1 flex-col p-5 sm:p-6">
           <p className="mb-3 font-mono text-[0.64rem] uppercase tracking-[0.15em] text-muted-foreground">{eyebrow}</p>
-          <h3 className="font-heading text-balance text-2xl font-semibold tracking-[-0.04em] text-foreground transition-colors group-hover:text-primary">
+          <h3 className="font-heading text-balance text-2xl font-semibold tracking-normal text-foreground transition-colors group-hover:text-primary">
             {title}
           </h3>
           <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{description}</p>
 
           <div className="mt-6 flex flex-wrap gap-1.5">
             {tags.map((tag) => (
-              <span key={tag} translate="no" className="rounded-md border border-border/70 bg-background/35 px-2 py-1 font-mono text-[0.64rem] text-muted-foreground">
+              <span key={tag} translate="no" className="tech-tag">
                 {tag}
               </span>
             ))}

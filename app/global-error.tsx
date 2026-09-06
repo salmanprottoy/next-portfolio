@@ -17,7 +17,7 @@ export default function GlobalError({
           <button
             type="button"
             onClick={() => reset()}
-            className="focus-ring touch-target rounded-full bg-primary px-6 py-2 text-primary-foreground transition-colors hover:bg-primary/90"
+            className="focus-ring command-button"
           >
             Try again
           </button>

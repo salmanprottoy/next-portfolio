@@ -133,7 +133,7 @@ export default function SkillsSection({ skills }: SkillsSectionProps) {
       <div className="flex flex-col gap-3 border-b border-border/60 pb-5 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="section-kicker mb-2">Technical toolkit</p>
-          <h3 className="font-heading text-balance text-3xl font-semibold tracking-[-0.045em] text-foreground md:text-4xl">
+          <h3 className="font-heading text-balance text-3xl font-semibold tracking-normal text-foreground md:text-4xl">
             The tools behind the work.
           </h3>
         </div>
@@ -150,10 +150,10 @@ export default function SkillsSection({ skills }: SkillsSectionProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ delay: categoryIndex * 0.07, duration: 0.45 }}
-            className="glass glow-hover rounded-2xl p-5"
+            className="glass glow-hover p-5"
           >
             <div className="mb-5 flex items-center gap-3">
-              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-primary">
+              <div className="icon-tile h-9 w-9 bg-primary/10">
                 <AccessibleIcon icon={category.icon} className="h-4 w-4" />
               </div>
               <h4 className="text-sm font-semibold text-foreground">{category.label}</h4>
@@ -168,7 +168,7 @@ export default function SkillsSection({ skills }: SkillsSectionProps) {
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: categoryIndex * 0.07 + skillIndex * 0.035 }}
-                    className="inline-flex items-center gap-1.5 rounded-lg border border-border/70 bg-background/35 px-2.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/30 hover:bg-primary/10 hover:text-foreground"
+                    className="tech-tag text-xs font-medium transition-colors hover:border-primary/30 hover:bg-primary/10 hover:text-foreground"
                   >
                     <AccessibleIcon icon={Icon} className="h-3.5 w-3.5 text-primary/75" />
                     <span translate="no">{skill.name}</span>

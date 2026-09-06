@@ -42,15 +42,13 @@ export default function Footer() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="glass-strong rounded-2xl px-6 py-7 md:px-8"
+        className="glass-strong px-6 py-7 md:px-8"
       >
         <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
           <div>
             <a href="#hero" className="focus-ring group inline-flex items-center gap-2">
-              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-sm font-bold text-primary-foreground transition-transform group-hover:rotate-6">
-                SP
-              </span>
-              <span className="font-heading text-lg font-semibold tracking-tight text-foreground">Keep in touch.</span>
+              <span className="brand-mark">SP</span>
+              <span className="font-heading text-lg font-semibold tracking-normal text-foreground">Keep in touch.</span>
             </a>
             <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
               Building dependable software and exploring useful AI from Jyväskylä, Finland.
@@ -68,7 +66,7 @@ export default function Footer() {
                     href={item.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="focus-ring touch-target rounded-full p-2.5 text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
+                    className="focus-ring touch-target rounded-none p-2.5 text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
                     aria-label={item.label}
                     title={item.label}
                   >
@@ -77,10 +75,10 @@ export default function Footer() {
                 );
               })}
               <Link
-                href="/api/resume"
+                href={resume.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="focus-ring ml-2 inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-2 text-xs font-semibold text-primary transition-colors hover:bg-primary/20"
+                className="focus-ring ml-2 inline-flex items-center gap-1.5 border border-primary/35 bg-primary/10 px-3 py-2 text-xs font-semibold text-primary transition-colors hover:border-primary/60 hover:bg-primary/20"
               >
                 <AccessibleIcon icon={FileText} className="h-3.5 w-3.5" />
                 {resume.text}
@@ -112,7 +110,7 @@ export default function Footer() {
             </span>
             <button
               onClick={scrollToTop}
-              className="focus-ring touch-target rounded-full p-1.5 text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
+              className="focus-ring touch-target rounded-none p-1.5 text-muted-foreground transition-colors hover:bg-primary/10 hover:text-primary"
               aria-label="Back to top"
               title="Back to top"
             >

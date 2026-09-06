@@ -26,7 +26,6 @@ export const Projects: Project[] = [
     kind: "ai",
     metric: "500+",
     metricLabel: "users",
-    sourceUrl: "#",
   },
   {
     title: "CMS data migration",
@@ -37,7 +36,6 @@ export const Projects: Project[] = [
     kind: "platform",
     metric: "0",
     metricLabel: "downtime",
-    sourceUrl: "#",
   },
   {
     title: "Travel data platform",
@@ -48,7 +46,6 @@ export const Projects: Project[] = [
     kind: "platform",
     metric: "30+",
     metricLabel: "domains",
-    sourceUrl: "#",
   },
   {
     title: "Bangla fake-news detection",

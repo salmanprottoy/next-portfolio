@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
-import { Prompt, Karla } from "next/font/google";
+import { Karla, Rajdhani } from "next/font/google";
 import AccessibilityProvider from "@/components/providers/AccessibilityProvider";
 import ThemeProvider from "@/components/providers/ThemeProvider";
 import { siteConfig } from "@/app/data/portfolio.config";
@@ -12,11 +12,11 @@ const profileImageUrl = process.env.NEXT_PUBLIC_S3_BASE_URL
   ? `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/salmanprottoy.jpg`
   : "/salman.jpg";
 
-// Prompt provides the editorial display voice.
-const prompt = Prompt({
+// Rajdhani gives headings a precise, kinetic display voice.
+const rajdhani = Rajdhani({
   subsets: ["latin"],
   weight: ["500", "600", "700"],
-  variable: "--font-prompt",
+  variable: "--font-rajdhani",
 });
 
 // Karla keeps long-form content readable.
@@ -127,7 +127,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body suppressHydrationWarning className={`${prompt.variable} ${karla.variable} font-sans`}>
+      <body suppressHydrationWarning className={`${rajdhani.variable} ${karla.variable} font-sans`}>
         <ThemeProvider>
           <AccessibilityProvider>{children}</AccessibilityProvider>
         </ThemeProvider>

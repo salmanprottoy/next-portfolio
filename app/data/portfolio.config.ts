@@ -9,7 +9,7 @@
 export const siteConfig = {
   fullName: "Md. Salman Hossan Prottoy",
   shortName: "SP",
-  defaultTitle: "Md. Salman Hossan Prottoy — Software Engineer & AI Builder",
+  defaultTitle: "Md. Salman Hossan Prottoy — Software Engineer & AI Systems Builder",
   jobTitle: "Software Engineer",
   metaDescription:
     "Software engineer and MSc Artificial Intelligence student building production web products, applied AI systems, and researching multi-objective optimization with TypeScript, React, Go, Python, and AWS.",
@@ -43,8 +43,8 @@ export const heroConfig = {
 export const impactStats = [
   { value: "500+", label: "RAG users reached" },
   { value: "2,000+", label: "documents / hour at peak" },
-  { value: "40%", label: "travel platform endpoints" },
-  { value: "35%", label: "monitoring frontend" },
+  { value: "40%", label: "of travel platform API endpoints" },
+  { value: "35%", label: "of monitoring frontend" },
 ];
 
 // ─── Working Focus ─────────────────────────────────────────────
@@ -108,13 +108,13 @@ export const featuredSocials = ["github", "linkedin"];
 
 // ─── Resume ────────────────────────────────────────────────────
 export const resume = {
-  link: "https://users.jyu.fi/~mshprott/",
+  link: "https://drive.google.com/file/d/19Xjj5BK8paFgnI-HIOxWN8R1QvAg9L5f/view",
   text: "Resume",
 };
 
 // ─── About ─────────────────────────────────────────────────────
 export const AboutMe = [
-  "I am a software engineer and Master's student in Artificial Intelligence at the University of Jyväskylä, Finland, currently starting my Master's thesis in multi-objective optimization. I build full-stack products with TypeScript, React, Go, Python, and AWS, with a particular interest in making language-model systems reliable enough to use beyond a demo.",
+  "I am a software engineer and Master's student in Artificial Intelligence at the University of Jyväskylä, Finland, currently working on my Master's thesis in multi-objective optimization. I build full-stack products with TypeScript, React, Go, Python, and AWS, with a particular interest in making language-model systems reliable enough to use beyond a demo.",
   "Most recently at Brand Cloud Inc., I worked across production TypeScript/React systems, zero-downtime PostgreSQL migrations, CI/CD, and a RAG application used by 500+ people. Earlier at W3 Engineers, I helped move backend services from Django to Go and connected data-heavy systems across a multi-tenant travel platform.",
 ];
 
@@ -137,8 +137,8 @@ export const Experience = [
     company: "W3 Engineers Limited · Dhaka, Bangladesh",
     date: "November 2021 — August 2023",
     bullets: [
-      "Contributed client-server integrations via REST and GraphQL APIs in Go and Node.js, covering roughly 40% of the platform's endpoints for a 30+ domain multi-tenant travel platform.",
-      "Contributed to the backend migration from Django to Go, helping significantly reduce response latency across the platform's core services.",
+      "Developed REST and GraphQL APIs and third-party integrations using Go and Node.js, contributing to approximately 40% of API endpoints across a multi-tenant travel platform spanning 30+ domains.",
+      "Contributed to migrating backend services from Django to Go, improving API performance and reducing response latency across the platform's core services.",
       "Built data pipelines to unify property data from multiple external providers into a single schema, using parallel processing and Amazon SQS asynchronous messaging on AWS.",
       "Built reusable, production Vue.js UI components powering 35% of the frontend of an enterprise network-monitoring application, integrating backend APIs to improve the end-user experience.",
     ],

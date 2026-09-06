@@ -90,9 +90,9 @@ export default function HeroSection({
           transition={{ delay: 0.08, duration: 0.55 }}
           className="mb-7"
         >
-          <h1 className="font-heading text-[clamp(3.25rem,7.4vw,7.2rem)] font-semibold leading-[0.84] tracking-[-0.075em] text-foreground">
+          <h1 className="font-heading text-[clamp(3.25rem,7.4vw,7.2rem)] font-semibold leading-[0.84] tracking-normal text-foreground">
             <span className="block">{firstName}</span>
-            <span className="block bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">
+            <span className="block text-primary">
               {lastName}<span className="text-accent">.</span>
             </span>
           </h1>
@@ -104,11 +104,11 @@ export default function HeroSection({
           transition={{ delay: 0.16, duration: 0.5 }}
           className="mb-6 flex flex-wrap items-center gap-2 text-sm font-medium"
         >
-          <span className="rounded-full border border-primary/30 bg-primary/10 px-3 py-1.5 text-primary">
+          <span className="title-chip">
             {titleA}
           </span>
           <span className="text-accent">+</span>
-          <span className="rounded-full border border-accent/30 bg-accent/10 px-3 py-1.5 text-accent">
+          <span className="title-chip title-chip-accent">
             {titleB}
           </span>
         </motion.div>
@@ -150,7 +150,7 @@ export default function HeroSection({
         >
           <Link
             href={`mailto:${contactEmail}`}
-            className="focus-ring group inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 font-semibold text-primary-foreground shadow-lg shadow-primary/20 transition-[background-color,box-shadow,transform] hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-primary/35"
+            className="focus-ring command-button group"
           >
             <AccessibleIcon icon={Mail} className="h-4 w-4" />
             {ctaContactText}
@@ -160,14 +160,14 @@ export default function HeroSection({
             href={resumeUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="focus-ring inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-5 py-3 font-semibold text-foreground transition-colors hover:border-primary/40 hover:bg-primary/10"
+            className="focus-ring ghost-button"
           >
             <AccessibleIcon icon={FileText} className="h-4 w-4 text-primary" />
             {resumeText}
           </Link>
           <a
             href="#projects"
-            className="focus-ring inline-flex items-center gap-2 rounded-full px-2 py-3 font-semibold text-muted-foreground transition-colors hover:text-primary"
+            className="focus-ring text-button"
           >
             {ctaScrollText}
             <AccessibleIcon icon={ArrowDown} className="h-4 w-4" />
@@ -181,18 +181,18 @@ export default function HeroSection({
         transition={{ delay: 0.18, duration: 0.65, ease: "easeOut" }}
         className="relative mx-auto w-full max-w-[30rem] lg:mx-0 lg:ml-auto"
       >
-        <div className="absolute -inset-8 rounded-[2.5rem] bg-primary/10 blur-3xl" aria-hidden="true" />
-        <div className="signal-card relative overflow-hidden rounded-[1.5rem] p-5 sm:p-7">
+        <div className="hero-seal motion-safe" aria-hidden="true" />
+        <div className="signal-card relative overflow-hidden p-5 sm:p-7">
           <div className="mb-6 flex items-center justify-between border-b border-border/70 pb-4">
             <span className="inline-flex items-center gap-2 font-mono text-[0.64rem] uppercase tracking-[0.18em] text-muted-foreground">
               <AccessibleIcon icon={Sparkles} className="h-3.5 w-3.5 text-accent" />
               Systems trace
             </span>
-            <span className="font-mono text-[0.64rem] uppercase tracking-[0.18em] text-primary">live / 08.26</span>
+            <span className="status-chip text-primary">status / open</span>
           </div>
 
           <div className="mb-7 flex items-center gap-4">
-            <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-xl border border-primary/35 bg-secondary">
+            <div className="hero-portrait-frame">
               <Image
                 src={imageUrl}
                 alt={imageAlt}
@@ -205,12 +205,12 @@ export default function HeroSection({
             </div>
             <div className="min-w-0">
               <p className="atlas-label mb-1">Builder profile</p>
-              <p className="truncate font-heading text-xl font-semibold tracking-tight text-foreground" translate="no">{name}</p>
+              <p className="truncate font-heading text-xl font-semibold tracking-normal text-foreground" translate="no">{name}</p>
               <p className="mt-1 text-sm text-muted-foreground">Human in the loop · thesis underway</p>
             </div>
           </div>
 
-          <div className="trace-surface rounded-xl p-4 sm:p-5" role="img" aria-label="A systems trace from retrieval through reasoning to shipping">
+          <div className="trace-surface p-4 sm:p-5" role="img" aria-label="A systems trace from retrieval through reasoning to shipping">
             <div className="flex items-center justify-between font-mono text-[0.6rem] uppercase tracking-[0.16em] text-muted-foreground">
               <span>input / messy problem</span>
               <span className="text-accent">output / useful system</span>
@@ -224,11 +224,11 @@ export default function HeroSection({
               <div className="grid gap-5 sm:grid-cols-3 sm:gap-2">
                 {traceNodes.map((node) => (
                   <div key={node.index} className="relative z-10 flex items-start gap-3 sm:block sm:text-center">
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-primary/45 bg-card font-mono text-xs font-semibold text-primary shadow-[0_0_0_4px_hsl(var(--card))] sm:mx-auto">
+                    <span className="trace-node sm:mx-auto">
                       {node.index}
                     </span>
                     <div className="pt-0.5 sm:pt-4">
-                      <p className="font-heading text-lg font-semibold tracking-tight text-foreground">{node.title}</p>
+                      <p className="font-heading text-lg font-semibold tracking-normal text-foreground">{node.title}</p>
                       <p className="mt-0.5 text-xs text-muted-foreground">{node.description}</p>
                       <p className="mt-2 font-mono text-[0.6rem] uppercase tracking-wider text-primary/80">{node.tools}</p>
                     </div>
@@ -247,11 +247,11 @@ export default function HeroSection({
           </div>
 
           <div className="mt-5 grid grid-cols-2 gap-3">
-            <div className="rounded-xl border border-border/70 bg-background/25 p-3">
+            <div className="signal-meta p-3">
               <p className="atlas-label">Ships with</p>
               <p className="mt-1 text-sm font-semibold text-foreground">Care + clarity</p>
             </div>
-            <div className="rounded-xl border border-border/70 bg-background/25 p-3">
+            <div className="signal-meta p-3">
               <p className="atlas-label">Reach me</p>
               <p className="mt-1 truncate text-sm font-semibold text-foreground">{contactEmail}</p>
             </div>

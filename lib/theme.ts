@@ -1,17 +1,17 @@
 export const themeColors = {
   light: {
-    background: "#f1f7f4",
-    surface: "#fbfdfb",
-    foreground: "#12201e",
-    primary: "#267f66",
-    accent: "#ec8d18",
+    background: "#eef3f7",
+    surface: "#fbfdff",
+    foreground: "#182033",
+    primary: "#087f96",
+    accent: "#d94d2f",
   },
   dark: {
-    background: "#071113",
-    surface: "#10282a",
-    foreground: "#d8e5df",
-    primary: "#67e8b0",
-    accent: "#f3a65a",
+    background: "#0a0b16",
+    surface: "#15172a",
+    foreground: "#f0ebd4",
+    primary: "#65e5eb",
+    accent: "#ff754b",
   },
 } as const;
 

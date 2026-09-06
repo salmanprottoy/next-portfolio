@@ -30,20 +30,20 @@ export function TimelineItem({
       className="group relative pl-10 pb-8 last:pb-0 md:pl-16"
     >
       <div className="absolute bottom-0 left-[0.45rem] top-3 w-px bg-gradient-to-b from-primary/70 via-primary/25 to-transparent md:left-[0.7rem]" aria-hidden="true" />
-      <div className="absolute left-0 top-0 flex h-7 w-7 items-center justify-center rounded-lg border border-primary/40 bg-background font-mono text-[0.62rem] text-primary shadow-[0_0_0_4px_hsl(var(--background))] md:h-8 md:w-8" aria-hidden="true">
+      <div className="timeline-node absolute left-0 top-0" aria-hidden="true">
         {String(index + 1).padStart(2, "0")}
       </div>
 
-      <article className="glass glow-hover rounded-2xl p-5 transition-transform duration-300 group-hover:-translate-y-0.5 md:p-7">
+      <article className="glass glow-hover p-5 transition-transform duration-300 group-hover:-translate-y-0.5 md:p-7">
         <div className="mb-5 flex flex-col gap-3 border-b border-border/60 pb-5 sm:flex-row sm:items-start sm:justify-between">
           <div className="min-w-0">
-            <h3 className="font-heading text-balance text-xl font-semibold tracking-[-0.025em] text-foreground md:text-2xl">{title}</h3>
+            <h3 className="font-heading text-balance text-xl font-semibold tracking-normal text-foreground md:text-2xl">{title}</h3>
             <div className="mt-2 flex items-start gap-2 text-sm font-medium text-primary">
               <AccessibleIcon icon={MapPin} className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary/70" />
               <span>{subtitle}</span>
             </div>
           </div>
-          <span className="inline-flex w-fit shrink-0 items-center gap-1.5 rounded-full border border-border/70 bg-background/35 px-2.5 py-1 font-mono text-[0.68rem] text-muted-foreground">
+          <span className="date-chip inline-flex w-fit shrink-0 items-center gap-1.5 font-mono text-[0.68rem] text-muted-foreground">
             <AccessibleIcon icon={Calendar} className="h-3 w-3 text-accent" />
             {date}
           </span>

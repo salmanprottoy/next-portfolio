@@ -18,7 +18,7 @@ export default function ThemeToggle() {
 
   if (!mounted) {
     return (
-      <div className="w-9 h-9 rounded-full glass flex items-center justify-center" aria-hidden="true">
+      <div className="glass touch-target flex h-11 w-11 items-center justify-center" aria-hidden="true">
         <AccessibleIcon icon={Sun} className="h-4 w-4 opacity-0" />
       </div>
     );
@@ -30,7 +30,7 @@ export default function ThemeToggle() {
     <motion.button
       type="button"
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="focus-ring touch-target motion-safe relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-full glass glow-hover"
+      className="focus-ring touch-target motion-safe relative flex h-11 w-11 items-center justify-center overflow-hidden glass glow-hover"
       whileTap={prefersReducedMotion === true ? undefined : { scale: 0.9 }}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
     >

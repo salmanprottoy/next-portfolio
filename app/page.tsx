@@ -47,7 +47,7 @@ function SectionHeading({
           <span className="section-kicker">{kicker}</span>
           <span className="section-rule max-w-20" />
         </div>
-        <h2 className="font-heading text-balance text-4xl font-semibold tracking-[-0.055em] text-foreground md:text-6xl">
+        <h2 className="font-heading text-balance text-4xl font-semibold tracking-normal text-foreground md:text-6xl">
           {title}
         </h2>
       </div>
@@ -98,7 +98,7 @@ export default function Home() {
           imageUrl={profileImageUrl}
           imageAlt={heroConfig.name}
           contactEmail={contact.email}
-          resumeUrl="/api/resume"
+          resumeUrl={resume.link}
           resumeText={resume.text}
           availabilityText={heroConfig.availabilityText}
           ctaContactText={heroConfig.ctaContactText}
@@ -137,16 +137,16 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.6, delay: 0.12 }}
-            className="signal-card rounded-2xl p-5 sm:p-7"
+            className="signal-card p-5 sm:p-7"
           >
             <div className="mb-6 flex items-center justify-between border-b border-border/70 pb-4">
               <span className="section-kicker">Selected signals</span>
               <AccessibleIcon icon={Sparkles} className="h-4 w-4 text-accent" />
             </div>
-            <div className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-border/70 bg-border/70">
+            <div className="signal-grid grid grid-cols-2 gap-px overflow-hidden border border-border/70 bg-border/70">
               {impactStats.map((stat) => (
                 <div key={stat.label} className="bg-card/85 p-4 sm:p-5">
-                  <p className="font-heading tabular-nums text-3xl font-semibold tracking-tight text-primary sm:text-4xl">{stat.value}</p>
+                  <p className="font-heading tabular-nums text-3xl font-semibold tracking-normal text-primary sm:text-4xl">{stat.value}</p>
                   <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{stat.label}</p>
                 </div>
               ))}
@@ -197,7 +197,7 @@ export default function Home() {
               <GlassCard hover className="h-full">
                 <div className="flex h-full flex-col justify-between gap-10">
                   <div className="flex items-start justify-between gap-5">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    <div className="icon-tile h-11 w-11 shrink-0">
                       <AccessibleIcon icon={GraduationCap} className="h-5 w-5" />
                     </div>
                     <span className="font-mono text-xs text-muted-foreground">{education.year}</span>
@@ -206,7 +206,7 @@ export default function Home() {
                     <h3 className="font-heading text-xl font-semibold tracking-tight text-foreground">{education.exam}</h3>
                     <p className="mt-2 text-sm leading-relaxed text-primary">{education.institution}</p>
                     {education.detail && (
-                      <p className="mt-3 inline-flex rounded-full border border-accent/30 bg-accent/10 px-2.5 py-1 font-mono text-[0.62rem] uppercase tracking-[0.12em] text-accent">
+                      <p className="status-chip status-chip-accent mt-3 w-fit">
                         {education.detail}
                       </p>
                     )}
@@ -233,9 +233,9 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
-              className="glass glow-hover rounded-2xl p-6"
+              className="glass glow-hover p-6"
             >
-              <p className="mb-12 font-mono text-[0.68rem] tracking-[0.18em] text-accent">{area.label}</p>
+              <p className="area-label mb-12 font-mono text-[0.68rem] tracking-[0.18em]">{area.label}</p>
               <h3 className="font-heading text-2xl font-semibold tracking-tight text-foreground">{area.title}</h3>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{area.description}</p>
             </motion.div>
@@ -246,12 +246,11 @@ export default function Home() {
       </Section>
 
       <Section id="contact" className="border-t border-border/50 pb-16">
-        <div className="signal-card relative overflow-hidden rounded-[1.75rem] p-7 sm:p-10 md:p-14">
-          <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-primary/10 blur-3xl" aria-hidden="true" />
+        <div className="signal-card p-7 sm:p-10 md:p-14">
           <div className="relative flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
             <div className="max-w-2xl">
               <p className="section-kicker mb-4">Contact</p>
-              <h2 className="font-heading text-balance text-4xl font-semibold tracking-[-0.055em] text-foreground md:text-6xl">
+              <h2 className="font-heading text-balance text-4xl font-semibold tracking-normal text-foreground md:text-6xl">
                 Have a hard problem?
                 <span className="block text-primary">Let&apos;s make it useful.</span>
               </h2>
@@ -262,7 +261,7 @@ export default function Home() {
             <div className="flex shrink-0 flex-col items-start gap-3">
               <Link
                 href={`mailto:${contact.email}`}
-                className="focus-ring group inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 font-semibold text-primary-foreground shadow-lg shadow-primary/20 transition-[background-color,box-shadow,transform] hover:-translate-y-0.5 hover:bg-primary/90"
+                className="focus-ring command-button group"
               >
                 <AccessibleIcon icon={Mail} className="h-4 w-4" />
                 {contact.email}

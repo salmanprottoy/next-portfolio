@@ -17,7 +17,7 @@ export default function ProjectsSection() {
             initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-heading text-balance text-4xl font-semibold tracking-[-0.055em] text-foreground md:text-6xl"
+            className="font-heading text-balance text-4xl font-semibold tracking-normal text-foreground md:text-6xl"
           >
             Work with a signal.
           </motion.h2>

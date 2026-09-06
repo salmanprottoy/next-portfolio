@@ -53,7 +53,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-karla)", ...fontFamily.sans],
-        heading: ["var(--font-prompt)", ...fontFamily.sans],
+        heading: ["var(--font-rajdhani)", ...fontFamily.sans],
       },
       borderRadius: {
         xl: "calc(var(--radius) + 4px)",
