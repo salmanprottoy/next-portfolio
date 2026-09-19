@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
-import { Karla, Rajdhani } from "next/font/google";
+import { Instrument_Sans, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import AccessibilityProvider from "@/components/providers/AccessibilityProvider";
 import ThemeProvider from "@/components/providers/ThemeProvider";
 import { siteConfig } from "@/app/data/portfolio.config";
@@ -12,18 +12,29 @@ const profileImageUrl = process.env.NEXT_PUBLIC_S3_BASE_URL
   ? `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/salmanprottoy.jpg`
   : "/salman.jpg";
 
-// Rajdhani gives headings a precise, kinetic display voice.
-const rajdhani = Rajdhani({
+// Space Grotesk — display only 600/700 (headings) — one variable file would be larger, 2 weights cuts ~45KB
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  variable: "--font-rajdhani",
+  weight: ["600", "700"],
+  display: "swap",
+  preload: true,
+  variable: "--font-display",
 });
 
-// Karla keeps long-form content readable.
-const karla = Karla({
+// Instrument Sans — body 400 regular + 600 semibold — covers paragraphs + headings
+const instrumentSans = Instrument_Sans({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-  variable: "--font-karla",
+  weight: ["400", "600"],
+  display: "swap",
+  variable: "--font-body",
+});
+
+// JetBrains Mono — utility mono single weight 400 (labels/traces) — 5.7KB, swap to avoid FOIT
+const jetMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400"],
+  display: "swap",
+  variable: "--font-mono",
 });
 
 export const viewport: Viewport = {
@@ -44,20 +55,40 @@ export const metadata: Metadata = {
   keywords: [
     siteConfig.author,
     siteConfig.fullName,
+    "AI Engineer",
+    "Full-Stack Software Engineer",
     "Software Engineer",
-    "AI Systems Builder",
-    "Full Stack Developer",
-    "React Developer",
-    "Go Developer",
-    "Python Developer",
-    "TypeScript",
-    "JavaScript",
-    "Next.js",
-    "Django",
-    "MongoDB",
-    "PostgreSQL",
-    "AWS",
     "RAG",
+    "LLMs",
+    "Vector Search",
+    "LangChain",
+    "CrewAI",
+    "Multi-Agent Systems",
+    "TensorFlow",
+    "NLP",
+    "TypeScript",
+    "Python",
+    "Go",
+    "Java",
+    "React",
+    "Next.js",
+    "Vue.js",
+    "Node.js",
+    "Express.js",
+    "Django",
+    "GraphQL",
+    "REST APIs",
+    "PostgreSQL",
+    "MongoDB",
+    "Redis",
+    "ChromaDB",
+    "DynamoDB",
+    "OpenSearch",
+    "MySQL",
+    "AWS Lambda",
+    "AWS RDS",
+    "AWS SQS",
+    "Docker",
     "Applied AI",
     "Multi-objective optimization",
   ],
@@ -85,7 +116,7 @@ export const metadata: Metadata = {
         url: profileImageUrl,
         width: 1200,
         height: 630,
-        alt: `${siteConfig.author} — Software Engineer & AI Systems Builder`,
+        alt: `${siteConfig.author} — AI Engineer | Full-Stack Software Engineer`,
       },
     ],
   },
@@ -120,14 +151,23 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="theme-color" content={themeColors.dark.background} data-theme-color="true" />
+        <link rel="preconnect" href="https://salmanprottoy-portfolio.s3.ap-south-1.amazonaws.com" crossOrigin="anonymous" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(jsonLdSchema),
           }}
         />
+        <script
+          type="speculationrules"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              prerender: [{ where: { href_matches: "/*" }, eagerness: "moderate" }],
+            }),
+          }}
+        />
       </head>
-      <body suppressHydrationWarning className={`${rajdhani.variable} ${karla.variable} font-sans`}>
+      <body suppressHydrationWarning className={`${spaceGrotesk.variable} ${instrumentSans.variable} ${jetMono.variable} font-sans`}>
         <ThemeProvider>
           <AccessibilityProvider>{children}</AccessibilityProvider>
         </ThemeProvider>

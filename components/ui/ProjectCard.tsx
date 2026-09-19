@@ -27,11 +27,11 @@ interface ProjectCardProps {
   index?: number;
 }
 
-const kindMap: Record<ProjectKind, { icon: React.ElementType; color: string; background: string }> = {
-  ai: { icon: Sparkles, color: "text-primary", background: "bg-primary/10" },
-  platform: { icon: Database, color: "text-accent", background: "bg-accent/10" },
-  research: { icon: BookOpen, color: "text-primary", background: "bg-primary/10" },
-  frontend: { icon: Code2, color: "text-accent", background: "bg-accent/10" },
+const kindMap: Record<ProjectKind, { icon: React.ElementType; color: string }> = {
+  ai: { icon: Sparkles, color: "text-primary" },
+  platform: { icon: Database, color: "text-accent" },
+  research: { icon: BookOpen, color: "text-primary" },
+  frontend: { icon: Code2, color: "text-accent" },
 };
 
 export default function ProjectCard({
@@ -51,50 +51,55 @@ export default function ProjectCard({
 
   return (
     <MotionReveal
-      delay={index * 0.08}
-      distance={24}
-      duration={0.5}
+      delay={index * 0.06}
+      distance={16}
+      duration={0.45}
       className="group h-full"
     >
-      <article className="glass glow-hover flex h-full flex-col overflow-hidden transition-transform duration-300 group-hover:-translate-y-1">
-        <div className="flex items-start justify-between gap-4 border-b border-border/60 p-5 sm:p-6">
-          <div className={`icon-tile ${visual.background} ${visual.color}`}>
-            <AccessibleIcon icon={Icon} className="h-5 w-5" />
+      <article className="flex h-full flex-col border border-border bg-card transition-colors hover:border-primary/25">
+        <div className="flex items-start justify-between gap-4 border-b border-border p-4 sm:p-5">
+          <div className="flex items-center gap-3">
+            <div className={`icon-tile h-8 w-8 ${visual.color} border-border bg-muted/30`}>
+              <AccessibleIcon icon={Icon} className="h-4 w-4" />
+            </div>
+            <div>
+              <p className="font-mono text-[0.58rem] uppercase tracking-[0.14em] text-muted-foreground">{eyebrow}</p>
+              <p className={`font-mono text-[0.58rem] uppercase tracking-[0.08em] ${visual.color} font-semibold`}>SPEC · 0{index + 1}</p>
+            </div>
           </div>
           {metric && metricLabel && (
             <div className="text-right">
-              <p className={`font-heading tabular-nums text-2xl font-semibold tracking-tight ${visual.color}`}>{metric}</p>
-              <p className="font-mono text-[0.62rem] uppercase tracking-wider text-muted-foreground">{metricLabel}</p>
+              <p className={`font-display tabular-nums text-xl font-semibold tracking-[-0.02em] ${visual.color}`}>{metric}</p>
+              <p className="font-mono text-[0.6rem] uppercase tracking-[0.08em] text-muted-foreground">{metricLabel}</p>
             </div>
           )}
         </div>
 
-        <div className="flex flex-1 flex-col p-5 sm:p-6">
-          <p className="mb-3 font-mono text-[0.64rem] uppercase tracking-[0.15em] text-muted-foreground">{eyebrow}</p>
-          <h3 className="font-heading text-balance text-2xl font-semibold tracking-normal text-foreground transition-colors group-hover:text-primary">
+        <div className="flex flex-1 flex-col p-4 sm:p-5">
+          <h3 className="font-display text-balance text-[1.2rem] font-semibold leading-[1.15] tracking-[-0.02em] text-foreground group-hover:text-primary">
             {title}
           </h3>
-          <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{description}</p>
+          <p className="mt-2.5 flex-1 font-mono text-[0.78rem] leading-[1.65] text-muted-foreground">{description}</p>
 
-          <div className="mt-6 flex flex-wrap gap-1.5">
+          <div className="mt-5 flex flex-wrap gap-1.5 border-t border-border/60 pt-4">
             {tags.map((tag) => (
-              <span key={tag} translate="no" className="tech-tag">
+              <span key={tag} translate="no" className="border border-border bg-muted/20 px-1.5 py-1 font-mono text-[0.62rem] tracking-[0.04em] text-muted-foreground">
                 {tag}
               </span>
             ))}
           </div>
         </div>
 
-        <div className="flex min-h-14 items-center gap-4 border-t border-border/60 px-5 py-3 sm:px-6">
+        <div className="flex min-h-11 items-center gap-4 border-t border-border bg-muted/10 px-4 py-2.5">
           {liveUrl && liveUrl !== "#" && (
             <Link
               href={liveUrl}
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`View live demo for ${title}`}
-              className="focus-ring inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-colors hover:text-primary/75"
+              className="focus-ring inline-flex items-center gap-1.5 font-mono text-[0.68rem] font-semibold uppercase tracking-[0.06em] text-primary hover:text-accent"
             >
-              <AccessibleIcon icon={ExternalLink} className="h-3.5 w-3.5" />
+              <AccessibleIcon icon={ExternalLink} className="h-3 w-3" />
               Live demo
             </Link>
           )}
@@ -104,18 +109,19 @@ export default function ProjectCard({
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`View source or publication for ${title}`}
-              className="focus-ring inline-flex items-center gap-1.5 text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground"
+              className="focus-ring inline-flex items-center gap-1.5 font-mono text-[0.68rem] font-semibold uppercase tracking-[0.06em] text-muted-foreground hover:text-foreground"
             >
-              <AccessibleIcon icon={kind === "research" ? BookOpen : Github} className="h-3.5 w-3.5" />
+              <AccessibleIcon icon={kind === "research" ? BookOpen : Github} className="h-3 w-3" />
               {kind === "research" ? "Publication" : "Source"}
             </Link>
           )}
           {!liveUrl && (!sourceUrl || sourceUrl === "#") && (
-            <span className="inline-flex items-center gap-1.5 font-mono text-[0.64rem] uppercase tracking-wider text-muted-foreground/65">
-              <AccessibleIcon icon={Layers} className="h-3.5 w-3.5" />
+            <span className="inline-flex items-center gap-1.5 font-mono text-[0.62rem] uppercase tracking-[0.08em] text-muted-foreground/70">
+              <AccessibleIcon icon={Layers} className="h-3 w-3" />
               Private case study
             </span>
           )}
+          <span className="ml-auto font-mono text-[0.58rem] uppercase tracking-[0.08em] text-muted-foreground/60">ledger entry</span>
         </div>
       </article>
     </MotionReveal>

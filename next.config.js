@@ -21,9 +21,9 @@ const nextConfig = {
     ],
   },
 
-  // Performance optimizations
+  // Performance optimizations — tree-shake heavy deps, reduce JS parse cost
   experimental: {
-    // optimizePackageImports: ["@/components"],
+    optimizePackageImports: ["framer-motion", "lucide-react", "react-icons"],
   },
 
   // Webpack optimizations
@@ -61,7 +61,7 @@ const nextConfig = {
     assetPrefix: (process.env.NEXT_PUBLIC_BASE_PATH || "/next-portfolio") + "/",
   }),
 
-  // Security and SEO headers
+  // Security and SEO headers + perf: Early Hints via Link preload + compression hints
   async headers() {
     return [
       {
@@ -94,6 +94,10 @@ const nextConfig = {
           {
             key: "Permissions-Policy",
             value: "camera=(), microphone=(), geolocation=()",
+          },
+          {
+            key: "Link",
+            value: "</salman-256.webp>; rel=preload; as=image; fetchpriority=high; imagesrcset=\"/salman-256.webp 256w\"; imagesizes=\"60px\"",
           },
         ],
       },

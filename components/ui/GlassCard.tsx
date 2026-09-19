@@ -21,10 +21,9 @@ export default function GlassCard({
   return (
     <div
       className={cn(
-        "p-6 md:p-8",
-        gradientBorder ? "gradient-border" : "glass",
-        glow && "shadow-[0_0_30px_var(--glow-primary)]",
-        hover && "glow-hover transition-[box-shadow,border-color,transform] duration-300",
+        "border border-border bg-card p-6 md:p-7",
+        glow && "shadow-[0_0_24px_var(--glow-primary)]",
+        hover && "hover:border-primary/20 transition-[border-color,box-shadow] duration-200",
         className
       )}
     >

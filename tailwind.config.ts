@@ -52,8 +52,10 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ["var(--font-karla)", ...fontFamily.sans],
-        heading: ["var(--font-rajdhani)", ...fontFamily.sans],
+        sans: ["var(--font-body)", ...fontFamily.sans],
+        heading: ["var(--font-display)", ...fontFamily.sans],
+        mono: ["var(--font-mono)", ...fontFamily.mono],
+        display: ["var(--font-display)", ...fontFamily.sans],
       },
       borderRadius: {
         xl: "calc(var(--radius) + 4px)",

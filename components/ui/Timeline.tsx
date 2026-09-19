@@ -24,37 +24,39 @@ export function TimelineItem({
 }: TimelineItemProps) {
   return (
     <MotionReveal
-      delay={index * 0.08}
-      distance={18}
-      duration={0.5}
-      className="group relative pl-10 pb-8 last:pb-0 md:pl-16"
+      delay={index * 0.06}
+      distance={14}
+      duration={0.45}
+      className="group relative pl-8 pb-6 last:pb-0 md:pl-14"
     >
-      <div className="absolute bottom-0 left-[0.45rem] top-3 w-px bg-gradient-to-b from-primary/70 via-primary/25 to-transparent md:left-[0.7rem]" aria-hidden="true" />
-      <div className="timeline-node absolute left-0 top-0" aria-hidden="true">
-        {String(index + 1).padStart(2, "0")}
+      <div className="absolute bottom-0 left-[0.45rem] top-2 w-px bg-border md:left-[0.65rem]" aria-hidden="true" />
+      <div className="absolute left-0 top-0 font-mono text-[0.58rem] font-semibold tracking-[0.08em] text-muted-foreground" aria-hidden="true">
+        <div className="timeline-node">
+          {String(index + 1).padStart(2, "0")}
+        </div>
       </div>
 
-      <article className="glass glow-hover p-5 transition-transform duration-300 group-hover:-translate-y-0.5 md:p-7">
-        <div className="mb-5 flex flex-col gap-3 border-b border-border/60 pb-5 sm:flex-row sm:items-start sm:justify-between">
+      <article className="border border-border bg-card p-5 transition-colors hover:border-primary/20 md:p-6">
+        <div className="mb-4 flex flex-col gap-2 border-b border-border pb-4 sm:flex-row sm:items-start sm:justify-between">
           <div className="min-w-0">
-            <h3 className="font-heading text-balance text-xl font-semibold tracking-normal text-foreground md:text-2xl">{title}</h3>
-            <div className="mt-2 flex items-start gap-2 text-sm font-medium text-primary">
-              <AccessibleIcon icon={MapPin} className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary/70" />
+            <h3 className="font-display text-balance text-[1.05rem] font-semibold tracking-[-0.015em] text-foreground md:text-[1.25rem]">{title}</h3>
+            <div className="mt-1.5 flex items-start gap-1.5 font-mono text-[0.68rem] uppercase tracking-[0.06em] text-primary">
+              <AccessibleIcon icon={MapPin} className="mt-0.5 h-3 w-3 shrink-0 text-primary/60" />
               <span>{subtitle}</span>
             </div>
           </div>
-          <span className="date-chip inline-flex w-fit shrink-0 items-center gap-1.5 font-mono text-[0.68rem] text-muted-foreground">
+          <span className="date-chip inline-flex w-fit shrink-0 items-center gap-1.5">
             <AccessibleIcon icon={Calendar} className="h-3 w-3 text-accent" />
             {date}
           </span>
         </div>
 
         {description && (
-          <ul className="space-y-3 text-sm leading-relaxed text-muted-foreground md:text-[0.95rem]">
+          <ul className="space-y-2.5 font-mono text-[0.78rem] leading-[1.65] text-muted-foreground">
             {description.map((item, itemIndex) => (
-              <li key={typeof item === "string" ? `${item}-${itemIndex}` : itemIndex} className="flex gap-3">
-                <span className="mt-[0.55rem] h-1.5 w-1.5 shrink-0 rounded-full bg-primary/80 shadow-[0_0_8px_hsl(var(--primary)/0.45)]" aria-hidden="true" />
-                <span>{item}</span>
+              <li key={typeof item === "string" ? `${item}-${itemIndex}` : itemIndex} className="flex gap-2.5">
+                <span className="mt-[0.58rem] h-1 w-1 shrink-0 rounded-full bg-accent" aria-hidden="true" />
+                <span className="font-sans min-w-0 break-words text-[0.82rem] leading-relaxed text-muted-foreground">{item}</span>
               </li>
             ))}
           </ul>
