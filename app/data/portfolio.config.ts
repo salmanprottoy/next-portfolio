@@ -44,10 +44,10 @@ export const heroConfig = {
 
 // ─── Impact Signals ────────────────────────────────────────────
 export const impactStats = [
+  { value: "93.1%", label: "F1 on published Bangla fake-news study" },
+  { value: "0", label: "downtime — CMS to PostgreSQL on RDS" },
+  { value: "40%", label: "of travel platform API endpoints shipped" },
   { value: "4+", label: "years production experience" },
-  { value: "3+", label: "major Next.js projects shipped" },
-  { value: "30+", label: "domains on travel platform" },
-  { value: "100+", label: "code & screen reviews" },
 ];
 
 // ─── Working Focus ─────────────────────────────────────────────

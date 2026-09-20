@@ -3,12 +3,18 @@ import { impactStats, Experience, Educations, Skills } from "./portfolio.config"
 import { Projects } from "./projects";
 
 describe("portfolio data contract — seam: public exports from app/data/*", () => {
-  it("impactStats has 4 ledger entries and does not contain 500+ users", () => {
+  it("impactStats leads with the hard, verifiable numbers", () => {
     expect(impactStats).toHaveLength(4);
     const values = impactStats.map((s) => s.value);
-    expect(values).not.toContain("500+");
-    expect(values).toContain("3+");
-    expect(impactStats.find((s) => s.value === "3+")?.label).toBe("major Next.js projects shipped");
+    // Independent ground truth: the published F1 result and the
+    // zero-downtime / endpoint-share claims from the experience entries.
+    expect(values).toContain("93.1%");
+    expect(values).toContain("0");
+    expect(values).toContain("40%");
+    expect(values).toContain("4+");
+    // Vague counts removed — the concrete numbers live in the ledger instead.
+    expect(values).not.toContain("100+");
+    expect(values).not.toContain("3+");
   });
 
   it("Projects has 6 entries and RAG card uses Multi-LLM not 500+", () => {

@@ -84,7 +84,7 @@ export default function Footer() {
                 {resume.text}
               </Link>
             </div>
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-muted-foreground/75 md:justify-end">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-muted-foreground md:justify-end">
               <a href={`mailto:${contact.email}`} className="focus-ring inline-flex items-center gap-1.5 transition-colors hover:text-primary">
                 <AccessibleIcon icon={Mail} className="h-3 w-3" />
                 {contact.email}
@@ -100,7 +100,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-7 flex flex-col gap-3 border-t border-border/60 pt-5 text-xs text-muted-foreground/60 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-7 flex flex-col gap-3 border-t border-border/60 pt-5 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <p>
             © <span suppressHydrationWarning>{new Date().getFullYear()}</span> {siteConfig.fullName} · Last updated {siteConfig.lastUpdated}
           </p>

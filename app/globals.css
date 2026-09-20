@@ -17,8 +17,8 @@
     --secondary: 200 10% 86%;
     --secondary-foreground: 203 43% 10%;
     --muted: 200 10% 86%;
-    --muted-foreground: 203 10% 42%;
-    --accent: 14 100% 55%;
+    --muted-foreground: 203 12% 34%;
+    --accent: 14 100% 38%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
@@ -27,7 +27,7 @@
     --ring: 171 77% 24%;
     --radius: 0.15rem;
     --chart-1: 171 77% 24%;
-    --chart-2: 14 100% 55%;
+    --chart-2: 14 100% 38%;
     --chart-3: 203 43% 10%;
     --chart-4: 203 12% 52%;
     --chart-5: 38 92% 50%;

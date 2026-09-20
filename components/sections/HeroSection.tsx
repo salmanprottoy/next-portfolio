@@ -12,6 +12,8 @@ import {
 } from "lucide-react";
 import AccessibleIcon from "@/components/ui/AccessibleIcon";
 import useReducedMotionPreference from "@/hooks/useReducedMotionPreference";
+import useTypedAnswer from "@/hooks/useTypedAnswer";
+import { answerQuery, PRESET_QUERIES, TRACE_DOCS } from "@/lib/retrieval";
 
 interface HeroSectionProps {
   name: string;
@@ -30,32 +32,7 @@ interface HeroSectionProps {
   ctaScrollText?: string;
 }
 
-const DOCS = [
-  { id: "DOC·014", label: "Opin.fi / CS curricula", chunk: "vector · 768d" },
-  { id: "DOC·089", label: "Brand Cloud RAG corpus", chunk: "retrieved" },
-  { id: "DOC·112", label: "Travel pipeline SQS logs", chunk: "vector · 768d" },
-  { id: "DOC·203", label: "Forest agent JADE trace", chunk: "retrieved" },
-  { id: "DOC·041", label: "Bangla F1 93.1% study", chunk: "retrieved" },
-  { id: "DOC·077", label: "AWS Lambda bed × beds", chunk: "vector · 768d" },
-  { id: "DOC·156", label: "EFS migration notes", chunk: "vector · 768d" },
-  { id: "DOC·198", label: "ChromaDB HNSW graph", chunk: "vector · 768d" },
-  { id: "DOC·063", label: "Vue monitoring 35%", chunk: "vector · 768d" },
-];
-
-const PRESET_QUERIES = [
-  "How does RAG handle Finnish education data?",
-  "Show multi-agent forest fire coordination",
-  "Explain 40% travel API in Go",
-];
-
-const DEMO_ANSWERS: Record<string, string> = {
-  "How does RAG handle Finnish education data?":
-    "UniPilot ingests Opin.fi curricula → embeds with Bedrock → retrieves via DynamoDB + vector search → generates study plans with risk scoring. Vitest-tested, CloudFormation-deployed.",
-  "Show multi-agent forest fire coordination":
-    "JADE + CrewAI agents coordinate detection → monitoring → response via local Ollama. Each agent owns a role, shares via ACL messages, escalates on threshold.",
-  "Explain 40% travel API in Go":
-    "Migrated Django → Go, rebuilt REST+GraphQL endpoints (40% of 30+ domains), unified provider schemas via SQS + parallel cron pipelines, EFS for zero-downtime cutover.",
-};
+const DOCS = TRACE_DOCS;
 
 export default function HeroSection({
   name,
@@ -73,64 +50,47 @@ export default function HeroSection({
   ctaContactText = "Let's talk",
   ctaScrollText = "Explore the work",
 }: HeroSectionProps) {
-  const [query, setQuery] = useState(PRESET_QUERIES[0]);
-  const [stage, setStage] = useState<"idle" | "embedding" | "retrieving" | "generating">("retrieving");
-  const [activeDocs, setActiveDocs] = useState<number[]>([1, 3, 4]);
-  const [typedAnswer, setTypedAnswer] = useState("");
-  const [isTyping, setIsTyping] = useState(false);
+  const [query, setQuery] = useState<string>(PRESET_QUERIES[0]);
+  const [stage, setStage] = useState<"idle" | "embedding" | "retrieving" | "generating">("embedding");
+  const [activeDocs, setActiveDocs] = useState<number[]>(() =>
+    answerQuery(PRESET_QUERIES[0]).docIndices
+  );
   const prefersReducedMotion = useReducedMotionPreference();
+
+  const traceResult = answerQuery(query);
+  const { typed: typedAnswer, isTyping } = useTypedAnswer(traceResult.answer, {
+    startDelay: 1250,
+    instant: prefersReducedMotion === true,
+  });
 
   // cycle demo on mount + on query change
   useEffect(() => {
-    const key = PRESET_QUERIES.includes(query) ? query : PRESET_QUERIES[0];
-    const answer = DEMO_ANSWERS[key] ?? DEMO_ANSWERS[PRESET_QUERIES[0]];
-
-    // choose docs per query (deterministic)
-    const picks: Record<string, number[]> = {
-      [PRESET_QUERIES[0]]: [1, 3, 4],
-      [PRESET_QUERIES[1]]: [3, 1, 7],
-      [PRESET_QUERIES[2]]: [2, 6, 0],
-    };
-    const nextDocs = picks[key] ?? [1, 3, 4];
-
     if (prefersReducedMotion) {
       setStage("idle");
-      setActiveDocs(nextDocs);
-      setTypedAnswer(answer);
-      setIsTyping(false);
+      setActiveDocs(traceResult.docIndices);
       return;
     }
     setStage("embedding");
-    setTypedAnswer("");
-    setIsTyping(true);
     const t1 = setTimeout(() => {
       setStage("retrieving");
-      setActiveDocs(nextDocs);
+      setActiveDocs(traceResult.docIndices);
     }, 650);
     const t2 = setTimeout(() => {
       setStage("generating");
     }, 1100);
-    let idx = 0;
-    const t3 = setTimeout(() => {
-      const tick = () => {
-        idx += 2;
-        setTypedAnswer(answer.slice(0, idx));
-        if (idx < answer.length) {
-          setTimeout(tick, 14);
-        } else {
-          setIsTyping(false);
-          setStage("idle");
-        }
-      };
-      tick();
-    }, 1250);
 
     return () => {
       clearTimeout(t1);
       clearTimeout(t2);
-      clearTimeout(t3);
     };
-  }, [query, prefersReducedMotion]);
+  }, [query, prefersReducedMotion, traceResult]);
+
+  // settle the pipeline once the reveal finishes
+  useEffect(() => {
+    if (!isTyping && stage === "generating") {
+      setStage("idle");
+    }
+  }, [isTyping, stage]);
 
   const nameParts = name.split(" ");
   const lastName = nameParts.pop() || name;
@@ -167,7 +127,7 @@ export default function HeroSection({
         <p className="mt-6 max-w-[36rem] text-[15px] leading-[1.75] text-muted-foreground md:text-[17px]">
           {intro}
         </p>
-        <p className="mt-3 max-w-[36rem] text-sm leading-relaxed text-muted-foreground/80">
+        <p className="mt-3 max-w-[36rem] text-sm leading-relaxed text-muted-foreground">
           I ship from backend architecture through to the interface. If the retrieval fails, the UI shouldn&apos;t lie — and if the migration is risky, it ships with zero downtime.
         </p>
 
@@ -374,12 +334,18 @@ export default function HeroSection({
               />
             </div>
             <div className="mt-2 grid grid-cols-3 gap-1.5">
-              {activeDocs.map((idx) => (
+              {activeDocs.length === 0 ? (
+                <p className="col-span-3 border border-border bg-muted/20 px-1.5 py-1 font-mono text-[0.58rem] uppercase tracking-[0.06em] text-muted-foreground">
+                  0 docs matched — no sources for this query
+                </p>
+              ) : (
+                activeDocs.map((idx) => (
                 <div key={DOCS[idx].id} className="border border-accent/25 bg-accent/5 px-1.5 py-1">
                   <p className="font-mono text-[0.58rem] font-semibold uppercase tracking-[0.06em] text-accent">{DOCS[idx].id}</p>
                   <p className="truncate font-mono text-[0.58rem] text-muted-foreground">{DOCS[idx].label}</p>
                 </div>
-              ))}
+              )))
+              }
             </div>
           </div>
 
@@ -407,7 +373,7 @@ export default function HeroSection({
           </div>
 
           <p className="mt-3 text-center font-mono text-[0.58rem] uppercase tracking-[0.12em] text-muted-foreground">
-            This is the artifact — not a mock. RAG that earns its place.
+            Grounded in a local index of this portfolio — ask your own question.
           </p>
         </div>
       </div>

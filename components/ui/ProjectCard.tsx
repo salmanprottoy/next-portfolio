@@ -116,12 +116,12 @@ export default function ProjectCard({
             </Link>
           )}
           {!liveUrl && (!sourceUrl || sourceUrl === "#") && (
-            <span className="inline-flex items-center gap-1.5 font-mono text-[0.62rem] uppercase tracking-[0.08em] text-muted-foreground/70">
+            <span className="inline-flex items-center gap-1.5 font-mono text-[0.62rem] uppercase tracking-[0.08em] text-muted-foreground">
               <AccessibleIcon icon={Layers} className="h-3 w-3" />
               Private case study
             </span>
           )}
-          <span className="ml-auto font-mono text-[0.58rem] uppercase tracking-[0.08em] text-muted-foreground/60">ledger entry</span>
+          <span className="ml-auto font-mono text-[0.58rem] uppercase tracking-[0.08em] text-muted-foreground/85">ledger entry</span>
         </div>
       </article>
     </MotionReveal>
