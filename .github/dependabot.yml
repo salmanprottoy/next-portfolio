@@ -1,0 +1,34 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    groups:
+      dev-dependencies:
+        patterns:
+          - "*"
+        exclude-patterns:
+          - "next"
+          - "sharp"
+          - "postcss"
+        update-types:
+          - "version-update:semver-patch"
+          - "version-update:semver-minor"
+    ignore:
+      # tar critical has no patch — build-time only via node-gyp, not shipped
+      - dependency-name: "tar"
+        update-types: ["version-update:semver-major", "version-update:semver-minor", "version-update:semver-patch"]
+      # dev-time ReDoS with no patch and not in production bundle
+      - dependency-name: "brace-expansion"
+      - dependency-name: "browserslist"
+      - dependency-name: "js-yaml"
+      - dependency-name: "nanoid"
+      - dependency-name: "picomatch"
+      - dependency-name: "minimatch"
+      - dependency-name: "postcss-selector-parser"
+      - dependency-name: "undici"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "security"
