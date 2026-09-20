@@ -13,8 +13,8 @@ updates:
           - "sharp"
           - "postcss"
         update-types:
-          - "version-update:semver-patch"
-          - "version-update:semver-minor"
+          - "patch"
+          - "minor"
     ignore:
       # tar critical has no patch — build-time only via node-gyp, not shipped
       - dependency-name: "tar"
