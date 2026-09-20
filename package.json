@@ -52,6 +52,16 @@
   "overrides": {
     "glob": "10.5.0"
   },
+  "resolutions": {
+    "brace-expansion": "2.0.2",
+    "browserslist": "4.24.4",
+    "js-yaml": "4.1.1",
+    "nanoid": "5.1.5",
+    "postcss-selector-parser": "7.1.0",
+    "picomatch": "4.0.3",
+    "minimatch": "9.0.5",
+    "undici": "6.28.0"
+  },
   "engines": {
     "node": ">=22"
   }
