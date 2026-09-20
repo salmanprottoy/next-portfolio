@@ -202,26 +202,27 @@ export default function HeroSection({
           </a>
         </div>
 
-        <div className="mt-6 flex items-center gap-3">
-          <div className="hero-portrait-frame">
+        <div className="mt-8 flex items-center gap-4 border border-border bg-card p-3">
+          <div className="relative h-[4.5rem] w-[4.5rem] shrink-0 overflow-hidden border border-border bg-muted sm:h-[5.5rem] sm:w-[5.5rem]">
             <Image
               src={imageUrl.includes("s3") ? imageUrl : "/salman-256.webp"}
               alt={imageAlt}
               width={256}
               height={256}
-              sizes="60px"
-              className="h-full w-full object-cover"
+              sizes="88px"
+              className="h-full w-full object-cover object-top"
               priority
               fetchPriority="high"
               decoding="sync"
             />
+            <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-border/50" aria-hidden="true" />
           </div>
           <div className="min-w-0">
-            <p className="font-mono text-[0.62rem] uppercase tracking-[0.12em] text-muted-foreground">Builder profile</p>
-            <p className="font-display text-[13px] font-semibold tracking-[-0.01em] text-foreground" translate="no">
-              {name} · human in the loop
+            <p className="font-mono text-[0.62rem] uppercase tracking-[0.14em] text-primary">Builder profile</p>
+            <p className="font-display text-[15px] font-semibold leading-tight tracking-[-0.015em] text-foreground sm:text-[16px]" translate="no">
+              {name}
             </p>
-            <p className="font-mono text-[0.62rem] text-muted-foreground">Thesis: multi-objective optimization · JYU</p>
+            <p className="mt-1 font-mono text-[0.68rem] leading-relaxed text-muted-foreground">Jyväskylä, Finland · AI Engineer · human in the loop</p>
           </div>
         </div>
       </div>

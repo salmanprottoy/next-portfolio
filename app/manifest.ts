@@ -2,6 +2,8 @@ import { MetadataRoute } from "next";
 import { siteConfig } from "@/app/data/portfolio.config";
 import { themeColors } from "@/lib/theme";
 
+export const dynamic = "force-static";
+
 export default function manifest(): MetadataRoute.Manifest {
   const profileImageUrl = process.env.NEXT_PUBLIC_S3_BASE_URL
     ? `${process.env.NEXT_PUBLIC_S3_BASE_URL}/images/salmanprottoy.jpg`
